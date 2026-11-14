@@ -1,0 +1,9 @@
+# Raw packages: re-downloadable, and what's used is already in icons/
+/downloads/
+# Generated: rebuild with `python3 build_icon_libraries.py`, publish as release assets
+/libraries/
+
+*.excalidraw
+!/icons/**
+__pycache__/
+.DS_Store
