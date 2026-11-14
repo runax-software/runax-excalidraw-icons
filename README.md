@@ -2,17 +2,19 @@
 
 Miro-style Excalidraw libraries (64px icon + editable label below, grouped) built from official icon sets.
 
-| Pack | Icons | Source |
-|---|---|---|
-| [`aws`](aws/) | 810 | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release |
-| [`azure`](azure/) | 645 | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25 |
-| [`k8s`](k8s/) | 39 | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg) |
-| [`techno`](techno/) | 116 | Hand-picked technology logos |
+| Pack                | Icons | Source                                                                                                                              |
+| ------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [`aws`](aws/)       | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                             |
+| [`azure`](azure/)   | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                              |
+| [`k8s`](k8s/)       | 39    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg) |
+| [`techno`](techno/) | 116   | Hand-picked technology logos                                                                                                        |
 
 ## Layout
 
 ```
-build.py
+build.py                        entry point: builds every pack
+builder/                        Pack, IconSource, Icon, ExcalidrawExporter, ReadmeRenderer
+pyproject.toml, uv.lock         dependencies (PyYAML), locked
 <pack>/
   pack.yml                      title, source, download glob, label overrides, README samples
   icons/                        SVGs used for the library (committed)
@@ -28,8 +30,8 @@ build.py
 uv run build.py
 ```
 
-Needs [uv](https://docs.astral.sh/uv/), which installs PyYAML on the fly. Every folder with a
-`pack.yml` is a pack. Each pack is built from its package in `<pack>/downloads/` if
+Needs [uv](https://docs.astral.sh/uv/), which installs the locked dependencies into `.venv/`
+on first run. Every folder with a `pack.yml` is a pack. Each pack is built from its package in `<pack>/downloads/` if
 present (newest wins), otherwise from `<pack>/icons/`.
 
 To update a pack, drop the new package into its `downloads/` folder and rerun:

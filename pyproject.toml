@@ -1,0 +1,11 @@
+[project]
+name = "excalidraw-icons"
+version = "0.1.0"
+description = "Miro-style Excalidraw libraries built from AWS, Azure, Kubernetes and technology icon sets"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["pyyaml>=6.0"]
+
+[tool.uv]
+# Scripts only (`uv run build.py`), nothing to install as a package.
+package = false
