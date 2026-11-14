@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """Package icon sets as Miro-style Excalidraw libraries.
 
-Layout (relative to this script):
+Layout, one folder per pack (relative to this script):
 
-  downloads/   raw packages, as downloaded (zip files or folders)
-  icons/       per pack, exactly the SVGs that went into its library
-  libraries/   <pack>-miro-style.excalidrawlib and <pack>-miro-style.excalidraw
+  <pack>/downloads/   raw packages, as downloaded (zip files or folders)
+  <pack>/icons/       exactly the SVGs that went into the library
+  <pack>/<pack>-miro-style.excalidrawlib and <pack>-miro-style.excalidraw
+  <pack>/README.md    generated: source, icon count and a preview grid of sample icons
 
 Packs and where their downloads come from:
 
-  aws    downloads/Icon-package_*.zip                https://aws.amazon.com/architecture/icons/
-  azure  downloads/Azure_Public_Service_Icons_*.zip  https://learn.microsoft.com/azure/architecture/icons/
-  k8s    downloads/kubernetes-icons/                 https://github.com/kubernetes/community/tree/main/icons/svg
-  techno downloads/techno/                          technology logos
+  aws    aws/downloads/Icon-package_*.zip                  https://aws.amazon.com/architecture/icons/
+  azure  azure/downloads/Azure_Public_Service_Icons_*.zip  https://learn.microsoft.com/azure/architecture/icons/
+  k8s    k8s/downloads/kubernetes-icons/                   https://github.com/kubernetes/community/tree/main/icons/svg
+  techno techno/downloads/techno/                         technology logos
 
-The newest matching download wins. Without a download, a pack is rebuilt from icons/<pack>/.
+The newest matching download wins. Without a download, a pack is rebuilt from <pack>/icons/.
 
 Each library item is a 64x64 image plus an editable label below it, grouped together.
 Only the largest size of each icon is kept (unlabeled variants preferred), and white-only
@@ -36,11 +37,9 @@ import time
 import uuid
 import zipfile
 from pathlib import Path, PurePosixPath
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent
-DOWNLOADS = ROOT / "downloads"
-ICONS = ROOT / "icons"
-LIBRARIES = ROOT / "libraries"
 
 # kubernetes/community names files by kubectl short name.
 K8S_LABELS = {
@@ -60,11 +59,59 @@ K8S_LABELS = {
 # Typos in the logo file names.
 TECHNO_LABELS = {"cosmos-bd": "Cosmos DB", "playwrite": "Playwright", "postgressql": "PostgreSQL"}
 
+# `samples` are the labels previewed in each pack's README; without them the first icons are shown.
 PACKS = {
-    "aws": {"download": "Icon-package_*.zip"},
-    "azure": {"download": "Azure_Public_Service_Icons_*.zip"},
-    "k8s": {"download": "kubernetes-icons", "labels": K8S_LABELS},
-    "techno": {"download": "techno", "labels": TECHNO_LABELS},
+    "aws": {
+        "title": "AWS Architecture Icons",
+        "source": "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)",
+        "download": "Icon-package_*.zip",
+        "samples": [
+            "Amazon EC2", "AWS Lambda", "Amazon Simple Storage Service", "Amazon RDS", "Amazon Aurora",
+            "Amazon DynamoDB", "Amazon ElastiCache", "Amazon CloudFront", "Amazon Virtual Private Cloud",
+            "Amazon Route 53", "Elastic Load Balancing", "Amazon API Gateway", "Amazon Simple Queue Service",
+            "Amazon Simple Notification Service", "Amazon EventBridge", "AWS Step Functions",
+            "Amazon Elastic Container Service", "Amazon Elastic Kubernetes Service", "AWS Fargate",
+            "Amazon CloudWatch", "AWS Identity And Access Management", "Amazon Kinesis", "Amazon SageMaker",
+            "Amazon Bedrock",
+        ],
+    },
+    "azure": {
+        "title": "Azure Architecture Icons",
+        "source": "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)",
+        "download": "Azure_Public_Service_Icons_*.zip",
+        "samples": [
+            "Virtual Machine", "App Services", "Function Apps", "Kubernetes Services", "Container Instances",
+            "Container Registries", "Storage Accounts", "SQL Database", "Azure Cosmos DB", "Cache Redis",
+            "Azure Database PostgreSQL Server", "Virtual Networks", "Load Balancers", "Application Gateways",
+            "Front Door And CDN Profiles", "DNS Zones", "Key Vaults", "Managed Identities", "Monitor",
+            "Log Analytics Workspaces", "API Management Services", "Azure Service Bus", "Event Hubs",
+            "Azure OpenAI",
+        ],
+    },
+    "k8s": {
+        "title": "Kubernetes Icons",
+        "source": "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg)",
+        "download": "kubernetes-icons",
+        "labels": K8S_LABELS,
+        "samples": [
+            "Pod", "Deployment", "ReplicaSet", "StatefulSet", "DaemonSet", "Job", "CronJob", "Service",
+            "Ingress", "NetworkPolicy", "ConfigMap", "Secret", "PersistentVolume", "PersistentVolumeClaim",
+            "StorageClass", "Namespace", "ServiceAccount", "Role", "RoleBinding", "HorizontalPodAutoscaler",
+            "Node", "Control Plane", "API Server", "etcd",
+        ],
+    },
+    "techno": {
+        "title": "Technology Logos",
+        "source": "hand-picked technology logos",
+        "download": "techno",
+        "labels": TECHNO_LABELS,
+        "samples": [
+            "Docker", "Kubernetes", "Helm", "HashiCorp Terraform", "Ansible", "Argo CD", "GitHub",
+            "GitHub Actions", "GitLab", "Grafana", "Prometheus", "OpenTelemetry", "PostgreSQL", "MySQL",
+            "MongoDB", "Redis", "Apache Kafka", "RabbitMQ", "Python", "Go", "TypeScript", "Rust", "Java",
+            "React",
+        ],
+    },
 }
 
 SOURCE = "https://excalidraw.com"
@@ -78,6 +125,8 @@ MAX_LINE_CHARS = 18  # wrap labels Miro-style instead of one very wide line
 SCENE_COLUMNS = 12
 SCENE_CELL_W = 160
 SCENE_CELL_H = 150
+README_COLUMNS = 6
+README_SAMPLES = 24
 
 # Stable namespace so the same SVG content always gets the same fileId across runs.
 FILE_ID_NAMESPACE = uuid.UUID("6f1c3c3e-4f0a-4c39-9a51-0d2b1f3e8a77")
@@ -239,13 +288,54 @@ def build_elements(file_id, label, now, ox=0, oy=0):
     return [image, label_el]
 
 
+def write_readme(name, pack, icons, labels):
+    by_label = {clean_label(path.stem, labels): path for path, _ in icons}
+    missing = [label for label in pack.get("samples", []) if label not in by_label]
+    if missing:
+        print(f"[{name}] README samples not found: {', '.join(missing)}")
+    samples = [label for label in pack.get("samples", []) if label in by_label] or list(by_label)[:README_SAMPLES]
+
+    cells = [
+        f'<td align="center" width="120"><img src="{quote(f"icons/{by_label[label]}")}" width="64" height="64"><br>'
+        f"<sub>{label}</sub></td>"
+        for label in samples
+    ]
+    rows = ["<tr>" + "".join(cells[i:i + README_COLUMNS]) + "</tr>" for i in range(0, len(cells), README_COLUMNS)]
+    lib, scene = f"{name}-miro-style.excalidrawlib", f"{name}-miro-style.excalidraw"
+    text = f"""# {pack["title"]}
+
+{len(icons)} icons from {pack["source"]}, packaged as a Miro-style Excalidraw library:
+each item is a 64px icon with an editable label below it, grouped together.
+
+<table>
+{chr(10).join(rows)}
+</table>
+
+{len(samples)} of {len(icons)} shown. Every icon is in [`icons/`](icons/).
+
+## Use
+
+Build with `python3 build_icon_libraries.py` from the repo root, then in Excalidraw:
+
+1. Open `{scene}` (or paste icons from it into your drawing), so the images are loaded.
+2. Import `{lib}` from the library panel.
+
+Excalidraw doesn't store images in library files, so library icons render only once the
+drawing contains them. See the [main README](../README.md).
+
+<!-- Generated by build_icon_libraries.py; edit the PACKS entry there instead. -->
+"""
+    (ROOT / name / "README.md").write_text(text, encoding="utf-8")
+
+
 def build_pack(name, pack, now):
     labels = pack.get("labels", {})
-    stored = ICONS / name
-    downloads = sorted(DOWNLOADS.glob(pack["download"]), key=lambda p: p.stat().st_mtime)
+    pack_dir = ROOT / name
+    stored = pack_dir / "icons"
+    downloads = sorted((pack_dir / "downloads").glob(pack["download"]), key=lambda p: p.stat().st_mtime)
     source = downloads[-1] if downloads else stored
     if not source.exists():
-        print(f"[{name}] skipped: no downloads/{pack['download']} and no icons/{name}/")
+        print(f"[{name}] skipped: no {name}/downloads/{pack['download']} and no {name}/icons/")
         return
     icons = collect_icons(source, labels)
 
@@ -293,11 +383,11 @@ def build_pack(name, pack, now):
         "files": files,
     }
 
-    LIBRARIES.mkdir(exist_ok=True)
-    lib_path = LIBRARIES / f"{name}-miro-style.excalidrawlib"
-    scene_path = LIBRARIES / f"{name}-miro-style.excalidraw"
+    lib_path = pack_dir / f"{name}-miro-style.excalidrawlib"
+    scene_path = pack_dir / f"{name}-miro-style.excalidraw"
     lib_path.write_text(json.dumps(library, indent=2), encoding="utf-8")
     scene_path.write_text(json.dumps(scene), encoding="utf-8")
+    write_readme(name, pack, icons, labels)
     print(f"[{name}] packaged {len(items)} icons from {source.relative_to(ROOT)} -> {lib_path.relative_to(ROOT)}")
 
 
