@@ -1,21 +1,22 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["pyyaml"]
+# ///
 """Package icon sets as Miro-style Excalidraw libraries.
+
+Run with `uv run build.py` (uv installs PyYAML on the fly).
 
 Layout, one folder per pack (relative to this script):
 
+  <pack>/pack.yml     title, source, download glob, label overrides, README samples
   <pack>/downloads/   raw packages, as downloaded (zip files or folders)
   <pack>/icons/       exactly the SVGs that went into the library
-  <pack>/<pack>-miro-style.excalidrawlib and <pack>-miro-style.excalidraw
+  <pack>/<pack>.excalidrawlib and <pack>.excalidraw
   <pack>/README.md    generated: source, icon count and a preview grid of sample icons
 
-Packs and where their downloads come from:
-
-  aws    aws/downloads/Icon-package_*.zip                  https://aws.amazon.com/architecture/icons/
-  azure  azure/downloads/Azure_Public_Service_Icons_*.zip  https://learn.microsoft.com/azure/architecture/icons/
-  k8s    k8s/downloads/kubernetes-icons/                   https://github.com/kubernetes/community/tree/main/icons/svg
-  techno techno/downloads/techno/                         technology logos
-
-The newest matching download wins. Without a download, a pack is rebuilt from <pack>/icons/.
+Every folder with a pack.yml is a pack. The newest download matching its `download` glob
+wins; without one, the pack is rebuilt from <pack>/icons/.
 
 Each library item is a 64x64 image plus an editable label below it, grouped together.
 Only the largest size of each icon is kept (unlabeled variants preferred), and white-only
@@ -39,80 +40,9 @@ import zipfile
 from pathlib import Path, PurePosixPath
 from urllib.parse import quote
 
+import yaml
+
 ROOT = Path(__file__).resolve().parent
-
-# kubernetes/community names files by kubectl short name.
-K8S_LABELS = {
-    "api": "API Server", "c-c-m": "Cloud Controller Manager", "c-m": "Controller Manager",
-    "k-proxy": "Kube Proxy", "kubelet": "Kubelet", "sched": "Scheduler",
-    "control-plane": "Control Plane", "etcd": "etcd", "node": "Node",
-    "c-role": "ClusterRole", "cm": "ConfigMap", "crb": "ClusterRoleBinding",
-    "crd": "CustomResourceDefinition", "cronjob": "CronJob", "deploy": "Deployment",
-    "ds": "DaemonSet", "ep": "Endpoints", "group": "Group", "hpa": "HorizontalPodAutoscaler",
-    "ing": "Ingress", "job": "Job", "limits": "LimitRange", "netpol": "NetworkPolicy",
-    "ns": "Namespace", "pod": "Pod", "psp": "PodSecurityPolicy", "pv": "PersistentVolume",
-    "pvc": "PersistentVolumeClaim", "quota": "ResourceQuota", "rb": "RoleBinding",
-    "role": "Role", "rs": "ReplicaSet", "sa": "ServiceAccount", "sc": "StorageClass",
-    "secret": "Secret", "sts": "StatefulSet", "svc": "Service", "user": "User", "vol": "Volume",
-}
-
-# Typos in the logo file names.
-TECHNO_LABELS = {"cosmos-bd": "Cosmos DB", "playwrite": "Playwright", "postgressql": "PostgreSQL"}
-
-# `samples` are the labels previewed in each pack's README; without them the first icons are shown.
-PACKS = {
-    "aws": {
-        "title": "AWS Architecture Icons",
-        "source": "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)",
-        "download": "Icon-package_*.zip",
-        "samples": [
-            "Amazon EC2", "AWS Lambda", "Amazon Simple Storage Service", "Amazon RDS", "Amazon Aurora",
-            "Amazon DynamoDB", "Amazon ElastiCache", "Amazon CloudFront", "Amazon Virtual Private Cloud",
-            "Amazon Route 53", "Elastic Load Balancing", "Amazon API Gateway", "Amazon Simple Queue Service",
-            "Amazon Simple Notification Service", "Amazon EventBridge", "AWS Step Functions",
-            "Amazon Elastic Container Service", "Amazon Elastic Kubernetes Service", "AWS Fargate",
-            "Amazon CloudWatch", "AWS Identity And Access Management", "Amazon Kinesis", "Amazon SageMaker",
-            "Amazon Bedrock",
-        ],
-    },
-    "azure": {
-        "title": "Azure Architecture Icons",
-        "source": "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)",
-        "download": "Azure_Public_Service_Icons_*.zip",
-        "samples": [
-            "Virtual Machine", "App Services", "Function Apps", "Kubernetes Services", "Container Instances",
-            "Container Registries", "Storage Accounts", "SQL Database", "Azure Cosmos DB", "Cache Redis",
-            "Azure Database PostgreSQL Server", "Virtual Networks", "Load Balancers", "Application Gateways",
-            "Front Door And CDN Profiles", "DNS Zones", "Key Vaults", "Managed Identities", "Monitor",
-            "Log Analytics Workspaces", "API Management Services", "Azure Service Bus", "Event Hubs",
-            "Azure OpenAI",
-        ],
-    },
-    "k8s": {
-        "title": "Kubernetes Icons",
-        "source": "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg)",
-        "download": "kubernetes-icons",
-        "labels": K8S_LABELS,
-        "samples": [
-            "Pod", "Deployment", "ReplicaSet", "StatefulSet", "DaemonSet", "Job", "CronJob", "Service",
-            "Ingress", "NetworkPolicy", "ConfigMap", "Secret", "PersistentVolume", "PersistentVolumeClaim",
-            "StorageClass", "Namespace", "ServiceAccount", "Role", "RoleBinding", "HorizontalPodAutoscaler",
-            "Node", "Control Plane", "API Server", "etcd",
-        ],
-    },
-    "techno": {
-        "title": "Technology Logos",
-        "source": "hand-picked technology logos",
-        "download": "techno",
-        "labels": TECHNO_LABELS,
-        "samples": [
-            "Docker", "Kubernetes", "Helm", "HashiCorp Terraform", "Ansible", "Argo CD", "GitHub",
-            "GitHub Actions", "GitLab", "Grafana", "Prometheus", "OpenTelemetry", "PostgreSQL", "MySQL",
-            "MongoDB", "Redis", "Apache Kafka", "RabbitMQ", "Python", "Go", "TypeScript", "Rust", "Java",
-            "React",
-        ],
-    },
-}
 
 SOURCE = "https://excalidraw.com"
 ICON_SIZE = 64
@@ -301,7 +231,7 @@ def write_readme(name, pack, icons, labels):
         for label in samples
     ]
     rows = ["<tr>" + "".join(cells[i:i + README_COLUMNS]) + "</tr>" for i in range(0, len(cells), README_COLUMNS)]
-    lib, scene = f"{name}-miro-style.excalidrawlib", f"{name}-miro-style.excalidraw"
+    lib, scene = f"{name}.excalidrawlib", f"{name}.excalidraw"
     text = f"""# {pack["title"]}
 
 {len(icons)} icons from {pack["source"]}, packaged as a Miro-style Excalidraw library:
@@ -315,7 +245,7 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 ## Use
 
-Build with `python3 build_icon_libraries.py` from the repo root, then in Excalidraw:
+Build with `uv run build.py` from the repo root, then in Excalidraw:
 
 1. Open `{scene}` (or paste icons from it into your drawing), so the images are loaded.
 2. Import `{lib}` from the library panel.
@@ -323,7 +253,7 @@ Build with `python3 build_icon_libraries.py` from the repo root, then in Excalid
 Excalidraw doesn't store images in library files, so library icons render only once the
 drawing contains them. See the [main README](../README.md).
 
-<!-- Generated by build_icon_libraries.py; edit the PACKS entry there instead. -->
+<!-- Generated by build.py; edit pack.yml instead. -->
 """
     (ROOT / name / "README.md").write_text(text, encoding="utf-8")
 
@@ -383,17 +313,22 @@ def build_pack(name, pack, now):
         "files": files,
     }
 
-    lib_path = pack_dir / f"{name}-miro-style.excalidrawlib"
-    scene_path = pack_dir / f"{name}-miro-style.excalidraw"
+    lib_path = pack_dir / f"{name}.excalidrawlib"
+    scene_path = pack_dir / f"{name}.excalidraw"
     lib_path.write_text(json.dumps(library, indent=2), encoding="utf-8")
     scene_path.write_text(json.dumps(scene), encoding="utf-8")
     write_readme(name, pack, icons, labels)
     print(f"[{name}] packaged {len(items)} icons from {source.relative_to(ROOT)} -> {lib_path.relative_to(ROOT)}")
 
 
+def load_packs():
+    """Every folder with a pack.yml is a pack."""
+    return {path.parent.name: yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(ROOT.glob("*/pack.yml"))}
+
+
 def main():
     now = int(time.time() * 1000)
-    for name, pack in PACKS.items():
+    for name, pack in load_packs().items():
         build_pack(name, pack, now)
 
 

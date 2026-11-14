@@ -1,0 +1,73 @@
+title: Kubernetes Icons
+source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg)"
+# Glob in downloads/; the newest match wins.
+download: kubernetes-icons
+
+# File name (without size suffix) -> label. kubernetes/community names files by kubectl short name.
+labels:
+  api: API Server
+  c-c-m: Cloud Controller Manager
+  c-m: Controller Manager
+  k-proxy: Kube Proxy
+  kubelet: Kubelet
+  sched: Scheduler
+  control-plane: Control Plane
+  etcd: etcd
+  node: Node
+  c-role: ClusterRole
+  cm: ConfigMap
+  crb: ClusterRoleBinding
+  crd: CustomResourceDefinition
+  cronjob: CronJob
+  deploy: Deployment
+  ds: DaemonSet
+  ep: Endpoints
+  group: Group
+  hpa: HorizontalPodAutoscaler
+  ing: Ingress
+  job: Job
+  limits: LimitRange
+  netpol: NetworkPolicy
+  ns: Namespace
+  pod: Pod
+  psp: PodSecurityPolicy
+  pv: PersistentVolume
+  pvc: PersistentVolumeClaim
+  quota: ResourceQuota
+  rb: RoleBinding
+  role: Role
+  rs: ReplicaSet
+  sa: ServiceAccount
+  sc: StorageClass
+  secret: Secret
+  sts: StatefulSet
+  svc: Service
+  user: User
+  vol: Volume
+
+# Shown in README.md, in this order.
+samples:
+  - Pod
+  - Deployment
+  - ReplicaSet
+  - StatefulSet
+  - DaemonSet
+  - Job
+  - CronJob
+  - Service
+  - Ingress
+  - NetworkPolicy
+  - ConfigMap
+  - Secret
+  - PersistentVolume
+  - PersistentVolumeClaim
+  - StorageClass
+  - Namespace
+  - ServiceAccount
+  - Role
+  - RoleBinding
+  - HorizontalPodAutoscaler
+  - Node
+  - Control Plane
+  - API Server
+  - etcd

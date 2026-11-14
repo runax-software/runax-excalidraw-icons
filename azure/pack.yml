@@ -1,0 +1,31 @@
+title: Azure Architecture Icons
+source: "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)"
+# Glob in downloads/; the newest match wins.
+download: Azure_Public_Service_Icons_*.zip
+
+# Shown in README.md, in this order.
+samples:
+  - Virtual Machine
+  - App Services
+  - Function Apps
+  - Kubernetes Services
+  - Container Instances
+  - Container Registries
+  - Storage Accounts
+  - SQL Database
+  - Azure Cosmos DB
+  - Cache Redis
+  - Azure Database PostgreSQL Server
+  - Virtual Networks
+  - Load Balancers
+  - Application Gateways
+  - Front Door And CDN Profiles
+  - DNS Zones
+  - Key Vaults
+  - Managed Identities
+  - Monitor
+  - Log Analytics Workspaces
+  - API Management Services
+  - Azure Service Bus
+  - Event Hubs
+  - Azure OpenAI

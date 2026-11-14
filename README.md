@@ -12,22 +12,24 @@ Miro-style Excalidraw libraries (64px icon + editable label below, grouped) buil
 ## Layout
 
 ```
-build_icon_libraries.py
+build.py
 <pack>/
+  pack.yml                      title, source, download glob, label overrides, README samples
   icons/                        SVGs used for the library (committed)
   downloads/                    raw packages (git-ignored)
-  <pack>-miro-style.excalidrawlib  generated library (git-ignored)
-  <pack>-miro-style.excalidraw     generated scene with the images (git-ignored)
+  <pack>.excalidrawlib          generated library (git-ignored)
+  <pack>.excalidraw             generated scene with the images (git-ignored)
   README.md                     generated preview of the pack
 ```
 
 ## Build
 
 ```sh
-python3 build_icon_libraries.py
+uv run build.py
 ```
 
-No dependencies beyond Python 3. Each pack is built from its package in `<pack>/downloads/` if
+Needs [uv](https://docs.astral.sh/uv/), which installs PyYAML on the fly. Every folder with a
+`pack.yml` is a pack. Each pack is built from its package in `<pack>/downloads/` if
 present (newest wins), otherwise from `<pack>/icons/`.
 
 To update a pack, drop the new package into its `downloads/` folder and rerun:
@@ -45,8 +47,8 @@ white-only icons (AWS `_Dark` variants), which are invisible on a white canvas.
 excalidraw.com doesn't store images in library files, so library icons show as empty boxes
 unless the drawing already contains them. For each pack:
 
-1. Open `<pack>/<pack>-miro-style.excalidraw`, or paste icons from it into your drawing.
-2. Import `<pack>/<pack>-miro-style.excalidrawlib` from the library panel.
+1. Open `<pack>/<pack>.excalidraw`, or paste icons from it into your drawing.
+2. Import `<pack>/<pack>.excalidrawlib` from the library panel.
 
 Library items use the same image IDs as the scene, so they render once the scene's images are loaded.
 

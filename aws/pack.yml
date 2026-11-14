@@ -1,0 +1,31 @@
+title: AWS Architecture Icons
+source: "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)"
+# Glob in downloads/; the newest match wins.
+download: Icon-package_*.zip
+
+# Shown in README.md, in this order.
+samples:
+  - Amazon EC2
+  - AWS Lambda
+  - Amazon Simple Storage Service
+  - Amazon RDS
+  - Amazon Aurora
+  - Amazon DynamoDB
+  - Amazon ElastiCache
+  - Amazon CloudFront
+  - Amazon Virtual Private Cloud
+  - Amazon Route 53
+  - Elastic Load Balancing
+  - Amazon API Gateway
+  - Amazon Simple Queue Service
+  - Amazon Simple Notification Service
+  - Amazon EventBridge
+  - AWS Step Functions
+  - Amazon Elastic Container Service
+  - Amazon Elastic Kubernetes Service
+  - AWS Fargate
+  - Amazon CloudWatch
+  - AWS Identity And Access Management
+  - Amazon Kinesis
+  - Amazon SageMaker
+  - Amazon Bedrock
