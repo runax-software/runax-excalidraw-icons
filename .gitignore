@@ -1,5 +1,3 @@
-# techno's local svg.zip; what's used is already in techno/src/
-downloads/
 # Generated: rebuild with `uv run runax-icons build` (released from CI on `v*` tags)
 runax-*.excalidrawlib
 runax-*.excalidraw

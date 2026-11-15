@@ -1,16 +1,104 @@
 title: Technology Logos
-source: hand-picked technology logos
-license: "Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
+source: "hand-picked technology logos from [gilbarbara/logos](https://github.com/gilbarbara/logos) and [simple-icons](https://github.com/simple-icons/simple-icons)"
+license: "The logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) and [simple-icons](https://github.com/simple-icons/simple-icons) (both CC0-1.0); GitHub Codespaces is from [Primer Octicons](https://github.com/primer/octicons) (MIT). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
-  edit: where these logos came from (techno/downloads/svg.zip) was never recorded, so their license is unknown
-  native: unknown license (see edit); the logos are their owners' trademarks
-  publish: unknown license (see edit)
+  native: "redrawing changes the logos' shape; the logos are their owners' trademarks"
+  publish: "the logos are their owners' trademarks; we don't republish them as a library of their own"
 
-# Where the files in src/ came from; `files` is a glob, the first match wins.
-sources:
-  - files: "*"
-    note: "hand-picked from a downloaded svg.zip of technology logos (kept in techno/downloads/, git-ignored)"
+
+# `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "{name}.svg"
+    note: "CC0-1.0"
+    names:
+      "Angular": "angular-icon"
+      "Ansible": "ansible"
+      "Astro": "astro-icon"
+      "Bash": "bash-icon"
+      "Bitbucket": "bitbucket"
+      "Bun": "bun"
+      "Dart": "dart"
+      "Debian": "debian"
+      "DigitalOcean": "digital-ocean-icon"
+      "Django": "django-icon"
+      "Docker": "docker-icon"
+      "ESLint": "eslint"
+      "FastAPI": "fastapi-icon"
+      "Figma": "figma"
+      "Flask": "flask"
+      "Flutter": "flutter-icon"
+      "Git": "git-icon"
+      "GitHub": "github-icon"
+      "GitHub-Actions": "github-actions"
+      "GitLab": "gitlab-icon"
+      "Go": "go"
+      "Google": "google-icon"
+      "Google-Cloud": "google-cloud"
+      "Gradle": "gradle"
+      "Gulp.js": "gulp"
+      "HashiCorp-Terraform": "terraform-icon"
+      "Homebrew": "homebrew"
+      "HTML5": "html-5"
+      "Java": "java"
+      "JavaScript": "javascript"
+      "Jira": "jira"
+      "JSON": "json"
+      "Kotlin": "kotlin-icon"
+      "Laravel": "laravel"
+      "Linux": "linux-tux"
+      "Lua": "lua"
+      "Nest.js": "nestjs"
+      "Next.js": "nextjs-icon"
+      "Node.js": "nodejs-icon"
+      "NPM": "npm-icon"
+      "NuGet": "nuget-icon"
+      "Nuxt": "nuxt-icon"
+      "PHP": "php"
+      "Playwright": "playwright"
+      "Postman": "postman-icon"
+      "Python": "python"
+      "Raspberry-Pi": "raspberry-pi"
+      "React": "react"
+      "Redux": "redux"
+      "Ruby": "ruby"
+      "Ruby-on-Rails": "rails"
+      "Rust": "rust"
+      "Salesforce": "salesforce"
+      "Scala": "scala"
+      "Slack": "slack-icon"
+      "Solid.js": "solidjs-icon"
+      "Spring": "spring-icon"
+      "Svelte": "svelte-icon"
+      "Swift": "swift"
+      "Tailwind-CSS": "tailwindcss-icon"
+      "Tauri": "tauri"
+      "TypeScript": "typescript-icon"
+      "Ubuntu": "ubuntu"
+      "V8": "v8"
+      "Vercel": "vercel-icon"
+      "Vite.js": "vite-icon"
+      "Vue.js": "vue"
+      "WebAssembly": "webassembly"
+      "WordPress": "wordpress-icon"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/css.svg
+    into: "CSS.svg"
+    note: "CC0-1.0; the current CSS logo"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/elixir.svg
+    into: "Elixir.svg"
+    fill: "#8847B9"
+    note: "CC0-1.0; brand color"
+  - url: https://raw.githubusercontent.com/primer/octicons/main/icons/codespaces-24.svg
+    into: "GitHub-Codespaces.svg"
+    note: "Primer Octicons, MIT"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/llvm.svg
+    into: "LLVM.svg"
+    fill: "#262D3A"
+    note: "CC0-1.0; brand color"
 
 # Shown in README.md, in this order.
 samples:

@@ -10,12 +10,12 @@ without hunting for logos.
 | [`aws`](aws/)                     | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                                                                                 |
 | [`azure`](azure/)                 | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                                                                                  |
 | [`cloudflare`](cloudflare/)       | 113   | Cloudflare logo and product icons ([cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons))                                                          |
-| [`data`](data/)                   | 34    | Databases, streaming and data-pipeline logos                                                                                                                                            |
-| [`k8s`](k8s/)                     | 44    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg), plus Kubernetes, Helm, Argo CD, K3s and K3OS logos |
+| [`data`](data/)                   | 32    | Databases, streaming and data-pipeline logos                                                                                                                                            |
+| [`k8s`](k8s/)                     | 43    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg), plus Kubernetes, Helm, Argo CD and K3s logos |
 | [`networking`](networking/)       | 35    | Service mesh, ingress, CNI, DNS, VPN and API protocols (CNCF artwork and others)                                                                                                        |
 | [`observability`](observability/) | 27    | Grafana products and signal icons, OpenTelemetry, Prometheus, .NET Aspire, Seq and PostHog                                                                                              |
 | [`supabase`](supabase/)           | 10    | Supabase logo and product icons                                                                                                                                                         |
-| [`techno`](techno/)               | 80    | Hand-picked technology logos                                                                                                                                                            |
+| [`techno`](techno/)               | 73    | Hand-picked technology logos ([gilbarbara/logos](https://github.com/gilbarbara/logos), [simple-icons](https://github.com/simple-icons/simple-icons))                                                                                                                                                            |
 
 Click a pack to see a preview of its icons, where each one came from, and its license.
 
@@ -122,8 +122,7 @@ import:
 ```
 
 Other edits: `replace: [[old, new], ...]` for text. To move to a new release, change the url
-and run `uv run runax-icons import <pack>`. `techno` has no imports: its logos were picked from
-a local `svg.zip` (kept in `techno/downloads/`, git-ignored).
+and run `uv run runax-icons import <pack>`.
 
 Hand-made files (drawn, cropped from a PNG, or with no known url) are listed under
 `sources:` instead, so every file in `src/` has a recorded origin.

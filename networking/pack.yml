@@ -47,13 +47,19 @@ import:
     note: "official logo, unmodified: WireGuard's trademark policy forbids removing elements"
   - url: https://raw.githubusercontent.com/netbirdio/netbird/main/client/ui/frontend/src/assets/logos/netbird.svg
     into: "other/netbird.svg"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "other/{name}.svg"
+    note: "CC0-1.0"
+    names:
+      "graphql": "graphql"
+      "openapi": "openapi-icon"
+      "socket.io": "socket.io"
+      "swagger": "swagger"
 
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:
   - files: "other/rest.svg"
     note: "drawn for this pack; REST has no logo"
-  - files: "other/*"
-    note: "moved from the techno pack (originally from techno's svg.zip) (GraphQL, OpenAPI, Swagger, Socket.IO)"
 
 # File name -> label.
 labels:

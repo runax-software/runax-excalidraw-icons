@@ -51,11 +51,26 @@ import:
     into: "CockroachDB.svg"
     fill: "#6933FF"
     note: "Cockroach Labs brand color"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "{name}.svg"
+    note: "CC0-1.0"
+    names:
+      "Apache-Airflow": "airflow-icon"
+      "Apache-Cassandra": "cassandra"
+      "Apache-Kafka": "kafka-icon"
+      "Apache-Spark": "apache-spark"
+      "CouchDB": "couchdb-icon"
+      "Elasticsearch": "elasticsearch"
+      "Firebase": "firebase-icon"
+      "Kibana": "kibana"
+      "MongoDB": "mongodb-icon"
+      "MySQL": "mysql-icon"
+      "Oracle": "oracle"
+      "PostgreSQL": "postgresql"
+      "RabbitMQ": "rabbitmq-icon"
+      "Redis": "redis"
+      "SQLite": "sqlite"
 
-# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
-sources:
-  - files: "*"
-    note: "moved from the techno pack (originally from techno's svg.zip); Cosmos-DB, Elasticsearch and PostgreSQL renamed to fix typos"
 
 # File name (without size suffix) -> label.
 labels:
@@ -65,7 +80,6 @@ labels:
 samples:
   - PostgreSQL
   - MySQL
-  - Microsoft SQL Server
   - SQLite
   - ClickHouse
   - DuckDB

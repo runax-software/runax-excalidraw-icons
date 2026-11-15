@@ -1,35 +1,38 @@
 # Technology Logos
 
-80 icons from hand-picked technology logos, packaged as a Miro-style Excalidraw library:
+73 icons from hand-picked technology logos from [gilbarbara/logos](https://github.com/gilbarbara/logos) and [simple-icons](https://github.com/simple-icons/simple-icons), packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
-<tr><td align="center" width="120"><img src="src/Docker.svg" width="64" height="64"><br><sub>Docker</sub></td><td align="center" width="120"><img src="src/HashiCorp-Terraform.svg" width="64" height="64"><br><sub>HashiCorp Terraform</sub></td><td align="center" width="120"><img src="src/Ansible.svg" width="64" height="64"><br><sub>Ansible</sub></td><td align="center" width="120"><img src="src/GitHub.svg" width="64" height="64"><br><sub>GitHub</sub></td><td align="center" width="120"><img src="src/GitHub-Actions.svg" width="64" height="64"><br><sub>GitHub Actions</sub></td><td align="center" width="120"><img src="src/GitLab.svg" width="64" height="64"><br><sub>GitLab</sub></td></tr>
-<tr><td align="center" width="120"><img src="src/Python.svg" width="64" height="64"><br><sub>Python</sub></td><td align="center" width="120"><img src="src/Go.svg" width="64" height="64"><br><sub>Go</sub></td><td align="center" width="120"><img src="src/TypeScript.svg" width="64" height="64"><br><sub>TypeScript</sub></td><td align="center" width="120"><img src="src/Rust.svg" width="64" height="64"><br><sub>Rust</sub></td><td align="center" width="120"><img src="src/Java.svg" width="64" height="64"><br><sub>Java</sub></td><td align="center" width="120"><img src="src/React.svg" width="64" height="64"><br><sub>React</sub></td></tr>
-<tr><td align="center" width="120"><img src="src/Next.js.svg" width="64" height="64"><br><sub>Next.js</sub></td><td align="center" width="120"><img src="src/Node.js.svg" width="64" height="64"><br><sub>Node.js</sub></td><td align="center" width="120"><img src="src/Spring.svg" width="64" height="64"><br><sub>Spring</sub></td><td align="center" width="120"><img src="src/Vue.js.svg" width="64" height="64"><br><sub>Vue.js</sub></td><td align="center" width="120"><img src="src/Angular.svg" width="64" height="64"><br><sub>Angular</sub></td><td align="center" width="120"><img src="src/Linux.svg" width="64" height="64"><br><sub>Linux</sub></td></tr>
-<tr><td align="center" width="120"><img src="src/Ubuntu.svg" width="64" height="64"><br><sub>Ubuntu</sub></td><td align="center" width="120"><img src="src/Bash.svg" width="64" height="64"><br><sub>Bash</sub></td><td align="center" width="120"><img src="src/Kotlin.svg" width="64" height="64"><br><sub>Kotlin</sub></td><td align="center" width="120"><img src="src/Swift.svg" width="64" height="64"><br><sub>Swift</sub></td><td align="center" width="120"><img src="src/Figma.svg" width="64" height="64"><br><sub>Figma</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Docker.svg" width="64" height="46"><br><sub>Docker</sub></td><td align="center" width="120"><img src="src/HashiCorp-Terraform.svg" width="56" height="64"><br><sub>HashiCorp Terraform</sub></td><td align="center" width="120"><img src="src/Ansible.svg" width="52" height="64"><br><sub>Ansible</sub></td><td align="center" width="120"><img src="src/GitHub.svg" width="64" height="62"><br><sub>GitHub</sub></td><td align="center" width="120"><img src="src/GitHub-Actions.svg" width="64" height="64"><br><sub>GitHub Actions</sub></td><td align="center" width="120"><img src="src/GitLab.svg" width="64" height="62"><br><sub>GitLab</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Python.svg" width="64" height="64"><br><sub>Python</sub></td><td align="center" width="120"><img src="src/Go.svg" width="64" height="24"><br><sub>Go</sub></td><td align="center" width="120"><img src="src/TypeScript.svg" width="64" height="64"><br><sub>TypeScript</sub></td><td align="center" width="120"><img src="src/Rust.svg" width="64" height="64"><br><sub>Rust</sub></td><td align="center" width="120"><img src="src/Java.svg" width="47" height="64"><br><sub>Java</sub></td><td align="center" width="120"><img src="src/React.svg" width="64" height="57"><br><sub>React</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Next.js.svg" width="64" height="64"><br><sub>Next.js</sub></td><td align="center" width="120"><img src="src/Node.js.svg" width="57" height="64"><br><sub>Node.js</sub></td><td align="center" width="120"><img src="src/Spring.svg" width="64" height="64"><br><sub>Spring</sub></td><td align="center" width="120"><img src="src/Vue.js.svg" width="64" height="55"><br><sub>Vue.js</sub></td><td align="center" width="120"><img src="src/Angular.svg" width="60" height="64"><br><sub>Angular</sub></td><td align="center" width="120"><img src="src/Linux.svg" width="56" height="64"><br><sub>Linux</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Ubuntu.svg" width="64" height="64"><br><sub>Ubuntu</sub></td><td align="center" width="120"><img src="src/Bash.svg" width="56" height="64"><br><sub>Bash</sub></td><td align="center" width="120"><img src="src/Kotlin.svg" width="64" height="64"><br><sub>Kotlin</sub></td><td align="center" width="120"><img src="src/Swift.svg" width="64" height="64"><br><sub>Swift</sub></td><td align="center" width="120"><img src="src/Figma.svg" width="43" height="64"><br><sub>Figma</sub></td></tr>
 </table>
 
-23 of 80 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
+23 of 73 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## License
 
-Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied.
+The logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) and [simple-icons](https://github.com/simple-icons/simple-icons) (both CC0-1.0); GitHub Codespaces is from [Primer Octicons](https://github.com/primer/octicons) (MIT). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied.
 
 This pack forbids, and the build refuses:
 
-- `edit`: where these logos came from (techno/downloads/svg.zip) was never recorded, so their license is unknown
-- `native`: unknown license (see edit); the logos are their owners' trademarks
-- `publish`: unknown license (see edit)
+- `native`: redrawing changes the logos' shape; the logos are their owners' trademarks
+- `publish`: the logos are their owners' trademarks; we don't republish them as a library of their own
 
 ## Sources
 
-Paths are relative to [`src/`](src/). Imported files are refreshed by
+Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by
 `uv run runax-icons import techno`; the rest are kept by hand.
 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
-| `*` |  | hand-picked from a downloaded svg.zip of technology logos (kept in techno/downloads/, git-ignored) |
+| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; 69 files |
+| `CSS.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/css.svg | CC0-1.0; the current CSS logo |
+| `Elixir.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/elixir.svg | CC0-1.0; brand color; filled #8847B9 |
+| `GitHub-Codespaces.svg` | https://raw.githubusercontent.com/primer/octicons/main/icons/codespaces-24.svg | Primer Octicons, MIT |
+| `LLVM.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/llvm.svg | CC0-1.0; brand color; filled #262D3A |
 
 ## Use
 

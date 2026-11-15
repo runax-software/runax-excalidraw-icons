@@ -1,5 +1,5 @@
 title: Kubernetes Icons
-source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos"
+source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm and K3s logos"
 license: "The Kubernetes resource and component icons are from [kubernetes/community](https://github.com/kubernetes/community) (Apache-2.0). The Kubernetes, Helm, Argo, K3s and K3OS logos are trademarks of The Linux Foundation or their owners, used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 
 # `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
@@ -18,18 +18,10 @@ import:
     note: "argo is Argo CD"
     names: ["argo", "helm", "k3s", "kubernetes"]
 
-# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
-sources:
-  - files: "other/k3os.svg"
-    forbid:
-      edit: "unknown license (from techno's svg.zip); a trademark"
-      native: "unknown license (from techno's svg.zip); a trademark"
-    note: "moved from the techno pack (originally from techno's svg.zip); CNCF has no K3OS artwork"
 
 # File name (without size suffix) -> label. kubernetes/community names files by kubectl short name.
 labels:
   argo: Argo CD
-  k3os: K3OS
   api: API Server
   c-c-m: Cloud Controller Manager
   c-m: Controller Manager

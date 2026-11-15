@@ -19,7 +19,8 @@ every file came from, under Sources.
 | `observability/aspire/aspire.svg`: [.NET Aspire logo](https://github.com/dotnet/aspire) | Copyright (c) .NET Foundation and Contributors | MIT ([text](LICENSES/MIT-dotnet-aspire.txt)) | none |
 | `observability/prometheus/`: [Prometheus logo](https://github.com/prometheus/docs) | Copyright 2014-2025 The Prometheus Authors | Apache-2.0 ([text](LICENSES/Apache-2.0.txt)) | none |
 | `supabase/`: [Supabase logo and product icon paths](https://github.com/supabase/supabase) | © Supabase, Inc. | Apache-2.0 ([text](LICENSES/Apache-2.0.txt)) | product icons drawn from the paths in `packages/shared-data/products.ts`, styled like supabase.com's green icons |
-| [gilbarbara/logos](https://github.com/gilbarbara/logos), [simple-icons](https://github.com/simple-icons/simple-icons) shapes | dedicated to the public domain | CC0-1.0 | simple-icons shapes filled with the brand's color (CockroachDB, HAProxy, Neo4j) |
+| `techno/GitHub-Codespaces.svg`: [Primer Octicons](https://github.com/primer/octicons) | Copyright (c) 2026 GitHub Inc. | MIT ([text](LICENSES/MIT-primer-octicons.txt)) | none |
+| [gilbarbara/logos](https://github.com/gilbarbara/logos), [simple-icons](https://github.com/simple-icons/simple-icons) shapes | dedicated to the public domain | CC0-1.0 | simple-icons shapes filled with the brand's color (CockroachDB, HAProxy, Neo4j, Elixir, LLVM) |
 
 NOTICE files of Apache-2.0 sources:
 

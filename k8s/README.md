@@ -1,6 +1,6 @@
 # Kubernetes Icons
 
-44 icons from [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos, packaged as a Miro-style Excalidraw library:
+43 icons from [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm and K3s logos, packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
@@ -11,7 +11,7 @@ each item is a 64px icon with an editable label below it, grouped together.
 <tr><td align="center" width="120"><img src="src/kubernetes/svg/infrastructure_components/unlabeled/control-plane.svg" width="64" height="62"><br><sub>Control Plane</sub></td><td align="center" width="120"><img src="src/kubernetes/svg/control_plane_components/labeled/api.svg" width="64" height="62"><br><sub>API Server</sub></td><td align="center" width="120"><img src="src/kubernetes/svg/infrastructure_components/unlabeled/etcd.svg" width="64" height="62"><br><sub>etcd</sub></td></tr>
 </table>
 
-27 of 44 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
+27 of 43 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## License
 
@@ -26,7 +26,6 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | ----- | ------ | ----- |
 | `kubernetes/**` | https://github.com/kubernetes/community/archive/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a.zip | largest size of each icon, white-only ones skipped; from `community-*/icons` in the archive |
 | `cncf/*.svg` | https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg | argo is Argo CD; forbids `edit`, `native`; 4 files |
-| `other/k3os.svg` |  | moved from the techno pack (originally from techno's svg.zip); CNCF has no K3OS artwork; forbids `edit`, `native` |
 
 ## Use
 

@@ -30,10 +30,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
 | `*.svg` | https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/{src}.svg | MIT; the -color variant where one exists; 37 files |
-| `tensorflow.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
-| `pytorch.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
-| `numpy.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
-| `opencv.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
+| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; 4 files |
 
 ## Use
 

@@ -53,17 +53,15 @@ import:
       "vllm": "vllm-color"
       "windsurf": "windsurf"
       "xai": "xai"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "{name}.svg"
+    note: "CC0-1.0"
+    names:
+      "numpy": "numpy"
+      "opencv": "opencv"
+      "pytorch": "pytorch-icon"
+      "tensorflow": "tensorflow"
 
-# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
-sources:
-  - files: "tensorflow.svg"
-    note: "moved from the techno pack (originally from techno's svg.zip)"
-  - files: "pytorch.svg"
-    note: "moved from the techno pack (originally from techno's svg.zip)"
-  - files: "numpy.svg"
-    note: "moved from the techno pack (originally from techno's svg.zip)"
-  - files: "opencv.svg"
-    note: "moved from the techno pack (originally from techno's svg.zip)"
 
 # File name -> label.
 labels:

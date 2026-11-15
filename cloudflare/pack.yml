@@ -13,14 +13,15 @@ import:
     fill: "#F38020"
     note: "labels from src/content/directory/<name>.yaml; docs-only icons and third-party logos left out"
     names: ["1.1.1.1", "access", "aegis", "agent-lee", "agent-memory", "agents", "ai", "ai-crawl-control", "ai-gateway", "ai-search", "analytics", "api-shield", "argo-smart-routing", "artifacts", "automatic-platform-optimization", "bots", "browser-isolation", "browser-run", "byoip", "cache", "casb", "china-network", "client-ip-geolocation", "client-side-security", "cloud-workload-security", "cloudflare-challenges", "cloudflare-for-platforms", "cloudflare-mesh", "cloudflare-network-firewall", "cloudflare-one", "cloudflare-tunnel-sase", "cloudflare-wan", "constellation", "containers", "d1", "data-localization", "data-loss-prevention", "ddos-protection", "dex", "dmarc-management", "dns", "durable-objects", "dynamic-workers", "email-routing", "email-security", "email-service", "firewall", "flagship", "gateway", "google-tag-gateway", "health-checks", "hyperdrive", "images", "key-transparency", "kv", "load-balancing", "log-explorer", "logs", "magic-transit", "monetization-gateway", "moq", "multi-cloud-networking", "network", "network-error-logging", "network-flow", "network-interconnect", "notifications", "pages", "pipelines", "privacy-gateway", "privacy-pass", "privacy-proxy", "pub-sub", "queues", "r2", "r2-data-catalog", "r2-sql", "radar", "randomness-beacon", "realtime", "realtime-kit", "realtime-sfu", "realtime-turn", "registrar", "resource-tagging", "rules", "ruleset-engine", "sandbox", "secrets-store", "security-center", "smart-shield", "spectrum", "speed", "ssl", "stream", "tenant", "time-services", "tunnel", "turnstile", "vectorize", "waf", "waiting-room", "warp-client", "web-analytics", "web-search", "web3", "workers", "workers-ai", "workers-vpc", "workflows", "zaraz", "zero-trust-networks"]
-
-# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
-sources:
-  - files: "Cloudflare.svg"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "{name}.svg"
+    note: "CC0-1.0"
     forbid:
       edit: "the Cloudflare logo is a trademark, used as published"
       native: "the Cloudflare logo is a trademark: no redrawing"
-    note: "moved from the techno pack (originally from techno's svg.zip)"
+    names:
+      "Cloudflare": "cloudflare-icon"
+
 
 # File name -> label: product names from cloudflare-docs src/content/directory/*.yaml.
 labels:
