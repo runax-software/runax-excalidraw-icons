@@ -10,9 +10,5 @@ All packs in the repository are released together.
 
 ### Added
 
-- 80 hand-picked technology logos: languages, frameworks, developer tools and platforms.
-- Bitbucket, DigitalOcean, Nuxt, Playwright and Apache HTTP Server get their correct names.
-
-### Removed
-
-- Logos that belong in the newer packs moved there: databases and messaging to data, Kubernetes tools to k8s, networking and API logos to networking, Cloudflare to cloudflare, observability logos to observability, machine-learning libraries to ai.
+- 73 hand-picked technology logos: languages, frameworks, developer tools and platforms, from gilbarbara/logos and simple-icons (CC0) and, for GitHub Codespaces, Primer Octicons (MIT).
+- Database, Kubernetes, networking, observability, Cloudflare and machine-learning logos are in their own packs.

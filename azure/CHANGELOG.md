@@ -8,11 +8,7 @@ All packs in the repository are released together.
 
 ## [Unreleased]
 
-### Changed
-
-- Icons that share a name in Microsoft's set carry its icon number ("Workspaces (00330)"); "WAC" reads "Windows Admin Center", and three names get their spacing and casing fixed.
-- The README quotes Microsoft's icon terms and guidelines.
-
 ### Added
 
-- 645 icons from the Azure Architecture Icons V25.
+- 645 icons from the Azure Architecture Icons V25, captioned with their full service names ("Windows Admin Center"); icons Microsoft names alike carry its icon number ("Workspaces (00330)").
+- The README quotes Microsoft's icon terms and guidelines.

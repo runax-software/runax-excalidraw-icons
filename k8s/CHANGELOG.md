@@ -11,4 +11,4 @@ All packs in the repository are released together.
 ### Added
 
 - 39 resource and component icons from kubernetes/community, labeled with their full names (Deployment, not `deploy`).
-- The Kubernetes, Helm, Argo CD and K3s logos from the CNCF artwork, and K3OS from the techno pack.
+- The Kubernetes, Helm, Argo CD and K3s logos from the CNCF artwork.

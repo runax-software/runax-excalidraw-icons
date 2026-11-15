@@ -8,12 +8,7 @@ All packs in the repository are released together.
 
 ## [Unreleased]
 
-### Changed
-
-- Grafana OnCall is now grafana.com's logo: the previous file came from an AGPL-3.0 repository.
-- Seq is now its own symbol (datalust.co's site icon) instead of a mark cut out of its logo.
-- Alerts uses Grafana's IRM icon unmodified (its background tint is no longer changed).
-
 ### Added
 
 - 27 icons: Grafana and its products (Loki, Tempo, Mimir, Pyroscope, Alloy, Beyla, Faro, k6, OnCall, Incident, SLO, Tanka, Graphite), the signal icons Logs, Metrics, Traces, Profiles, Alerts and Dashboards in Grafana's style, Prometheus, Alertmanager, OpenTelemetry and its Collector, .NET Aspire, Seq and PostHog.
+- Logos as their owners publish them: grafana.com's product logos, Grafana's IRM icon for Alerts, and Seq's own symbol.
