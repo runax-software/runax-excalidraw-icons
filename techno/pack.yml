@@ -3,29 +3,14 @@ source: hand-picked technology logos
 # Glob in downloads/; the newest match wins.
 download: techno
 
-# File name (without size suffix) -> label. Fixes typos in the logo file names.
-labels:
-  cosmos-bd: Cosmos DB
-  playwrite: Playwright
-  postgressql: PostgreSQL
-
 # Shown in README.md, in this order.
 samples:
   - Docker
-  - Kubernetes
-  - Helm
   - HashiCorp Terraform
   - Ansible
-  - Argo CD
   - GitHub
   - GitHub Actions
   - GitLab
-  - PostgreSQL
-  - MySQL
-  - MongoDB
-  - Redis
-  - Apache Kafka
-  - RabbitMQ
   - Python
   - Go
   - TypeScript
@@ -34,4 +19,12 @@ samples:
   - React
   - Next.js
   - Node.js
-  - Cloudflare
+  - Spring
+  - Vue.js
+  - Angular
+  - Linux
+  - Ubuntu
+  - Bash
+  - Kotlin
+  - Swift
+  - Figma
