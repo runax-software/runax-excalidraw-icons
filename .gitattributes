@@ -1,0 +1,26 @@
+# Auto detect text files and normalise line endings to LF
+* text=auto eol=lf
+
+# Explicit text files
+*.py text diff=python
+*.md text
+*.yml text
+*.yaml text
+*.toml text
+*.json text
+*.lock text
+
+# Icons are kept byte for byte as imported (some upstream files use CRLF): no line-ending
+# conversion, but still shown as text in diffs.
+*.svg -text diff
+
+# Generated libraries: large one-line JSON, not useful to diff
+runax-*.excalidrawlib -diff linguist-generated
+runax-*.excalidraw -diff linguist-generated
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.zip binary

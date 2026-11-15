@@ -1,10 +1,15 @@
 # techno's local svg.zip; what's used is already in techno/src/
 downloads/
-# Generated: rebuild with `uv run build.py`
-*.excalidrawlib
-*.excalidraw
+# Generated: rebuild with `uv run runax-icons build` (released from CI on `v*` tags)
+runax-*.excalidrawlib
+runax-*.excalidraw
 
 __pycache__/
 .DS_Store
-
 .venv/
+
+# APM dependencies
+apm_modules/
+# Claude Code personal/local settings
+.claude/settings.local.json
+.claude/worktrees/

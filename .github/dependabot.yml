@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # Python dependencies. Versions are locked in uv.lock.
+  - package-ecosystem: uv
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels:
+      - chore
+    assignees:
+      - Katyara11
+    commit-message:
+      prefix: build
+
+  # Actions used by the workflows.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels:
+      - chore
+    assignees:
+      - Katyara11
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns:
+          - "*"
