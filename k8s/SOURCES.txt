@@ -1,0 +1,8 @@
+Downloaded 2026-11-15.
+
+kubernetes-icons/  the icons/ folder of https://github.com/kubernetes/community (commit c8b1af836bc44adbafe45653ceb1a4a54ab14d9a)
+
+cncf/<project>.svg  https://github.com/cncf/artwork/tree/main/projects/<project>/icon/color/<project>-icon-color.svg
+  argo (Argo CD), helm, k3s, kubernetes
+
+other/k3os.svg  moved from the techno pack (originally from techno/downloads/svg.zip); CNCF has no K3OS artwork

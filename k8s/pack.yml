@@ -1,10 +1,12 @@
 title: Kubernetes Icons
-source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg)"
+source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos (URLs in [`SOURCES.txt`](SOURCES.txt))"
 # Glob in downloads/; the newest match wins.
-download: kubernetes-icons
+download: sources
 
 # File name (without size suffix) -> label. kubernetes/community names files by kubectl short name.
 labels:
+  argo: Argo CD
+  k3os: K3OS
   api: API Server
   c-c-m: Cloud Controller Manager
   c-m: Controller Manager
@@ -47,6 +49,9 @@ labels:
 
 # Shown in README.md, in this order.
 samples:
+  - Kubernetes
+  - Helm
+  - Argo CD
   - Pod
   - Deployment
   - ReplicaSet
