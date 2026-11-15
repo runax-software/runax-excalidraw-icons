@@ -1,0 +1,17 @@
+title: Supabase
+source: "the [Supabase](https://supabase.com) logo and product icons (URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# Shown in README.md, in this order.
+samples:
+  - Supabase
+  - Supabase Database
+  - Supabase Authentication
+  - Supabase Storage
+  - Supabase Edge Functions
+  - Supabase Realtime
+  - Supabase Compute
+  - Supabase Cron
+  - Supabase Queues
+  - Supabase Vector

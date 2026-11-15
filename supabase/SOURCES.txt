@@ -1,0 +1,10 @@
+Downloaded 2026-11-15.
+
+Supabase.svg  https://github.com/supabase/supabase/blob/master/apps/www/public/images/supabase-logo-icon.svg
+
+Supabase-<Product>.svg
+  The 24px product icon paths from
+  https://github.com/supabase/supabase/blob/master/packages/shared-data/products.ts
+  drawn the way apps/www/components/ProductIcon.tsx draws its "green" variant: 1.5px round strokes in
+  --brand-200 (#D3F8E4) on a rounded --brand-default (#3FCF8E) tile, colors from
+  packages/ui/build/css/themes/light.css.
