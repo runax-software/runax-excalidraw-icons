@@ -33,7 +33,7 @@ import:
     into: "grafana/grafana-incident.svg"
   - url: https://grafana.com/static/img/logos/slo.svg
     into: "grafana/grafana-slo.svg"
-  - url: https://raw.githubusercontent.com/grafana/oncall/dev/grafana-plugin/src/assets/img/logo.svg
+  - url: https://grafana.com/oss/assets/logo-grafana-oncall.svg
     into: "grafana/grafana-oncall.svg"
   - url: https://a-us.storyblok.com/f/1022730/24x24/682285d5c0/icon-nav-logs.svg
     into: "signals/logs.svg"
@@ -52,9 +52,7 @@ import:
     note: "grafana.com nav icon"
   - url: https://a-us.storyblok.com/f/1022730/32x32/a412179eca/grafana-pricing-icon-irm.svg
     into: "signals/alerts.svg"
-    note: "Grafana IRM icon, tile tint matched to the nav icons"
-    replace:
-      - ["<rect opacity=\"0.2\"", "<rect opacity=\"0.15\""]
+    note: "Grafana IRM icon, unmodified"
   - url: https://raw.githubusercontent.com/prometheus/docs/main/public/assets/prometheus-logo.svg
     into: "prometheus/{name}.svg"
     note: "Alertmanager has no logo of its own"
@@ -67,10 +65,9 @@ import:
     into: "aspire/aspire.svg"
   - url: https://raw.githubusercontent.com/PostHog/posthog/master/frontend/public/posthog-icon.svg
     into: "posthog/posthog.svg"
-  - url: https://datalust.co/assets/seq-logo-dark.svg
+  - url: https://datalust.co/favicon.png
     into: "seq/seq.svg"
-    viewBox: "499 67.8 140.7 140.7"
-    note: "mark only"
+    note: "Seq's own symbol (its site icon)"
 
 # File name (without size suffix) -> label.
 labels:

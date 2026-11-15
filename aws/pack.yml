@@ -1,12 +1,40 @@
 title: AWS Architecture Icons
 source: "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)"
-license: "The icons are from AWS's [Architecture Icons](https://aws.amazon.com/architecture/icons/). AWS lets customers and partners use them in architecture diagrams; check AWS's terms before using them for anything else. AWS and the AWS product names are trademarks of Amazon.com, Inc. or its affiliates."
+license: |
+  The icons are AWS's [Architecture Icons](https://aws.amazon.com/architecture/icons/), unmodified
+  (no cropping, recoloring or reshaping), shown at their predefined size. AWS's terms, from the
+  icons page:
+
+  > We allow customers and partners to use these toolkits and assets to create architecture
+  > diagrams. You can also put icons in materials like whitepapers, presentations, data sheets,
+  > and posters.
+
+  AWS's guidelines, from the PowerPoint toolkit on the same page:
+
+  - Use icons at their predefined size, color and format in diagrams; scale them only in
+    presentations, holding Shift so they keep their proportions.
+  - Don't crop, flip or rotate icons, or change their shapes.
+  - Service names fit on at most two lines, never break mid-word, and keep "AWS" or "Amazon" on
+    the same line as the first word of the name (the captions in this library follow this).
+  - Use a short form (Amazon EC2) only after the full service name appears somewhere in the
+    document, and never the same short form for two services.
+
+  AWS and the AWS product names are trademarks of Amazon.com, Inc. or its affiliates. The AWS
+  logo can't be used in some Regions (such as China): use the generic cloud group there.
+native_size: true  # AWS: "use icons at their predefined size"
 # `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.
 import:
   - url: https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip
 
-# Shown in README.md, in this order.
+# File name (lowercased, without size suffix) -> label.
+labels:
+  res_amazon-aurora_amazon-rds-instance-aternate: Amazon Aurora Amazon RDS Instance Alternate  # AWS's file name typo
+  # Resource icons named like their service's icon; AWS names resources in sentence case.
+  res_amazon-ec2_auto-scaling: Amazon EC2 Auto Scaling resource
+  res_aws-management-console_light: AWS Management Console resource
+
+# Shown in README.md, in this order., in this order.
 samples:
   - Amazon EC2
   - AWS Lambda
@@ -28,7 +56,7 @@ samples:
   - Amazon Elastic Kubernetes Service
   - AWS Fargate
   - Amazon CloudWatch
-  - AWS Identity And Access Management
+  - AWS Identity and Access Management
   - Amazon Kinesis
   - Amazon SageMaker
   - Amazon Bedrock

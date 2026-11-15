@@ -1,6 +1,6 @@
 title: Networking
 source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF projects from [cncf/artwork](https://github.com/cncf/artwork) plus NGINX, Traefik, Kong, HAProxy, Caddy, Calico, Consul, Tailscale, WireGuard, NetBird, GraphQL, REST, OpenAPI, Swagger and Socket.IO"
-license: "The CNCF project logos are from [cncf/artwork](https://github.com/cncf/artwork), used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage); other logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0), [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0) or the projects themselves. Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
+license: "The CNCF project logos are from [cncf/artwork](https://github.com/cncf/artwork), used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage); other logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0), [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0) or the projects themselves. Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
 
 # `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
 # entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
@@ -30,18 +30,15 @@ import:
     into: "other/haproxy.svg"
     fill: "#169BD6"
     note: "HAProxy brand color"
-  - url: https://caddyserver.com/resources/images/logo-light.svg
+  - url: https://caddyserver.com/resources/images/favicon.png
     into: "other/caddy.svg"
-    viewBox: "-2 -2 152 151"
-    note: "mark only"
-  - url: https://www.tigera.io/app/uploads/2026/01/Calico-logo-2026-black-text.svg
+    note: "Caddy's own symbol (its site icon)"
+  - url: https://docs.tigera.io/img/calico-logo-2026-badge.png
     into: "other/calico.svg"
-    viewBox: "0 0 105 118"
-    note: "mark only"
+    note: "Calico's badge, from its docs"
   - url: https://www.wireguard.com/img/wireguard.svg
     into: "other/wireguard.svg"
-    viewBox: "0 0 333.14 333.14"
-    note: "mark only"
+    note: "official logo, unmodified: WireGuard's trademark policy forbids removing elements"
   - url: https://raw.githubusercontent.com/netbirdio/netbird/main/client/ui/frontend/src/assets/logos/netbird.svg
     into: "other/netbird.svg"
 

@@ -21,12 +21,13 @@ import:
       "Valkey": "valkey-icon"
   - url: https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/docker/server/README.src/logo.svg
     into: "ClickHouse.svg"
-  - url: https://raw.githubusercontent.com/duckdb/duckdb/main/logo/DuckDB_Logo-stacked.svg
+  - url: https://raw.githubusercontent.com/duckdb/duckdb-web/main/images/designmanual/DuckDB_icon-lightmode.svg
     into: "DuckDB.svg"
-    viewBox: "217.6 10 334.4 334.4"
-    note: "mark only"
-  - url: https://raw.githubusercontent.com/neo4j/neo4j-browser/master/src/browser/components/icons/svgs/neo4j-icon.svg
+    note: "the icon from DuckDB's design manual"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/neo4j.svg
     into: "Neo4j.svg"
+    fill: "#4581C3"
+    note: "CC0-1.0; Neo4j brand color (the neo4j-browser icon is GPL-3.0)"
   - url: https://raw.githubusercontent.com/apache/iceberg/main/site/docs/assets/images/iceberg-logo-icon.png
     into: "Apache-Iceberg.svg"
     note: "PNG wrapped in SVG"
@@ -38,8 +39,10 @@ import:
     viewBox: "10.8 10.4 30 44"
   - url: https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg
     into: "MQTT.svg"
-    viewBox: "192 28 306 306"
-    note: "mark only"
+    note: "official logo, unmodified (mqtt.org has no symbol-only version)"
+  - url: https://user-images.githubusercontent.com/95200/143832033-32e868df-f3b0-4251-97fb-c64809a43d36.png
+    into: "BullMQ.svg"
+    note: "the taskforcesh/bullmq README banner, unmodified (BullMQ has no other logo file)"
   - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cockroachlabs.svg
     into: "CockroachDB.svg"
     fill: "#6933FF"
@@ -47,9 +50,6 @@ import:
 
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:
-  - files: "BullMQ.svg"
-    url: https://user-images.githubusercontent.com/95200/143832033-32e868df-f3b0-4251-97fb-c64809a43d36.png
-    note: "the bull from the taskforcesh/bullmq README banner, as a 512px PNG on a rounded #00ADEF tile"
   - files: "*"
     note: "moved from the techno pack (originally from techno's svg.zip); Cosmos-DB, Elasticsearch and PostgreSQL renamed to fix typos"
 

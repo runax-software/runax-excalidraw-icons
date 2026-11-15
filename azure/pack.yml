@@ -1,10 +1,41 @@
 title: Azure Architecture Icons
 source: "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)"
-license: "The icons are from Microsoft's [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/). Microsoft permits their use in architectural diagrams, training materials or documentation, and does not allow modifying them; see Microsoft's icon terms. Azure and the Azure product names are trademarks of Microsoft."
+license: |
+  The icons are Microsoft's [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/),
+  unmodified (no cropping, recoloring or reshaping; only scaled to fit, keeping their proportions).
+  Microsoft's terms, as published with the icons:
+
+  > Microsoft permits the use of these icons in architectural diagrams, training materials, or
+  > documentation. You may copy, distribute, and display the icons only for the permitted use unless
+  > granted explicit permission by Microsoft. Microsoft reserves all other rights.
+
+  Microsoft's guidelines for using them:
+
+  - Use the icons to illustrate how products can work together, as they would appear within Azure.
+  - Keep the full name of the service near the icon (each library item has it as the caption below
+    the icon), but not so close that it looks like it's overlapping the icon.
+  - Don't crop, flip or rotate icons, and don't distort or change their shape in any way: when
+    resizing in Excalidraw, keep the proportions (hold Shift).
+  - Don't use Microsoft product icons to represent your own product or service.
+
+  Running `runax-icons import azure` downloads the icons from Microsoft, which means agreeing to
+  these terms. Azure and the Azure product names are trademarks of Microsoft.
 # `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.
 import:
   - url: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip
+
+# File name (lowercased) -> label.
+labels:
+  # Microsoft names two different icons the same in each pair; their icon numbers tell them apart.
+  00330-icon-service-workspaces: Workspaces (00330)
+  00400-icon-service-workspaces: Workspaces (00400)
+  02302-icon-service-load-balancer-hub: Load Balancer Hub (02302)
+  029029174-icon-service-load-balancer-hub: Load Balancer Hub (029029174)
+  02505-icon-service-cloud-services-(extended-support): Cloud Services (Extended Support)
+  10355-icon-service-wac: Windows Admin Center
+  10362-icon-service-web-application-firewall-policies(waf): Web Application Firewall Policies (WAF)
+  10203-icon-service-windows10-core-services: Windows 10 Core Services
 
 # Shown in README.md, in this order.
 samples:
@@ -22,7 +53,7 @@ samples:
   - Virtual Networks
   - Load Balancers
   - Application Gateways
-  - Front Door And CDN Profiles
+  - Front Door and CDN Profiles
   - DNS Zones
   - Key Vaults
   - Managed Identities
