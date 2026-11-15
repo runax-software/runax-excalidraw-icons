@@ -1,0 +1,146 @@
+title: Cloudflare
+source: "the Cloudflare logo and product icons from [cloudflare/cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons) (URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# File name -> label: product names from cloudflare-docs src/content/directory/*.yaml.
+labels:
+  1.1.1.1: Cloudflare 1.1.1.1
+  access: Cloudflare Access
+  aegis: Cloudflare Aegis
+  agent-lee: Cloudflare Agent Lee
+  agent-memory: Cloudflare Agent Memory
+  agents: Cloudflare Agents
+  ai-crawl-control: Cloudflare AI Crawl Control
+  ai-gateway: Cloudflare AI Gateway
+  ai-search: Cloudflare AI Search
+  ai: Cloudflare AI
+  analytics: Cloudflare Analytics
+  api-shield: Cloudflare API Shield
+  argo-smart-routing: Cloudflare Argo Smart Routing
+  artifacts: Cloudflare Artifacts
+  automatic-platform-optimization: Cloudflare Automatic Platform Optimization
+  bots: Cloudflare Bots
+  browser-isolation: Cloudflare Browser Isolation
+  browser-run: Cloudflare Browser Run
+  byoip: Cloudflare BYOIP
+  cache: Cloudflare Cache
+  casb: Cloudflare CASB
+  china-network: Cloudflare China Network
+  client-ip-geolocation: Cloudflare Client IP Geolocation
+  client-side-security: Cloudflare Client-side security
+  cloud-workload-security: Cloudflare Cloud Workload Security
+  cloudflare-challenges: Cloudflare Challenges
+  cloudflare-for-platforms: Cloudflare for Platforms
+  cloudflare-mesh: Cloudflare Mesh
+  cloudflare-network-firewall: Cloudflare Network Firewall
+  cloudflare-one: Cloudflare One
+  cloudflare-tunnel-sase: Cloudflare Tunnel for SASE
+  cloudflare-wan: Cloudflare WAN
+  constellation: Cloudflare Constellation
+  containers: Cloudflare Containers
+  d1: Cloudflare D1
+  data-localization: Cloudflare Data Localization Suite
+  data-loss-prevention: Cloudflare Data Loss Prevention
+  ddos-protection: Cloudflare DDoS Protection
+  dex: Cloudflare Digital Experience Monitoring
+  dmarc-management: Cloudflare DMARC Management
+  dns: Cloudflare DNS
+  durable-objects: Cloudflare Durable Objects
+  dynamic-workers: Cloudflare Dynamic Workers
+  email-routing: Cloudflare Email Routing
+  email-security: Cloudflare Email security
+  email-service: Cloudflare Email Service
+  firewall: Cloudflare Firewall Rules
+  flagship: Cloudflare Flagship
+  gateway: Cloudflare Gateway
+  google-tag-gateway: Cloudflare Google tag gateway for advertisers
+  health-checks: Cloudflare Health Checks
+  hyperdrive: Cloudflare Hyperdrive
+  images: Cloudflare Images
+  key-transparency: Cloudflare Key Transparency Auditor
+  kv: Cloudflare KV
+  load-balancing: Cloudflare Load Balancing
+  log-explorer: Cloudflare Log Explorer
+  logs: Cloudflare Logs
+  magic-transit: Cloudflare Magic Transit
+  monetization-gateway: Cloudflare Monetization Gateway
+  moq: Cloudflare MoQ
+  multi-cloud-networking: Cloudflare Multi-Cloud Networking
+  network-error-logging: Cloudflare Network Error Logging
+  network-flow: Cloudflare Network Flow
+  network-interconnect: Cloudflare Network Interconnect
+  network: Cloudflare Network
+  notifications: Cloudflare Notifications
+  pages: Cloudflare Pages
+  pipelines: Cloudflare Pipelines
+  privacy-gateway: Cloudflare OHTTP Relay
+  privacy-pass: Cloudflare Privacy Pass
+  privacy-proxy: Cloudflare Privacy Proxy
+  pub-sub: Cloudflare Pub/Sub
+  queues: Cloudflare Queues
+  r2-data-catalog: Cloudflare R2 Data Catalog
+  r2-sql: Cloudflare R2 SQL
+  r2: Cloudflare R2
+  radar: Cloudflare Radar
+  randomness-beacon: Cloudflare Randomness Beacon
+  realtime-kit: Cloudflare RealtimeKit
+  realtime-sfu: Cloudflare Realtime SFU
+  realtime-turn: Cloudflare TURN Service
+  realtime: Cloudflare Realtime
+  registrar: Cloudflare Registrar
+  resource-tagging: Cloudflare Resource Tagging
+  rules: Cloudflare Rules
+  ruleset-engine: Cloudflare Ruleset Engine
+  sandbox: Cloudflare Sandboxes
+  secrets-store: Cloudflare Secrets Store
+  security-center: Cloudflare Security Center
+  smart-shield: Cloudflare Smart Shield
+  spectrum: Cloudflare Spectrum
+  speed: Cloudflare Speed
+  ssl: Cloudflare SSL/TLS
+  stream: Cloudflare Stream
+  tenant: Cloudflare Tenant
+  time-services: Cloudflare Time Services
+  tunnel: Cloudflare Tunnel
+  turnstile: Cloudflare Turnstile
+  vectorize: Cloudflare Vectorize
+  waf: Cloudflare WAF
+  waiting-room: Cloudflare Waiting Room
+  warp-client: Cloudflare WARP Client
+  web-analytics: Cloudflare Web Analytics
+  web-search: Cloudflare Web Search API
+  web3: Cloudflare Web3
+  workers-ai: Cloudflare Workers AI
+  workers-vpc: Cloudflare Workers VPC
+  workers: Cloudflare Workers
+  workflows: Cloudflare Workflows
+  zaraz: Cloudflare Zaraz
+  zero-trust-networks: Cloudflare Zero Trust Networks
+
+# Shown in README.md, in this order.
+samples:
+- Cloudflare
+- Cloudflare Workers
+- Cloudflare Pages
+- Cloudflare R2
+- Cloudflare D1
+- Cloudflare KV
+- Cloudflare Durable Objects
+- Cloudflare Queues
+- Cloudflare Workflows
+- Cloudflare Workers AI
+- Cloudflare AI Gateway
+- Cloudflare Vectorize
+- Cloudflare Hyperdrive
+- Cloudflare Tunnel
+- Cloudflare Access
+- Cloudflare Gateway
+- Cloudflare DNS
+- Cloudflare Cache
+- Cloudflare Load Balancing
+- Cloudflare WAF
+- Cloudflare DDoS Protection
+- Cloudflare Turnstile
+- Cloudflare Zaraz
+- Cloudflare Stream
