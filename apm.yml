@@ -1,0 +1,21 @@
+name: runax-excalidraw-icons
+version: 1.0.0
+# Which agent platforms to deploy to.
+# Resolution order: --target flag > this field > auto-detect from filesystem.
+# Accepted values: agent-skills, antigravity, claude, codex, copilot, cursor, gemini, kiro, opencode, windsurf
+targets:
+  - claude
+dependencies:
+  apm:
+    - git: github/awesome-copilot
+      skills:
+        - github-actions-hardening
+    - anthropics/claude-plugins-official/plugins/pyright-lsp
+  mcp:
+    # Official Excalidraw MCP server: draw and edit diagrams from the agent.
+    - name: excalidraw
+      registry: false
+      transport: http
+      url: https://mcp.excalidraw.com/mcp
+includes: auto
+scripts: {}

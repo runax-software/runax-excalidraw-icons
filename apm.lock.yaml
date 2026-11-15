@@ -1,0 +1,176 @@
+lockfile_version: '1'
+generated_at: '2026-11-15T17:01:15.510609+00:00'
+apm_version: 0.25.0
+dependencies:
+- repo_url: anthropics/claude-plugins-official
+  name: pyright-lsp
+  host: github.com
+  resolved_commit: b5b01ac4f889fec0c4c6bb89f27ca7c8574473f6
+  version: 1.0.0
+  virtual_path: plugins/pyright-lsp
+  is_virtual: true
+  package_type: marketplace_plugin
+  content_hash: sha256:52fabe7f325bd6482e8215de4de4f86bfc73a4b8cbdb652682301c24bc8da160
+- repo_url: github/awesome-copilot
+  name: awesome-copilot
+  host: github.com
+  resolved_commit: 8ecd5b17f02fe5fbebf35eccd1867265eded811f
+  version: unknown
+  package_type: skill_bundle
+  deployed_files:
+  - .claude/skills/github-actions-hardening
+  - .claude/skills/github-actions-hardening/SKILL.md
+  - .claude/skills/github-actions-hardening/references/injection.md
+  - .claude/skills/github-actions-hardening/references/permissions-and-tokens.md
+  - .claude/skills/github-actions-hardening/references/report-format.md
+  - .claude/skills/github-actions-hardening/references/supply-chain.md
+  - .claude/skills/github-actions-hardening/references/triggers-and-privilege.md
+  deployed_file_hashes:
+    .claude/skills/github-actions-hardening/SKILL.md: sha256:31a8e7483d978e6267941edefebbe42aaa946bb3d43c9095aa3db343d4a8ff06
+    .claude/skills/github-actions-hardening/references/injection.md: sha256:ebd6ef8d39ba6f1cd3dc13051e6ed4163d1d2ba36518cf0f7393836a211e58ff
+    .claude/skills/github-actions-hardening/references/permissions-and-tokens.md: sha256:7272d00b20cf99c6fcbf34346f76730907c00701aef44bb9cfb7ab3eecac336b
+    .claude/skills/github-actions-hardening/references/report-format.md: sha256:3ecd2442e173bc001f858747873349be7c6c77050470b87ae516647908b1e86e
+    .claude/skills/github-actions-hardening/references/supply-chain.md: sha256:f66f613dbd732ce87c1e76b88208efde8feae3ffe5a3ab405cde4ce3df66f605
+    .claude/skills/github-actions-hardening/references/triggers-and-privilege.md: sha256:465f3f76517e9f5374a73e30f46cb47e1fe62ce9fd81f782808a3abbb2df2756
+  content_hash: sha256:64db4eb1335526ac8b5ae2407adb1041db64d721d5d7badce24297056e255b97
+  skill_subset:
+  - github-actions-hardening
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/excalidraw-diagrams
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/excalidraw-diagrams/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:292edec7520f9671e9f1a200964797e9791a840e0c2fd67559e9b08deb8882d9
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:31a8e7483d978e6267941edefebbe42aaa946bb3d43c9095aa3db343d4a8ff06
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/references/injection.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:ebd6ef8d39ba6f1cd3dc13051e6ed4163d1d2ba36518cf0f7393836a211e58ff
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/references/permissions-and-tokens.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:7272d00b20cf99c6fcbf34346f76730907c00701aef44bb9cfb7ab3eecac336b
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/references/report-format.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:3ecd2442e173bc001f858747873349be7c6c77050470b87ae516647908b1e86e
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/references/supply-chain.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:f66f613dbd732ce87c1e76b88208efde8feae3ffe5a3ab405cde4ce3df66f605
+- kind: project-relative
+  target: claude
+  value: .claude/skills/github-actions-hardening/references/triggers-and-privilege.md
+  runtime: null
+  scope: project
+  owners:
+  - github/awesome-copilot
+  active_owner: github/awesome-copilot
+  content_hash: sha256:465f3f76517e9f5374a73e30f46cb47e1fe62ce9fd81f782808a3abbb2df2756
+- kind: project-relative
+  target: claude
+  value: .claude/skills/icon-packs
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/icon-packs/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:fec7fdcaaf571c26c180bedc1baa507ea910b2b02ea4969fc70f5a25b176dcb8
+- kind: uri
+  target: mcp
+  value: excalidraw
+  runtime: claude
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: null
+mcp_servers:
+- excalidraw
+mcp_configs:
+  excalidraw:
+    name: excalidraw
+    transport: http
+    registry: false
+    url: https://mcp.excalidraw.com/mcp
+mcp_target_servers:
+  claude:
+  - excalidraw
+lsp_servers:
+- pyright
+lsp_configs:
+  pyright:
+    name: pyright
+    command: pyright-langserver
+    args:
+    - --stdio
+    extensionToLanguage:
+      .py: python
+      .pyi: python
+local_deployed_files:
+- .claude/skills/excalidraw-diagrams
+- .claude/skills/excalidraw-diagrams/SKILL.md
+- .claude/skills/icon-packs
+- .claude/skills/icon-packs/SKILL.md
+local_deployed_file_hashes:
+  .claude/skills/excalidraw-diagrams/SKILL.md: sha256:292edec7520f9671e9f1a200964797e9791a840e0c2fd67559e9b08deb8882d9
+  .claude/skills/icon-packs/SKILL.md: sha256:fec7fdcaaf571c26c180bedc1baa507ea910b2b02ea4969fc70f5a25b176dcb8
