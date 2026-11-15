@@ -5,6 +5,7 @@ from .pack import Pack
 
 README_COLUMNS = 6
 README_SAMPLES = 24
+PREVIEW_SIZE = 64
 
 
 class ReadmeRenderer:
@@ -53,7 +54,7 @@ drawing contains them. See the [main README](../README.md).
     @staticmethod
     def _grid(samples: list[tuple[str, Icon]]) -> str:
         cells = [
-            f'<td align="center" width="120"><img src="{quote(f"src/{icon.path}")}" width="64" height="64"><br>'
+            f'<td align="center" width="120"><img src="{quote(f"src/{icon.path}")}" {_preview_size(icon)}><br>'
             f"<sub>{label}</sub></td>"
             for label, icon in samples
         ]
@@ -98,3 +99,11 @@ drawing contains them. See the [main README](../README.md).
 | ----- | ------ | ----- |
 {chr(10).join(rows)}
 """
+
+
+def _preview_size(icon: Icon) -> str:
+    """width and height attributes fitting the icon in PREVIEW_SIZE without distorting it
+    (vendor terms forbid changing an icon's shape, and a forced square would)."""
+    width = round(PREVIEW_SIZE * min(1, icon.aspect))
+    height = round(PREVIEW_SIZE * min(1, 1 / icon.aspect))
+    return f'width="{width}" height="{height}"'

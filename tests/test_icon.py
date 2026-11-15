@@ -31,3 +31,8 @@ def test_unlabeled_beats_labeled_at_the_same_size():
 
 def test_file_id_is_stable_for_the_same_content():
     assert icon("a.svg").file_id == icon("b.svg").file_id
+
+
+def test_small_words_stay_lowercase_inside_names():
+    assert icon("Arch_AWS-Identity-and-Access-Management_64.svg").label({}) == "AWS Identity and Access Management"
+    assert icon("and-more.svg").label({}) == "And More"  # except at the start

@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 
 from ..icon import Icon
-from .elements import Element, ElementFactory
+from .elements import ICON_SIZE, Element, ElementFactory
 from .geometry import Box, Point
 from .scene import Scene
 
@@ -30,11 +30,13 @@ class Diagram:
     def save(self) -> None:
         self.scene.save(self.path)
 
-    def add_icon(self, icon: Icon, label: str, at: Point | None = None) -> Point:
+    def add_icon(
+        self, icon: Icon, label: str, at: Point | None = None, box: int = ICON_SIZE
+    ) -> Point:
         """Add the icon and its label as one group, with its SVG embedded so the diagram
         renders without the library. Without a position it goes right of the drawing."""
         at = at or self._free_spot()
-        self.scene.add_icon(self.factory, icon, label, at.x, at.y)
+        self.scene.add_icon(self.factory, icon, label, at.x, at.y, box)
         return at
 
     def connect(

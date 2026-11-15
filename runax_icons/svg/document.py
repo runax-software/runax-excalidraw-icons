@@ -18,6 +18,7 @@ GROUP_FILL_RE = re.compile(
     r'<(?:svg|g)\b[^>]*\bfill\s*[=:]\s*"?\s*(?!none)[#a-z]', re.IGNORECASE
 )
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
+WEBP_MAGIC = (b"RIFF", b"WEBP")  # bytes 0-4 and 8-12
 WHITE = {"#fff", "#ffffff", "white"}
 NO_PAINT = {"none", "transparent", "currentcolor", "inherit"}
 RENDER_SIZE = 256  # longer side given to SVGs that only have a viewBox
@@ -42,20 +43,36 @@ class SvgDocument:
         return cls(text.encode("utf-8"))
 
     @classmethod
-    def from_png(cls, data: bytes) -> "SvgDocument":
-        """An SVG showing the PNG at its own size."""
-        width, height = struct.unpack(">II", data[16:24])  # the IHDR chunk follows the magic
+    def from_raster(cls, data: bytes, mime: str, width: int, height: int) -> "SvgDocument":
+        """An SVG showing a raster image at its own size."""
         encoded = base64.b64encode(data).decode("ascii")
-
         return cls.from_text(
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}">'
-            f'<image width="{width}" height="{height}" href="data:image/png;base64,{encoded}"/></svg>'
+            f'<image width="{width}" height="{height}" href="data:{mime};base64,{encoded}"/></svg>'
         )
 
     @classmethod
+    def from_png(cls, data: bytes) -> "SvgDocument":
+        width, height = struct.unpack(">II", data[16:24])  # the IHDR chunk follows the magic
+        return cls.from_raster(data, "image/png", width, height)
+
+    @classmethod
+    def from_webp(cls, data: bytes) -> "SvgDocument":
+        return cls.from_raster(data, "image/webp", *_webp_size(data))
+
+    @classmethod
     def from_download(cls, data: bytes) -> "SvgDocument":
-        """A downloaded SVG, or a PNG wrapped in one."""
-        return cls.from_png(data) if data.startswith(PNG_MAGIC) else cls(data)
+        """A downloaded SVG, or a PNG or WebP (recognized by content, not name) wrapped in one.
+        Anything else must be an SVG: its root tag is checked, so an error page or an
+        unexpected format fails here instead of being written to src/."""
+        if data.startswith(PNG_MAGIC):
+            return cls.from_png(data)
+        if data[:4] == WEBP_MAGIC[0] and data[8:12] == WEBP_MAGIC[1]:
+            return cls.from_webp(data)
+
+        document = cls(data)
+        document.root_tag  # raises SvgError if this isn't an SVG
+        return document
 
     @cached_property
     def text(self) -> str:
@@ -138,3 +155,18 @@ class SvgDocument:
         sized = SIZE_ATTR_RE.sub("", self.root_tag)
         sized = re.sub(r"<svg\b", f'<svg width="{width}" height="{height}"', sized, count=1)
         return self.with_root_tag(sized)
+
+
+def _webp_size(data: bytes) -> tuple[int, int]:
+    """Width and height from a WebP's first chunk (lossy VP8, lossless VP8L or extended VP8X)."""
+    chunk = data[12:16]
+    if chunk == b"VP8 ":
+        width, height = struct.unpack("<HH", data[26:30])
+        return width & 0x3FFF, height & 0x3FFF
+    if chunk == b"VP8L":
+        bits = int.from_bytes(data[21:25], "little")
+        return (bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1
+    if chunk == b"VP8X":
+        return int.from_bytes(data[24:27], "little") + 1, int.from_bytes(data[27:30], "little") + 1
+
+    raise SvgError(f"unsupported WebP chunk {chunk!r}")

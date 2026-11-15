@@ -14,6 +14,8 @@ PREFIX_RE = re.compile(r"^(?:Arch(?:-Category)?_|Res_|\d+\s*-icon-service-)", re
 SIZE_SUFFIX_RE = re.compile(r"[_-](\d{2,3})(?:@\dx)?(?=(?:[_-](?:Light|Dark))?$)")  # _48, _48_Dark
 SIZE_DIR_RE = re.compile(r"^\d{2,3}$")
 LIGHT_RE = re.compile(r"[_-]Light$", re.IGNORECASE)
+# Kept lowercase inside names, as vendors write them ("AWS Identity and Access Management").
+MINOR_WORDS = {"a", "an", "and", "as", "at", "by", "for", "from", "in", "of", "on", "or", "the", "to", "via", "with"}
 
 
 @dataclass(frozen=True)
@@ -60,8 +62,12 @@ class Icon:
         name = PREFIX_RE.sub("", name)
         words = [w for w in re.split(r"[-_\s]+", name) if w]
 
-        # Capitalize the first letter only, so acronyms like EC2 / IoT / VPN survive.
-        return " ".join(w[:1].upper() + w[1:] for w in words)
+        # Capitalize the first letter only, so acronyms like EC2 / IoT / VPN survive; small words
+        # stay lowercase except at the start.
+        return " ".join(
+            w.lower() if i and w.lower() in MINOR_WORDS else w[:1].upper() + w[1:]
+            for i, w in enumerate(words)
+        )
 
     @property
     def aspect(self) -> float:

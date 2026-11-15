@@ -11,6 +11,7 @@ import typer
 
 from .download import DownloadError
 from .excalidraw import Diagram, DiagramError, ElementFactory, Point
+from .excalidraw.guidelines import MANUAL_RULES, Guidelines, LibraryFile
 from .packs import ConfigError, Importer, PackBuilder, UpstreamError, Validator
 from .workspace import AmbiguousIcon, Workspace, WorkspaceError
 
@@ -64,6 +65,37 @@ def check(ctx: typer.Context, packs: PackNames = None) -> None:
 
 
 @app.command()
+def guidelines(
+    ctx: typer.Context,
+    packs: PackNames = None,
+    publishable: Annotated[
+        bool, typer.Option(help="Only packs with `publish: true` in pack.yml (what CI enforces).")
+    ] = False,
+) -> None:
+    """Check built libraries against the libraries.excalidraw.com submission guidelines."""
+    with _errors():
+        selected = [p for p in ctx.obj.packs(packs) if p.config.publish or not publishable]
+
+    failed = False
+    for pack in selected:
+        if not pack.library_path.exists():
+            typer.echo(f"[{pack.name}] not built: run `runax-icons build {pack.name}`", err=True)
+            failed = True
+            continue
+
+        findings = Guidelines().check(LibraryFile(pack.library_path))
+        typer.echo(f"[{pack.name}] " + ("follows the guidelines" if not findings else f"{len(findings)} problems"))
+        for finding in findings:
+            typer.echo(f"  {finding}", err=True)
+        failed = failed or bool(findings)
+
+    if selected:
+        typer.echo("Check by hand: " + "; ".join(MANUAL_RULES))
+    if failed:
+        raise typer.Exit(1)
+
+
+@app.command()
 def search(
     ctx: typer.Context,
     text: Annotated[str, typer.Argument(help="Part of a label or file name; empty lists every icon.")] = "",
@@ -96,7 +128,9 @@ def add(
     with _errors():
         match = ctx.obj.catalog(pack).resolve(icon)
         scene = Diagram(diagram, ElementFactory(_now()))
-        placed = scene.add_icon(match.icon, label or match.label, Point(*at) if at else None)
+        placed = scene.add_icon(
+            match.icon, label or match.label, Point(*at) if at else None, match.pack.box(match.icon)
+        )
         scene.save()
 
     typer.echo(f"added {label or match.label!r} from {match.pack.name} at {placed.x:g}, {placed.y:g}")

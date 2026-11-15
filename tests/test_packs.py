@@ -40,3 +40,13 @@ def test_builder_writes_library_scene_and_readme(workspace_root):
     assert [item["name"] for item in library["libraryItems"]] == ["Database", "Queue", "Queue Worker"]
     assert pack.scene_path.exists()
     assert "drawn for the tests" in pack.readme_path.read_text()
+
+
+def test_native_size_packs_draw_icons_at_their_designed_size(tmp_path):
+    from .conftest import SQUARE, write_pack
+
+    write_pack(tmp_path, "vendor", "title: V\nsource: s\nnative_size: true\nsources: [{files: '*.svg'}]\n",
+               {"Res_Queue_48.svg": SQUARE, "Unsized.svg": SQUARE})
+    (pack,) = Workspace(tmp_path).packs()
+    sizes = {icon.path.name: pack.box(icon) for icon in pack.icons()}
+    assert sizes == {"Res_Queue_48.svg": 48, "Unsized.svg": 64}

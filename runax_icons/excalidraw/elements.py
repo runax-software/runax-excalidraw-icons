@@ -8,12 +8,13 @@ from ..icon import Icon
 from .geometry import Point
 
 ICON_SIZE = 64
-LABEL_Y = 72  # caption top, below the 64px icon
+LABEL_GAP = 8  # between an icon and its caption
 FONT_SIZE = 14
 LINE_HEIGHT = 1.25
 FONT_FAMILY = 2  # Helvetica
 CHAR_WIDTH = FONT_SIZE * 0.55  # average Helvetica glyph width estimate
-MAX_LINE_CHARS = 18  # wrap labels Miro-style instead of one very wide line
+MAX_LINE_CHARS = 18  # longer labels wrap onto a second line, Miro-style
+VENDOR_WORDS = {"AWS", "Amazon", "Azure", "Microsoft", "Google"}
 TEXT_COLOR = "#1e1e1e"
 
 
@@ -144,19 +145,22 @@ class ElementFactory:
             "group_ids": [group_id] if group_id else [],
         }
 
-    def icon(self, icon: Icon, label: str, x: float = 0, y: float = 0) -> list[Element]:
-        """An icon with its label below, grouped: the unit of every library item."""
+    def icon(
+        self, icon: Icon, label: str, x: float = 0, y: float = 0, box: int = ICON_SIZE
+    ) -> list[Element]:
+        """An icon fitted in a `box`-pixel square, with its label below, grouped: the unit of
+        every library item."""
         group_id = self.new_id()
 
         # Excalidraw stretches images to their element, so fit non-square icons in the box.
-        width = round(ICON_SIZE * min(1, icon.aspect), 2)
-        height = round(ICON_SIZE * min(1, 1 / icon.aspect), 2)
+        width = round(box * min(1, icon.aspect), 2)
+        height = round(box * min(1, 1 / icon.aspect), 2)
         image = ImageElement(
             type="image",
             file_id=icon.file_id,
-            **self._base(x + (ICON_SIZE - width) / 2, y + (ICON_SIZE - height) / 2, width, height, group_id),
+            **self._base(x + (box - width) / 2, y + (box - height) / 2, width, height, group_id),
         )
-        caption = self.text(wrap_label(label), x + ICON_SIZE / 2, y + LABEL_Y, group_id=group_id)
+        caption = self.text(wrap_label(label), x + box / 2, y + box + LABEL_GAP, group_id=group_id)
         return [image, caption]
 
     def text(
@@ -206,16 +210,19 @@ class ElementFactory:
 
 
 def wrap_label(label: str) -> str:
-    """Break a label into lines of at most MAX_LINE_CHARS, Miro-style."""
-    lines, current = [], ""
-    for word in label.split(" "):
-        candidate = f"{current} {word}".strip()
-        if current and len(candidate) > MAX_LINE_CHARS:
-            lines.append(current)
-            current = word
-        else:
-            current = candidate
-    if current:
-        lines.append(current)
+    """One line if it fits in MAX_LINE_CHARS, else two lines as even as possible, never more
+    (vendor guidelines: names fit on two lines and never break mid-word). A vendor word ("AWS",
+    "Amazon") stays on the same line as the word after it."""
+    words = label.split(" ")
+    if len(label) <= MAX_LINE_CHARS or len(words) == 1:
+        return label
 
-    return "\n".join(lines)
+    first_split = 2 if words[0] in VENDOR_WORDS else 1
+    if first_split >= len(words):  # "Amazon CodeCatalyst": one long line beats a split vendor name
+        return label
+
+    split = min(
+        range(first_split, len(words)),
+        key=lambda i: max(len(" ".join(words[:i])), len(" ".join(words[i:]))),
+    )
+    return " ".join(words[:split]) + "\n" + " ".join(words[split:])

@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
 
+from ..excalidraw.elements import ICON_SIZE
 from ..icon import Icon
 from ..sources import FolderSource
 from .config import PackConfig, SourceEntry
@@ -53,6 +54,13 @@ class Pack:
 
     def label(self, icon: Icon) -> str:
         return icon.label(self.config.labels)
+
+    def box(self, icon: Icon) -> int:
+        """The square an icon is drawn in: its designed size for `native_size` packs (some
+        vendors, AWS among them, ask for icons at their predefined size), else ICON_SIZE."""
+        if not self.config.native_size:
+            return ICON_SIZE
+        return icon.size or ICON_SIZE
 
     @cached_property
     def import_targets(self) -> list[ImportTarget]:

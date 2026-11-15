@@ -38,12 +38,14 @@ class PackBuilder:
     def _library(self, icons: list[Icon]) -> Library:
         library = Library(self.factory)
         for icon in icons:
-            library.add_icon(icon, self.pack.label(icon))
+            library.add_icon(icon, self.pack.label(icon), self.pack.box(icon))
         return library
 
     def _scene(self, icons: list[Icon]) -> Scene:
         scene = Scene()
         for i, icon in enumerate(icons):
             col, row = i % SCENE_COLUMNS, i // SCENE_COLUMNS
-            scene.add_icon(self.factory, icon, self.pack.label(icon), col * SCENE_CELL_W, row * SCENE_CELL_H)
+            scene.add_icon(
+                self.factory, icon, self.pack.label(icon), col * SCENE_CELL_W, row * SCENE_CELL_H, self.pack.box(icon)
+            )
         return scene

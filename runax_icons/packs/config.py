@@ -10,7 +10,7 @@ import yaml
 from ..svg import Edit, Fill, Replace, ViewBox
 from .imports import ArchiveImport, FileImport, ImportEntry, NamesTemplate
 
-PACK_KEYS = {"title", "source", "license", "import", "downloaded", "sources", "labels", "samples"}
+PACK_KEYS = {"title", "source", "license", "native_size", "publish", "import", "downloaded", "sources", "labels", "samples"}
 IMPORT_KEYS = {"url", "into", "path", "note", "names", "fill", "viewBox", "replace"}
 SOURCE_KEYS = {"files", "url", "note"}
 
@@ -36,6 +36,8 @@ class PackConfig:
     title: str
     source: str  # markdown, completes "N icons from ..." in the README
     license: str = ""  # markdown: the icons' license or terms
+    native_size: bool = False  # show icons at their designed size (from the file name), not 64px
+    publish: bool = False  # meant for libraries.excalidraw.com: CI enforces its guidelines
     imports: tuple[ImportEntry, ...] = ()
     downloaded: str = ""  # when the imports were last fetched
     sources: tuple[SourceEntry, ...] = ()
@@ -56,6 +58,8 @@ class PackConfig:
             title=data["title"],
             source=data["source"],
             license=data.get("license", ""),
+            native_size=bool(data.get("native_size", False)),
+            publish=bool(data.get("publish", False)),
             imports=tuple(_parse_import(entry) for entry in data.get("import") or []),
             downloaded=str(data.get("downloaded", "")),  # YAML reads dates as date
             sources=tuple(_parse_source(entry) for entry in data.get("sources") or []),

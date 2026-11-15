@@ -72,3 +72,20 @@ def test_edits_describe_themselves():
         "viewBox cropped",
         "text replaced",
     ]
+
+
+def lossless_webp(width: int, height: int) -> bytes:
+    bits = (width - 1) | ((height - 1) << 14)
+    chunk = b"VP8L" + (5).to_bytes(4, "little") + b"\x2f" + bits.to_bytes(4, "little")
+    return b"RIFF" + (4 + len(chunk)).to_bytes(4, "little") + b"WEBP" + chunk
+
+
+def test_webp_is_recognized_by_content_and_wrapped_at_its_size():
+    document = SvgDocument.from_download(lossless_webp(328, 200))
+    assert 'viewBox="0 0 328 200"' in document.root_tag
+    assert "data:image/webp;base64," in document.text
+
+
+def test_downloads_that_arent_svg_are_rejected():
+    with pytest.raises(SvgError):
+        SvgDocument.from_download(b"<html><body>404 Not Found</body></html>")

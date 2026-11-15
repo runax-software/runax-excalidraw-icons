@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any
 
 from ..icon import Icon
-from .elements import Element, ElementFactory
+from .elements import ICON_SIZE, Element, ElementFactory
 
 SOURCE = "https://excalidraw.com"
 
@@ -44,9 +44,11 @@ class Scene:
     def add(self, elements: list[Element]) -> None:
         self.elements += [e.to_dict() for e in elements]
 
-    def add_icon(self, factory: ElementFactory, icon: Icon, label: str, x: float, y: float) -> None:
+    def add_icon(
+        self, factory: ElementFactory, icon: Icon, label: str, x: float, y: float, box: int = ICON_SIZE
+    ) -> None:
         """The icon with its label, and its SVG embedded so the scene renders on its own."""
-        self.add(factory.icon(icon, label, x, y))
+        self.add(factory.icon(icon, label, x, y, box))
         self.files[icon.file_id] = factory.file(icon)
 
 
@@ -64,12 +66,12 @@ class Library:
         self.items: list[dict] = []
         self.files: dict[str, dict] = {}
 
-    def add_icon(self, icon: Icon, label: str) -> None:
+    def add_icon(self, icon: Icon, label: str, box: int = ICON_SIZE) -> None:
         self.items.append(
             {
                 "id": self.factory.new_id(),
                 "status": "unpublished",
-                "elements": [e.to_dict() for e in self.factory.icon(icon, label)],
+                "elements": [e.to_dict() for e in self.factory.icon(icon, label, box=box)],
                 "created": self.factory.now,
                 "name": label,
             }
