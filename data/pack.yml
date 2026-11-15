@@ -1,0 +1,38 @@
+title: Data
+source: "database, streaming and data-pipeline logos (URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# File name (without size suffix) -> label.
+labels:
+  dbt: dbt
+
+# Shown in README.md, in this order.
+samples:
+  - PostgreSQL
+  - MySQL
+  - Microsoft SQL Server
+  - SQLite
+  - ClickHouse
+  - DuckDB
+  - CockroachDB
+  - Snowflake
+  - MongoDB
+  - Redis
+  - Valkey
+  - Neo4j
+  - Apache Kafka
+  - RabbitMQ
+  - NATS
+  - MQTT
+  - Apache ActiveMQ
+  - BullMQ
+  - Apache Flink
+  - Apache Spark
+  - Apache Airflow
+  - Apache Iceberg
+  - Airbyte
+  - Apache SeaTunnel
+  - dbt
+  - Qdrant
+  - OpenSearch
