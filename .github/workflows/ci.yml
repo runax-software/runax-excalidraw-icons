@@ -1,29 +1,64 @@
 name: ci
 
-# Tests and type checks for the runax_icons package. Runs only when Python code, its
-# dependencies or this workflow change.
+# Runs only what a change affects: `changes` works out whether Python code changed and which packs
+# did, then `python` tests and type-checks the package and `pack` builds and checks each changed
+# pack (all of them when the code that builds them changed). `ci` sums it up as one check to
+# require for merging, whatever was skipped.
 on:
   push:
     branches: [main]
-    paths:
-      - "runax_icons/**"
-      - "tests/**"
-      - "pyproject.toml"
-      - "uv.lock"
-      - ".github/workflows/ci.yml"
   pull_request:
-    paths:
-      - "runax_icons/**"
-      - "tests/**"
-      - "pyproject.toml"
-      - "uv.lock"
-      - ".github/workflows/ci.yml"
 
 permissions:
   contents: read
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read  # paths-filter lists a pull request's files through the API
+    outputs:
+      python: ${{ steps.filter.outputs.python }}
+      packs: ${{ steps.packs.outputs.packs }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          list-files: json
+          filters: |
+            python:
+              - "runax_icons/**"
+              - "tests/**"
+              - "pyproject.toml"
+              - "uv.lock"
+              - ".github/workflows/ci.yml"
+            packs:
+              - "*/pack.yml"
+              - "*/src/**"
+              - "*/README.md"
+
+      - name: Changed packs
+        id: packs
+        env:
+          PYTHON_CHANGED: ${{ steps.filter.outputs.python }}
+          PACK_FILES: ${{ steps.filter.outputs.packs_files }}
+        run: |
+          if [ "$PYTHON_CHANGED" = "true" ]; then
+            # The build code changed: every pack's output may change.
+            packs=$(ls -d */pack.yml | cut -d/ -f1)
+          else
+            # The packs owning a changed file (a folder with a pack.yml; deleted packs drop out).
+            packs=$(echo "${PACK_FILES:-[]}" | jq -r '.[]' | cut -d/ -f1 | sort -u |
+              while read -r dir; do [ -f "$dir/pack.yml" ] && echo "$dir"; done)
+          fi
+          echo "packs=$(printf '%s\n' $packs | jq -Rsc 'split("\n") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
+
   python:
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -35,3 +70,45 @@ jobs:
 
       - name: Type-check
         run: uv run pyright
+
+  pack:
+    needs: changes
+    if: needs.changes.outputs.packs != '[]'
+    name: pack (${{ matrix.pack }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pack: ${{ fromJSON(needs.changes.outputs.packs) }}
+    env:
+      PACK: ${{ matrix.pack }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Build
+        run: uv run runax-icons build "$PACK"
+
+      - name: Check
+        run: uv run runax-icons check "$PACK"
+
+      - name: Check against the libraries.excalidraw.com guidelines (publish packs)
+        run: uv run runax-icons guidelines --publishable "$PACK"
+
+      - name: Check the generated README is committed
+        run: git diff --exit-code -- "$PACK/README.md"
+
+  ci:
+    if: always()
+    needs: [changes, python, pack]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every job that ran passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "results: $RESULTS"
+          case " $RESULTS " in
+            *" failure "*|*" cancelled "*) exit 1 ;;
+          esac

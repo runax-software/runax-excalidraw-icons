@@ -42,6 +42,7 @@ All packs in the repository are released together.
 - Imports recognize WebP as well as PNG, by content rather than file name, and reject downloads
   that aren't images (an error page no longer lands in `src/`).
 - Non-square icons keep their aspect ratio, and SVGs without a size render at their real shape.
-- CI, each workflow running only when its files change: `ci` (tests and type checks)
-  for the package, `build` (build and check every pack, generated READMEs committed) for packs
-  and the build code. `build` also publishes the libraries to a GitHub Release for `v*` tags.
+- CI runs only what a change affects: a paths-filter job finds changed Python code and changed
+  packs, then tests and type-checks the package and builds, checks and guideline-checks each
+  changed pack in parallel (every pack when the build code changed); one `ci` job sums it up for
+  branch protection. Tags `v*` publish a GitHub Release with the libraries, notices and licenses.

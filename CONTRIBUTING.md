@@ -55,6 +55,12 @@ about files in `src/` that no `import:` or `sources:` entry covers.
 Create `<pack>/pack.yml` with a `title`, `source`, `license` and its `import:` / `sources:`
 entries, then run `uv run runax-icons import <pack>`. Every folder with a `pack.yml` is a pack.
 
+## CI
+
+`.github/workflows/ci.yml` runs only what a pull request affects: tests and type checks when
+Python code changes, and a build, `check` and guidelines check for each changed pack. The single
+`ci` check is green when everything that ran passed. `release.yml` publishes tagged releases.
+
 ## Licensing
 
 Only add icons whose license or terms allow redistribution for diagrams, and record that in

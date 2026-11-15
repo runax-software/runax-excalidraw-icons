@@ -1,0 +1,33 @@
+name: release
+
+# Publishes a GitHub Release for each `v*` tag: every pack's libraries and scenes (with the native
+# libraries of publish packs), the notices and the license texts.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write  # create the release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Build every pack
+        run: uv run runax-icons build
+
+      - name: Check every pack
+        run: uv run runax-icons check
+
+      - name: Check publish packs against the libraries.excalidraw.com guidelines
+        run: uv run runax-icons guidelines --publishable
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" --generate-notes */runax-*.excalidrawlib */runax-*.excalidraw NOTICE.md LICENSE LICENSES/*
