@@ -1,0 +1,33 @@
+Downloaded 2026-11-15.
+
+grafana/   grafana.com product logos
+  grafana.svg            https://grafana.com/oss/assets/logo-grafana-spiral.svg
+  grafana-loki.svg       https://grafana.com/oss/assets/logo-loki.svg
+  grafana-tempo.svg      https://grafana.com/oss/assets/logo-tempo.svg
+  grafana-mimir.svg      https://grafana.com/oss/assets/logo-mimir.svg
+  grafana-pyroscope.svg  https://grafana.com/static/img/pyroscope-logo.svg
+  grafana-alloy.svg      https://grafana.com/media/oss/alloy/alloy-logo.svg
+  grafana-beyla.svg      https://grafana.com/static/img/logos/beyla-logo.svg
+  grafana-faro.svg       https://grafana.com/oss/assets/logo-grafana-faro.svg
+  grafana-k6.svg         https://grafana.com/media/menus/products/grafana-menu-icon-k6.svg
+  grafana-tanka.svg      https://grafana.com/oss/assets/logo-grafana-tanka.svg
+  graphite.svg           https://grafana.com/oss/assets/logo-graphite.svg
+  grafana-incident.svg   https://grafana.com/static/img/logos/incident.svg
+  grafana-slo.svg        https://grafana.com/static/img/logos/slo.svg
+  grafana-oncall.svg     https://github.com/grafana/oncall/blob/dev/grafana-plugin/src/assets/img/logo.svg
+prometheus/prometheus.svg  https://github.com/prometheus/docs/blob/main/public/assets/prometheus-logo.svg
+posthog/posthog.svg        https://github.com/PostHog/posthog/blob/master/frontend/public/posthog-icon.svg
+seq/seq.svg                mark only (wordmark removed) from https://datalust.co/assets/seq-logo-dark.svg
+prometheus/alertmanager.svg  same file as prometheus.svg (Alertmanager has no logo of its own)
+opentelemetry/opentelemetry.svg            https://github.com/cncf/artwork/blob/main/projects/opentelemetry/icon/color/opentelemetry-icon-color.svg
+opentelemetry/opentelemetry-collector.svg  https://github.com/open-telemetry/opentelemetry.io/blob/main/iconography/32x32/Collector.svg
+aspire/aspire.svg                          https://github.com/dotnet/aspire/blob/main/.agents/skills/create-video/scripts/assets/aspire-logo.svg
+
+signals/   grafana.com nav icons (Grafana's orange tile style)
+  logs.svg        https://a-us.storyblok.com/f/1022730/24x24/682285d5c0/icon-nav-logs.svg
+  metrics.svg     https://a-us.storyblok.com/f/1022730/24x24/a6d277c5a5/icon-nav-metrics.svg
+  traces.svg      https://a-us.storyblok.com/f/1022730/24x24/c0434948fc/icon-nav-traces.svg
+  profiles.svg    https://a-us.storyblok.com/f/1022730/24x24/68d796c56c/icon-nav-profiles.svg
+  dashboards.svg  https://a-us.storyblok.com/f/1022730/24x24/27416765d7/icon-nav-dashboards-data-visualization.svg
+  alerts.svg      https://a-us.storyblok.com/f/1022730/32x32/a412179eca/grafana-pricing-icon-irm.svg
+                  (Grafana IRM icon; tile opacity changed from 0.2 to 0.15 to match the others)

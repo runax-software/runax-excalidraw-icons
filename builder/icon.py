@@ -25,6 +25,9 @@ SHAPE_RE = re.compile(
 GROUP_FILL_RE = re.compile(
     r'<(?:svg|g)\b[^>]*\bfill\s*[=:]\s*"?\s*(?!none)[#a-z]', re.IGNORECASE
 )
+SVG_TAG_RE = re.compile(r"<svg\b[^>]*>", re.IGNORECASE)
+VIEWBOX_RE = re.compile(r'\bviewBox\s*=\s*"([^"]+)"', re.IGNORECASE)
+DIMENSION_RE = r'\b{}\s*=\s*"\s*([\d.]+)(?:px)?\s*"'
 WHITE = {"#fff", "#ffffff", "white"}
 NO_PAINT = {"none", "transparent", "currentcolor", "inherit"}
 
@@ -70,6 +73,26 @@ class Icon:
         # A shape without its own fill renders black unless a parent group sets one.
         unfilled = any("fill" not in attrs for attrs in SHAPE_RE.findall(text))
         return not unfilled or bool(GROUP_FILL_RE.search(text))
+
+    @cached_property
+    def aspect(self):
+        """Width / height of the root <svg>, from its viewBox or width/height; 1 if unknown."""
+        tag = SVG_TAG_RE.search(self.svg.decode("utf-8", errors="ignore"))
+        if not tag:
+            return 1
+
+        viewbox = VIEWBOX_RE.search(tag.group())
+        if viewbox:
+            parts = re.split(r"[\s,]+", viewbox.group(1).strip())
+            if len(parts) == 4 and float(parts[3]) > 0:
+                return float(parts[2]) / float(parts[3])
+
+        width = re.search(DIMENSION_RE.format("width"), tag.group())
+        height = re.search(DIMENSION_RE.format("height"), tag.group())
+        if width and height and float(height.group(1)) > 0:
+            return float(width.group(1)) / float(height.group(1))
+
+        return 1
 
     @cached_property
     def base64(self):

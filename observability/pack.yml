@@ -1,0 +1,45 @@
+title: Observability
+source: "[grafana.com](https://grafana.com/oss/) product logos and signal icons, plus [OpenTelemetry](https://opentelemetry.io), [Prometheus](https://prometheus.io), [.NET Aspire](https://aspire.dev), [Seq](https://datalust.co/seq) and [PostHog](https://posthog.com) (URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# File name (without size suffix) -> label.
+labels:
+  grafana-k6: Grafana k6
+  grafana-oncall: Grafana OnCall
+  grafana-slo: Grafana SLO
+  posthog: PostHog
+  aspire: .NET Aspire
+  alertmanager: Alertmanager
+  opentelemetry: OpenTelemetry
+  opentelemetry-collector: OpenTelemetry Collector
+
+# Shown in README.md, in this order.
+samples:
+  - Logs
+  - Metrics
+  - Traces
+  - Profiles
+  - Alerts
+  - Dashboards
+  - Grafana
+  - Grafana Loki
+  - Grafana Tempo
+  - Grafana Mimir
+  - Grafana Pyroscope
+  - Grafana Alloy
+  - Grafana Beyla
+  - Grafana Faro
+  - Grafana k6
+  - Grafana OnCall
+  - Grafana Incident
+  - Grafana SLO
+  - Grafana Tanka
+  - Graphite
+  - Prometheus
+  - Alertmanager
+  - OpenTelemetry
+  - OpenTelemetry Collector
+  - .NET Aspire
+  - Seq
+  - PostHog

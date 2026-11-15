@@ -101,7 +101,17 @@ class ExcalidrawExporter:
     def _item(self, icon, label, ox=0, oy=0):
         group_id = self._rand_id()
 
-        image = self._element("image", ox, oy, ICON_SIZE, ICON_SIZE, group_id)
+        # Excalidraw stretches images to their element, so fit non-square icons in the box.
+        width = round(ICON_SIZE * min(1, icon.aspect), 2)
+        height = round(ICON_SIZE * min(1, 1 / icon.aspect), 2)
+        image = self._element(
+            "image",
+            ox + (ICON_SIZE - width) / 2,
+            oy + (ICON_SIZE - height) / 2,
+            width,
+            height,
+            group_id,
+        )
         image.update(
             {"status": "saved", "fileId": icon.file_id, "scale": [1, 1], "crop": None}
         )

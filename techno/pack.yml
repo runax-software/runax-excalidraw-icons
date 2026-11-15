@@ -20,9 +20,6 @@ samples:
   - GitHub
   - GitHub Actions
   - GitLab
-  - Grafana
-  - Prometheus
-  - OpenTelemetry
   - PostgreSQL
   - MySQL
   - MongoDB
@@ -35,3 +32,6 @@ samples:
   - Rust
   - Java
   - React
+  - Next.js
+  - Node.js
+  - Cloudflare

@@ -2,12 +2,13 @@
 
 Miro-style Excalidraw libraries (64px icon + editable label below, grouped) built from official icon sets.
 
-| Pack                | Icons | Source                                                                                                                              |
-| ------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [`aws`](aws/)       | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                             |
-| [`azure`](azure/)   | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                              |
-| [`k8s`](k8s/)       | 39    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg) |
-| [`techno`](techno/) | 116   | Hand-picked technology logos                                                                                                        |
+| Pack                              | Icons | Source                                                                                                                              |
+| --------------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [`aws`](aws/)                     | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                             |
+| [`azure`](azure/)                 | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                              |
+| [`k8s`](k8s/)                     | 39    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg) |
+| [`observability`](observability/) | 27    | Grafana products and signal icons, OpenTelemetry, Prometheus, .NET Aspire, Seq and PostHog                                          |
+| [`techno`](techno/)               | 113   | Hand-picked technology logos                                                                                                        |
 
 ## Layout
 
@@ -39,6 +40,7 @@ To update a pack, drop the new package into its `downloads/` folder and rerun:
 - `aws/downloads/Icon-package_*.zip`
 - `azure/downloads/Azure_Public_Service_Icons_*.zip`
 - `k8s/downloads/kubernetes-icons/` (the repo's `icons/` folder)
+- `observability/downloads/sources/<vendor>/` (one SVG per product; URLs in `observability/SOURCES.txt`)
 - `techno/downloads/techno/` (flat folder of SVGs, picked from `svg.zip`)
 
 The script keeps only the largest size of each icon, prefers unlabeled variants, and skips
@@ -57,5 +59,5 @@ Library items use the same image IDs as the scene, so they render once the scene
 ## Licensing
 
 AWS and Microsoft icons may be used in architecture diagrams and documentation under their
-terms; Kubernetes icons are open-licensed; technology logos are their owners' trademarks.
+terms; Kubernetes icons are open-licensed; technology and observability logos are their owners' trademarks.
 Keep this repo private.
