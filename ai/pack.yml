@@ -1,0 +1,75 @@
+title: AI
+source: "AI model, inference, framework and coding-tool logos, mostly from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT; URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# File name -> label.
+labels:
+  anthropic: Anthropic
+  claude: Claude
+  claudecode: Claude Code
+  cline: Cline
+  codex: OpenAI Codex
+  cohere: Cohere
+  crewai: CrewAI
+  cursor: Cursor
+  deepseek: DeepSeek
+  dify: Dify
+  gemini: Google Gemini
+  gemma: Google Gemma
+  githubcopilot: GitHub Copilot
+  groq: Groq
+  huggingface: Hugging Face
+  langchain: LangChain
+  langfuse: Langfuse
+  langgraph: LangGraph
+  llamaindex: LlamaIndex
+  lmstudio: LM Studio
+  mastra: Mastra
+  mcp: Model Context Protocol
+  meta-llama: Meta Llama
+  mistral: Mistral AI
+  numpy: NumPy
+  n8n: n8n
+  ollama: Ollama
+  openai: OpenAI
+  opencv: OpenCV
+  openrouter: OpenRouter
+  openwebui: Open WebUI
+  perplexity: Perplexity
+  pytorch: PyTorch
+  qwen: Qwen
+  replicate: Replicate
+  tensorflow: TensorFlow
+  together: Together AI
+  vertexai: Vertex AI
+  vllm: vLLM
+  windsurf: Windsurf
+  xai: xAI
+
+# Shown in README.md, in this order.
+samples:
+  - OpenAI
+  - Anthropic
+  - Claude
+  - Google Gemini
+  - Mistral AI
+  - Meta Llama
+  - DeepSeek
+  - Qwen
+  - xAI
+  - Hugging Face
+  - Ollama
+  - vLLM
+  - OpenRouter
+  - Groq
+  - Vertex AI
+  - LangChain
+  - LangGraph
+  - LlamaIndex
+  - Model Context Protocol
+  - Langfuse
+  - n8n
+  - GitHub Copilot
+  - Cursor
+  - Claude Code
