@@ -1,24 +1,26 @@
 import tarfile
 import zipfile
+from abc import ABC, abstractmethod
+from collections.abc import Iterator
 from fnmatch import fnmatch
-from pathlib import PurePosixPath
+from pathlib import Path, PurePosixPath
 
-from builder.icon import Icon
+from .icon import Icon
 
 
-class IconSource:
+class IconSource(ABC):
     """Every SVG in a package, as Icons with paths relative to the package root.
 
     `root` is an optional glob for a folder inside the package (e.g. "community-*/icons"):
     only SVGs under a matching folder are read, with paths relative to it.
     """
 
-    def __init__(self, path, root=None):
+    def __init__(self, path: Path, root: str | None = None):
         self.path = path
         self.root = root
 
     @staticmethod
-    def open(path, root=None):
+    def open(path: Path, root: str | None = None) -> "IconSource":
         if path.is_dir():
             return FolderSource(path, root)
         if zipfile.is_zipfile(path):
@@ -28,10 +30,10 @@ class IconSource:
 
         raise ValueError(f"{path}: not a folder, zip or tar archive")
 
-    def __iter__(self):
-        raise NotImplementedError
+    @abstractmethod
+    def __iter__(self) -> Iterator[Icon]: ...
 
-    def _relative(self, path):
+    def _relative(self, path: PurePosixPath) -> PurePosixPath | None:
         """`path` relative to the root folder, or None if it's outside it or not an icon."""
         # __MACOSX/._*.svg entries are Finder metadata, not icons.
         if (
@@ -51,7 +53,7 @@ class IconSource:
 
 
 class FolderSource(IconSource):
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Icon]:
         for path in sorted(self.path.rglob("*.svg")):
             relative = self._relative(PurePosixPath(path.relative_to(self.path).as_posix()))
             if relative:
@@ -59,7 +61,7 @@ class FolderSource(IconSource):
 
 
 class ZipSource(IconSource):
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Icon]:
         with zipfile.ZipFile(self.path) as archive:
             for info in archive.infolist():
                 relative = self._relative(PurePosixPath(info.filename))
@@ -68,9 +70,10 @@ class ZipSource(IconSource):
 
 
 class TarSource(IconSource):
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Icon]:
         with tarfile.open(self.path) as archive:
             for member in archive:
-                relative = member.isfile() and self._relative(PurePosixPath(member.name))
-                if relative:
-                    yield Icon(relative, archive.extractfile(member).read())
+                relative = self._relative(PurePosixPath(member.name))
+                file = archive.extractfile(member) if member.isfile() and relative else None
+                if relative and file:
+                    yield Icon(relative, file.read())

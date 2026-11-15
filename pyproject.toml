@@ -1,11 +1,37 @@
 [project]
-name = "excalidraw-icons"
+name = "runax-excalidraw-icons"
 version = "0.1.0"
-description = "Miro-style Excalidraw libraries built from AWS, Azure, Kubernetes and technology icon sets"
+description = "Miro-style Excalidraw icon libraries for architecture diagrams"
+license = "MIT"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["pyyaml>=6.0"]
+dependencies = [
+    "brotli>=1.2.1",
+    "pyyaml>=6.0",
+    "typer>=0.29.1",
+]
 
-[tool.uv]
-# Scripts only (`uv run build.py`), nothing to install as a package.
-package = false
+[project.urls]
+Repository = "https://github.com/runax-software/runax-excalidraw-icons"
+
+[project.scripts]
+runax-icons = "runax_icons.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["runax_icons"]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.414",
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.pyright]
+include = ["runax_icons", "tests"]
