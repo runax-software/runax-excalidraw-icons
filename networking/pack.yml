@@ -1,0 +1,61 @@
+title: Networking
+source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF projects from [cncf/artwork](https://github.com/cncf/artwork) plus NGINX, Traefik, Kong, HAProxy, Caddy, Calico, Consul, Tailscale, WireGuard, NetBird, GraphQL, REST, OpenAPI, Swagger and Socket.IO (URLs in [`SOURCES.txt`](SOURCES.txt))"
+# Glob in downloads/; the newest match wins.
+download: sources
+
+# File name -> label.
+labels:
+  antrea: Antrea
+  cert-manager: cert-manager
+  cni: CNI
+  consul: HashiCorp Consul
+  coredns: CoreDNS
+  emissary-ingress: Emissary-ingress
+  graphql: GraphQL
+  grpc: gRPC
+  haproxy: HAProxy
+  kgateway: kgateway
+  kube-ovn: Kube-OVN
+  metallb: MetalLB
+  netbird: NetBird
+  networkservicemesh: Network Service Mesh
+  nginx: NGINX
+  openapi: OpenAPI
+  rest: REST API
+  socket.io: Socket.IO
+  spiffe: SPIFFE
+  spire: SPIRE
+  wireguard: WireGuard
+
+# Shown in README.md, in this order.
+samples:
+  - Istio
+  - Linkerd
+  - Cilium
+  - Envoy
+  - NGINX
+  - Traefik
+  - Kong
+  - HAProxy
+  - Caddy
+  - Contour
+  - Emissary-ingress
+  - kgateway
+  - Kuma
+  - HashiCorp Consul
+  - Calico
+  - Antrea
+  - MetalLB
+  - CoreDNS
+  - cert-manager
+  - SPIFFE
+  - SPIRE
+  - gRPC
+  - GraphQL
+  - REST API
+  - OpenAPI
+  - Swagger
+  - Socket.IO
+  - Tailscale
+  - WireGuard
+  - NetBird
