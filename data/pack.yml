@@ -1,7 +1,56 @@
 title: Data
-source: "database, streaming and data-pipeline logos (URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "database, streaming and data-pipeline logos"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "{name}.svg"
+    note: "MIT"
+    names:
+      "Airbyte": "airbyte-icon"
+      "Apache-Flink": "apache-flink-icon"
+      "dbt": "dbt-icon"
+      "NATS": "nats-icon"
+      "OpenSearch": "opensearch-icon"
+      "Qdrant": "qdrant-icon"
+      "Snowflake": "snowflake-icon"
+      "Valkey": "valkey-icon"
+  - url: https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/docker/server/README.src/logo.svg
+    into: "ClickHouse.svg"
+  - url: https://raw.githubusercontent.com/duckdb/duckdb/main/logo/DuckDB_Logo-stacked.svg
+    into: "DuckDB.svg"
+    viewBox: "217.6 10 334.4 334.4"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/neo4j/neo4j-browser/master/src/browser/components/icons/svgs/neo4j-icon.svg
+    into: "Neo4j.svg"
+  - url: https://raw.githubusercontent.com/apache/iceberg/main/site/docs/assets/images/iceberg-logo-icon.png
+    into: "Apache-Iceberg.svg"
+    note: "PNG wrapped in SVG"
+  - url: https://seatunnel.apache.org/image/logo.png
+    into: "Apache-SeaTunnel.svg"
+    note: "PNG wrapped in SVG"
+  - url: https://raw.githubusercontent.com/apache/activemq-website/main/src/assets/img/activemq_logo_icon.svg
+    into: "Apache-ActiveMQ.svg"
+    viewBox: "10.8 10.4 30 44"
+  - url: https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg
+    into: "MQTT.svg"
+    viewBox: "192 28 306 306"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cockroachlabs.svg
+    into: "CockroachDB.svg"
+    fill: "#6933FF"
+    note: "Cockroach Labs brand color"
+
+# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
+sources:
+  - files: "BullMQ.svg"
+    url: https://user-images.githubusercontent.com/95200/143832033-32e868df-f3b0-4251-97fb-c64809a43d36.png
+    note: "the bull from the taskforcesh/bullmq README banner, as a 512px PNG on a rounded #00ADEF tile"
+  - files: "*"
+    note: "moved from the techno pack (originally from techno's svg.zip); Cosmos-DB, Elasticsearch and PostgreSQL renamed to fix typos"
 
 # File name (without size suffix) -> label.
 labels:

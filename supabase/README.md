@@ -1,21 +1,31 @@
 # Supabase
 
-10 icons from the [Supabase](https://supabase.com) logo and product icons (URLs in [`SOURCES.txt`](SOURCES.txt)), packaged as a Miro-style Excalidraw library:
+10 icons from the [Supabase](https://supabase.com) logo and product icons, packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
-<tr><td align="center" width="120"><img src="icons/Supabase.svg" width="64" height="64"><br><sub>Supabase</sub></td><td align="center" width="120"><img src="icons/Supabase-Database.svg" width="64" height="64"><br><sub>Supabase Database</sub></td><td align="center" width="120"><img src="icons/Supabase-Authentication.svg" width="64" height="64"><br><sub>Supabase Authentication</sub></td><td align="center" width="120"><img src="icons/Supabase-Storage.svg" width="64" height="64"><br><sub>Supabase Storage</sub></td><td align="center" width="120"><img src="icons/Supabase-Edge-Functions.svg" width="64" height="64"><br><sub>Supabase Edge Functions</sub></td><td align="center" width="120"><img src="icons/Supabase-Realtime.svg" width="64" height="64"><br><sub>Supabase Realtime</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/Supabase-Compute.svg" width="64" height="64"><br><sub>Supabase Compute</sub></td><td align="center" width="120"><img src="icons/Supabase-Cron.svg" width="64" height="64"><br><sub>Supabase Cron</sub></td><td align="center" width="120"><img src="icons/Supabase-Queues.svg" width="64" height="64"><br><sub>Supabase Queues</sub></td><td align="center" width="120"><img src="icons/Supabase-Vector.svg" width="64" height="64"><br><sub>Supabase Vector</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Supabase.svg" width="64" height="64"><br><sub>Supabase</sub></td><td align="center" width="120"><img src="src/Supabase-Database.svg" width="64" height="64"><br><sub>Supabase Database</sub></td><td align="center" width="120"><img src="src/Supabase-Authentication.svg" width="64" height="64"><br><sub>Supabase Authentication</sub></td><td align="center" width="120"><img src="src/Supabase-Storage.svg" width="64" height="64"><br><sub>Supabase Storage</sub></td><td align="center" width="120"><img src="src/Supabase-Edge-Functions.svg" width="64" height="64"><br><sub>Supabase Edge Functions</sub></td><td align="center" width="120"><img src="src/Supabase-Realtime.svg" width="64" height="64"><br><sub>Supabase Realtime</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Supabase-Compute.svg" width="64" height="64"><br><sub>Supabase Compute</sub></td><td align="center" width="120"><img src="src/Supabase-Cron.svg" width="64" height="64"><br><sub>Supabase Cron</sub></td><td align="center" width="120"><img src="src/Supabase-Queues.svg" width="64" height="64"><br><sub>Supabase Queues</sub></td><td align="center" width="120"><img src="src/Supabase-Vector.svg" width="64" height="64"><br><sub>Supabase Vector</sub></td></tr>
 </table>
 
-10 of 10 shown. Every icon is in [`icons/`](icons/).
+10 of 10 shown. Every icon is in [`src/`](src/).
+
+## Sources
+
+Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by
+`uv run build.py --import supabase`; the rest are kept by hand.
+
+| Files | Source | Notes |
+| ----- | ------ | ----- |
+| `Supabase.svg` | https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/supabase-logo-icon.svg |  |
+| `Supabase-*.svg` | https://github.com/supabase/supabase/blob/master/packages/shared-data/products.ts | 24px product icon paths, drawn like ProductIcon.tsx's green variant: 1.5px round #D3F8E4 strokes on a rounded #3FCF8E tile |
 
 ## Use
 
 Build with `uv run build.py` from the repo root, then in Excalidraw:
 
-1. Open `supabase.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
-2. Import `supabase.excalidrawlib` from the library panel.
+1. Open `runax-supabase.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
+2. Import `runax-supabase.excalidrawlib` from the library panel.
 
 Excalidraw doesn't store images in library files, so library icons render only once the
 drawing contains them. See the [main README](../README.md).

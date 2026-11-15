@@ -1,7 +1,9 @@
 title: AWS Architecture Icons
 source: "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)"
-# Glob in downloads/; the newest match wins.
-download: Icon-package_*.zip
+# `uv run build.py --import` downloads the zip and replaces src/ with the largest size of
+# each icon in it, skipping white-only ones.
+import:
+  - url: https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip
 
 # Shown in README.md, in this order.
 samples:

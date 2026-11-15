@@ -1,7 +1,75 @@
 title: Observability
-source: "[grafana.com](https://grafana.com/oss/) product logos and signal icons, plus [OpenTelemetry](https://opentelemetry.io), [Prometheus](https://prometheus.io), [.NET Aspire](https://aspire.dev), [Seq](https://datalust.co/seq) and [PostHog](https://posthog.com) (URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "[grafana.com](https://grafana.com/oss/) product logos and signal icons, plus [OpenTelemetry](https://opentelemetry.io), [Prometheus](https://prometheus.io), [.NET Aspire](https://aspire.dev), [Seq](https://datalust.co/seq) and [PostHog](https://posthog.com)"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://grafana.com/oss/assets/logo-grafana-spiral.svg
+    into: "grafana/grafana.svg"
+  - url: https://grafana.com/oss/assets/logo-loki.svg
+    into: "grafana/grafana-loki.svg"
+  - url: https://grafana.com/oss/assets/logo-tempo.svg
+    into: "grafana/grafana-tempo.svg"
+  - url: https://grafana.com/oss/assets/logo-mimir.svg
+    into: "grafana/grafana-mimir.svg"
+  - url: https://grafana.com/static/img/pyroscope-logo.svg
+    into: "grafana/grafana-pyroscope.svg"
+  - url: https://grafana.com/media/oss/alloy/alloy-logo.svg
+    into: "grafana/grafana-alloy.svg"
+  - url: https://grafana.com/static/img/logos/beyla-logo.svg
+    into: "grafana/grafana-beyla.svg"
+  - url: https://grafana.com/oss/assets/logo-grafana-faro.svg
+    into: "grafana/grafana-faro.svg"
+  - url: https://grafana.com/media/menus/products/grafana-menu-icon-k6.svg
+    into: "grafana/grafana-k6.svg"
+  - url: https://grafana.com/oss/assets/logo-grafana-tanka.svg
+    into: "grafana/grafana-tanka.svg"
+  - url: https://grafana.com/oss/assets/logo-graphite.svg
+    into: "grafana/graphite.svg"
+  - url: https://grafana.com/static/img/logos/incident.svg
+    into: "grafana/grafana-incident.svg"
+  - url: https://grafana.com/static/img/logos/slo.svg
+    into: "grafana/grafana-slo.svg"
+  - url: https://raw.githubusercontent.com/grafana/oncall/dev/grafana-plugin/src/assets/img/logo.svg
+    into: "grafana/grafana-oncall.svg"
+  - url: https://a-us.storyblok.com/f/1022730/24x24/682285d5c0/icon-nav-logs.svg
+    into: "signals/logs.svg"
+    note: "grafana.com nav icon"
+  - url: https://a-us.storyblok.com/f/1022730/24x24/a6d277c5a5/icon-nav-metrics.svg
+    into: "signals/metrics.svg"
+    note: "grafana.com nav icon"
+  - url: https://a-us.storyblok.com/f/1022730/24x24/c0434948fc/icon-nav-traces.svg
+    into: "signals/traces.svg"
+    note: "grafana.com nav icon"
+  - url: https://a-us.storyblok.com/f/1022730/24x24/68d796c56c/icon-nav-profiles.svg
+    into: "signals/profiles.svg"
+    note: "grafana.com nav icon"
+  - url: https://a-us.storyblok.com/f/1022730/24x24/27416765d7/icon-nav-dashboards-data-visualization.svg
+    into: "signals/dashboards.svg"
+    note: "grafana.com nav icon"
+  - url: https://a-us.storyblok.com/f/1022730/32x32/a412179eca/grafana-pricing-icon-irm.svg
+    into: "signals/alerts.svg"
+    note: "Grafana IRM icon, tile tint matched to the nav icons"
+    replace:
+      - ["<rect opacity=\"0.2\"", "<rect opacity=\"0.15\""]
+  - url: https://raw.githubusercontent.com/prometheus/docs/main/public/assets/prometheus-logo.svg
+    into: "prometheus/{name}.svg"
+    note: "Alertmanager has no logo of its own"
+    names: ["prometheus", "alertmanager"]
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/opentelemetry/icon/color/opentelemetry-icon-color.svg
+    into: "opentelemetry/opentelemetry.svg"
+  - url: https://raw.githubusercontent.com/open-telemetry/opentelemetry.io/main/iconography/32x32/Collector.svg
+    into: "opentelemetry/opentelemetry-collector.svg"
+  - url: https://raw.githubusercontent.com/dotnet/aspire/main/.agents/skills/create-video/scripts/assets/aspire-logo.svg
+    into: "aspire/aspire.svg"
+  - url: https://raw.githubusercontent.com/PostHog/posthog/master/frontend/public/posthog-icon.svg
+    into: "posthog/posthog.svg"
+  - url: https://datalust.co/assets/seq-logo-dark.svg
+    into: "seq/seq.svg"
+    viewBox: "499 67.8 140.7 140.7"
+    note: "mark only"
 
 # File name (without size suffix) -> label.
 labels:

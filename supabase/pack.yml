@@ -1,7 +1,19 @@
 title: Supabase
-source: "the [Supabase](https://supabase.com) logo and product icons (URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "the [Supabase](https://supabase.com) logo and product icons"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/supabase-logo-icon.svg
+    into: "Supabase.svg"
+
+# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
+sources:
+  - files: "Supabase-*.svg"
+    url: https://github.com/supabase/supabase/blob/master/packages/shared-data/products.ts
+    note: "24px product icon paths, drawn like ProductIcon.tsx's green variant: 1.5px round #D3F8E4 strokes on a rounded #3FCF8E tile"
 
 # Shown in README.md, in this order.
 samples:

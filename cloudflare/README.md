@@ -1,23 +1,33 @@
 # Cloudflare
 
-113 icons from the Cloudflare logo and product icons from [cloudflare/cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons) (URLs in [`SOURCES.txt`](SOURCES.txt)), packaged as a Miro-style Excalidraw library:
+113 icons from the Cloudflare logo and product icons from [cloudflare/cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons), packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
-<tr><td align="center" width="120"><img src="icons/Cloudflare.svg" width="64" height="64"><br><sub>Cloudflare</sub></td><td align="center" width="120"><img src="icons/products/workers.svg" width="64" height="64"><br><sub>Cloudflare Workers</sub></td><td align="center" width="120"><img src="icons/products/pages.svg" width="64" height="64"><br><sub>Cloudflare Pages</sub></td><td align="center" width="120"><img src="icons/products/r2.svg" width="64" height="64"><br><sub>Cloudflare R2</sub></td><td align="center" width="120"><img src="icons/products/d1.svg" width="64" height="64"><br><sub>Cloudflare D1</sub></td><td align="center" width="120"><img src="icons/products/kv.svg" width="64" height="64"><br><sub>Cloudflare KV</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/products/durable-objects.svg" width="64" height="64"><br><sub>Cloudflare Durable Objects</sub></td><td align="center" width="120"><img src="icons/products/queues.svg" width="64" height="64"><br><sub>Cloudflare Queues</sub></td><td align="center" width="120"><img src="icons/products/workflows.svg" width="64" height="64"><br><sub>Cloudflare Workflows</sub></td><td align="center" width="120"><img src="icons/products/workers-ai.svg" width="64" height="64"><br><sub>Cloudflare Workers AI</sub></td><td align="center" width="120"><img src="icons/products/ai-gateway.svg" width="64" height="64"><br><sub>Cloudflare AI Gateway</sub></td><td align="center" width="120"><img src="icons/products/vectorize.svg" width="64" height="64"><br><sub>Cloudflare Vectorize</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/products/hyperdrive.svg" width="64" height="64"><br><sub>Cloudflare Hyperdrive</sub></td><td align="center" width="120"><img src="icons/products/tunnel.svg" width="64" height="64"><br><sub>Cloudflare Tunnel</sub></td><td align="center" width="120"><img src="icons/products/access.svg" width="64" height="64"><br><sub>Cloudflare Access</sub></td><td align="center" width="120"><img src="icons/products/gateway.svg" width="64" height="64"><br><sub>Cloudflare Gateway</sub></td><td align="center" width="120"><img src="icons/products/dns.svg" width="64" height="64"><br><sub>Cloudflare DNS</sub></td><td align="center" width="120"><img src="icons/products/cache.svg" width="64" height="64"><br><sub>Cloudflare Cache</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/products/load-balancing.svg" width="64" height="64"><br><sub>Cloudflare Load Balancing</sub></td><td align="center" width="120"><img src="icons/products/waf.svg" width="64" height="64"><br><sub>Cloudflare WAF</sub></td><td align="center" width="120"><img src="icons/products/ddos-protection.svg" width="64" height="64"><br><sub>Cloudflare DDoS Protection</sub></td><td align="center" width="120"><img src="icons/products/turnstile.svg" width="64" height="64"><br><sub>Cloudflare Turnstile</sub></td><td align="center" width="120"><img src="icons/products/zaraz.svg" width="64" height="64"><br><sub>Cloudflare Zaraz</sub></td><td align="center" width="120"><img src="icons/products/stream.svg" width="64" height="64"><br><sub>Cloudflare Stream</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Cloudflare.svg" width="64" height="64"><br><sub>Cloudflare</sub></td><td align="center" width="120"><img src="src/products/workers.svg" width="64" height="64"><br><sub>Cloudflare Workers</sub></td><td align="center" width="120"><img src="src/products/pages.svg" width="64" height="64"><br><sub>Cloudflare Pages</sub></td><td align="center" width="120"><img src="src/products/r2.svg" width="64" height="64"><br><sub>Cloudflare R2</sub></td><td align="center" width="120"><img src="src/products/d1.svg" width="64" height="64"><br><sub>Cloudflare D1</sub></td><td align="center" width="120"><img src="src/products/kv.svg" width="64" height="64"><br><sub>Cloudflare KV</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/products/durable-objects.svg" width="64" height="64"><br><sub>Cloudflare Durable Objects</sub></td><td align="center" width="120"><img src="src/products/queues.svg" width="64" height="64"><br><sub>Cloudflare Queues</sub></td><td align="center" width="120"><img src="src/products/workflows.svg" width="64" height="64"><br><sub>Cloudflare Workflows</sub></td><td align="center" width="120"><img src="src/products/workers-ai.svg" width="64" height="64"><br><sub>Cloudflare Workers AI</sub></td><td align="center" width="120"><img src="src/products/ai-gateway.svg" width="64" height="64"><br><sub>Cloudflare AI Gateway</sub></td><td align="center" width="120"><img src="src/products/vectorize.svg" width="64" height="64"><br><sub>Cloudflare Vectorize</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/products/hyperdrive.svg" width="64" height="64"><br><sub>Cloudflare Hyperdrive</sub></td><td align="center" width="120"><img src="src/products/tunnel.svg" width="64" height="64"><br><sub>Cloudflare Tunnel</sub></td><td align="center" width="120"><img src="src/products/access.svg" width="64" height="64"><br><sub>Cloudflare Access</sub></td><td align="center" width="120"><img src="src/products/gateway.svg" width="64" height="64"><br><sub>Cloudflare Gateway</sub></td><td align="center" width="120"><img src="src/products/dns.svg" width="64" height="64"><br><sub>Cloudflare DNS</sub></td><td align="center" width="120"><img src="src/products/cache.svg" width="64" height="64"><br><sub>Cloudflare Cache</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/products/load-balancing.svg" width="64" height="64"><br><sub>Cloudflare Load Balancing</sub></td><td align="center" width="120"><img src="src/products/waf.svg" width="64" height="64"><br><sub>Cloudflare WAF</sub></td><td align="center" width="120"><img src="src/products/ddos-protection.svg" width="64" height="64"><br><sub>Cloudflare DDoS Protection</sub></td><td align="center" width="120"><img src="src/products/turnstile.svg" width="64" height="64"><br><sub>Cloudflare Turnstile</sub></td><td align="center" width="120"><img src="src/products/zaraz.svg" width="64" height="64"><br><sub>Cloudflare Zaraz</sub></td><td align="center" width="120"><img src="src/products/stream.svg" width="64" height="64"><br><sub>Cloudflare Stream</sub></td></tr>
 </table>
 
-24 of 113 shown. Every icon is in [`icons/`](icons/).
+24 of 113 shown. Every icon is in [`src/`](src/).
+
+## Sources
+
+Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by
+`uv run build.py --import cloudflare`; the rest are kept by hand.
+
+| Files | Source | Notes |
+| ----- | ------ | ----- |
+| `products/*.svg` | https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/icons/{name}.svg | labels from src/content/directory/<name>.yaml; docs-only icons and third-party logos left out; filled #F38020; 112 files |
+| `Cloudflare.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
 
 ## Use
 
 Build with `uv run build.py` from the repo root, then in Excalidraw:
 
-1. Open `cloudflare.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
-2. Import `cloudflare.excalidrawlib` from the library panel.
+1. Open `runax-cloudflare.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
+2. Import `runax-cloudflare.excalidrawlib` from the library panel.
 
 Excalidraw doesn't store images in library files, so library icons render only once the
 drawing contains them. See the [main README](../README.md).

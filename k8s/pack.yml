@@ -1,7 +1,23 @@
 title: Kubernetes Icons
-source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos (URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://github.com/kubernetes/community/archive/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a.zip
+    path: "community-*/icons"
+    into: kubernetes
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg
+    into: "cncf/{name}.svg"
+    note: "argo is Argo CD"
+    names: ["argo", "helm", "k3s", "kubernetes"]
+
+# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
+sources:
+  - files: "other/k3os.svg"
+    note: "moved from the techno pack (originally from techno's svg.zip); CNCF has no K3OS artwork"
 
 # File name (without size suffix) -> label. kubernetes/community names files by kubectl short name.
 labels:

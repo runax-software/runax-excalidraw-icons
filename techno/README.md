@@ -4,20 +4,29 @@
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
-<tr><td align="center" width="120"><img src="icons/Docker.svg" width="64" height="64"><br><sub>Docker</sub></td><td align="center" width="120"><img src="icons/HashiCorp-Terraform.svg" width="64" height="64"><br><sub>HashiCorp Terraform</sub></td><td align="center" width="120"><img src="icons/Ansible.svg" width="64" height="64"><br><sub>Ansible</sub></td><td align="center" width="120"><img src="icons/GitHub.svg" width="64" height="64"><br><sub>GitHub</sub></td><td align="center" width="120"><img src="icons/GitHub-Actions.svg" width="64" height="64"><br><sub>GitHub Actions</sub></td><td align="center" width="120"><img src="icons/GitLab.svg" width="64" height="64"><br><sub>GitLab</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/Python.svg" width="64" height="64"><br><sub>Python</sub></td><td align="center" width="120"><img src="icons/Go.svg" width="64" height="64"><br><sub>Go</sub></td><td align="center" width="120"><img src="icons/TypeScript.svg" width="64" height="64"><br><sub>TypeScript</sub></td><td align="center" width="120"><img src="icons/Rust.svg" width="64" height="64"><br><sub>Rust</sub></td><td align="center" width="120"><img src="icons/Java.svg" width="64" height="64"><br><sub>Java</sub></td><td align="center" width="120"><img src="icons/React.svg" width="64" height="64"><br><sub>React</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/Next.js.svg" width="64" height="64"><br><sub>Next.js</sub></td><td align="center" width="120"><img src="icons/Node.js.svg" width="64" height="64"><br><sub>Node.js</sub></td><td align="center" width="120"><img src="icons/Spring.svg" width="64" height="64"><br><sub>Spring</sub></td><td align="center" width="120"><img src="icons/Vue.js.svg" width="64" height="64"><br><sub>Vue.js</sub></td><td align="center" width="120"><img src="icons/Angular.svg" width="64" height="64"><br><sub>Angular</sub></td><td align="center" width="120"><img src="icons/Linux.svg" width="64" height="64"><br><sub>Linux</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/Ubuntu.svg" width="64" height="64"><br><sub>Ubuntu</sub></td><td align="center" width="120"><img src="icons/Bash.svg" width="64" height="64"><br><sub>Bash</sub></td><td align="center" width="120"><img src="icons/Kotlin.svg" width="64" height="64"><br><sub>Kotlin</sub></td><td align="center" width="120"><img src="icons/Swift.svg" width="64" height="64"><br><sub>Swift</sub></td><td align="center" width="120"><img src="icons/Figma.svg" width="64" height="64"><br><sub>Figma</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Docker.svg" width="64" height="64"><br><sub>Docker</sub></td><td align="center" width="120"><img src="src/HashiCorp-Terraform.svg" width="64" height="64"><br><sub>HashiCorp Terraform</sub></td><td align="center" width="120"><img src="src/Ansible.svg" width="64" height="64"><br><sub>Ansible</sub></td><td align="center" width="120"><img src="src/GitHub.svg" width="64" height="64"><br><sub>GitHub</sub></td><td align="center" width="120"><img src="src/GitHub-Actions.svg" width="64" height="64"><br><sub>GitHub Actions</sub></td><td align="center" width="120"><img src="src/GitLab.svg" width="64" height="64"><br><sub>GitLab</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Python.svg" width="64" height="64"><br><sub>Python</sub></td><td align="center" width="120"><img src="src/Go.svg" width="64" height="64"><br><sub>Go</sub></td><td align="center" width="120"><img src="src/TypeScript.svg" width="64" height="64"><br><sub>TypeScript</sub></td><td align="center" width="120"><img src="src/Rust.svg" width="64" height="64"><br><sub>Rust</sub></td><td align="center" width="120"><img src="src/Java.svg" width="64" height="64"><br><sub>Java</sub></td><td align="center" width="120"><img src="src/React.svg" width="64" height="64"><br><sub>React</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Next.js.svg" width="64" height="64"><br><sub>Next.js</sub></td><td align="center" width="120"><img src="src/Node.js.svg" width="64" height="64"><br><sub>Node.js</sub></td><td align="center" width="120"><img src="src/Spring.svg" width="64" height="64"><br><sub>Spring</sub></td><td align="center" width="120"><img src="src/Vue.js.svg" width="64" height="64"><br><sub>Vue.js</sub></td><td align="center" width="120"><img src="src/Angular.svg" width="64" height="64"><br><sub>Angular</sub></td><td align="center" width="120"><img src="src/Linux.svg" width="64" height="64"><br><sub>Linux</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/Ubuntu.svg" width="64" height="64"><br><sub>Ubuntu</sub></td><td align="center" width="120"><img src="src/Bash.svg" width="64" height="64"><br><sub>Bash</sub></td><td align="center" width="120"><img src="src/Kotlin.svg" width="64" height="64"><br><sub>Kotlin</sub></td><td align="center" width="120"><img src="src/Swift.svg" width="64" height="64"><br><sub>Swift</sub></td><td align="center" width="120"><img src="src/Figma.svg" width="64" height="64"><br><sub>Figma</sub></td></tr>
 </table>
 
-23 of 80 shown. Every icon is in [`icons/`](icons/).
+23 of 80 shown. Every icon is in [`src/`](src/).
+
+## Sources
+
+Paths are relative to [`src/`](src/). Imported files are refreshed by
+`uv run build.py --import techno`; the rest are kept by hand.
+
+| Files | Source | Notes |
+| ----- | ------ | ----- |
+| `*` |  | hand-picked from a downloaded svg.zip of technology logos (kept in techno/downloads/, git-ignored) |
 
 ## Use
 
 Build with `uv run build.py` from the repo root, then in Excalidraw:
 
-1. Open `techno.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
-2. Import `techno.excalidrawlib` from the library panel.
+1. Open `runax-techno.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
+2. Import `runax-techno.excalidrawlib` from the library panel.
 
 Excalidraw doesn't store images in library files, so library icons render only once the
 drawing contains them. See the [main README](../README.md).

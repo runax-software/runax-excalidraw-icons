@@ -1,23 +1,36 @@
 # AI
 
-41 icons from AI model, inference, framework and coding-tool logos, mostly from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT; URLs in [`SOURCES.txt`](SOURCES.txt)), packaged as a Miro-style Excalidraw library:
+41 icons from AI model, inference, framework and coding-tool logos, mostly from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons), packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
-<tr><td align="center" width="120"><img src="icons/openai.svg" width="64" height="64"><br><sub>OpenAI</sub></td><td align="center" width="120"><img src="icons/anthropic.svg" width="64" height="64"><br><sub>Anthropic</sub></td><td align="center" width="120"><img src="icons/claude.svg" width="64" height="64"><br><sub>Claude</sub></td><td align="center" width="120"><img src="icons/gemini.svg" width="64" height="64"><br><sub>Google Gemini</sub></td><td align="center" width="120"><img src="icons/mistral.svg" width="64" height="64"><br><sub>Mistral AI</sub></td><td align="center" width="120"><img src="icons/meta-llama.svg" width="64" height="64"><br><sub>Meta Llama</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/deepseek.svg" width="64" height="64"><br><sub>DeepSeek</sub></td><td align="center" width="120"><img src="icons/qwen.svg" width="64" height="64"><br><sub>Qwen</sub></td><td align="center" width="120"><img src="icons/xai.svg" width="64" height="64"><br><sub>xAI</sub></td><td align="center" width="120"><img src="icons/huggingface.svg" width="64" height="64"><br><sub>Hugging Face</sub></td><td align="center" width="120"><img src="icons/ollama.svg" width="64" height="64"><br><sub>Ollama</sub></td><td align="center" width="120"><img src="icons/vllm.svg" width="64" height="64"><br><sub>vLLM</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/openrouter.svg" width="64" height="64"><br><sub>OpenRouter</sub></td><td align="center" width="120"><img src="icons/groq.svg" width="64" height="64"><br><sub>Groq</sub></td><td align="center" width="120"><img src="icons/vertexai.svg" width="64" height="64"><br><sub>Vertex AI</sub></td><td align="center" width="120"><img src="icons/langchain.svg" width="64" height="64"><br><sub>LangChain</sub></td><td align="center" width="120"><img src="icons/langgraph.svg" width="64" height="64"><br><sub>LangGraph</sub></td><td align="center" width="120"><img src="icons/llamaindex.svg" width="64" height="64"><br><sub>LlamaIndex</sub></td></tr>
-<tr><td align="center" width="120"><img src="icons/mcp.svg" width="64" height="64"><br><sub>Model Context Protocol</sub></td><td align="center" width="120"><img src="icons/langfuse.svg" width="64" height="64"><br><sub>Langfuse</sub></td><td align="center" width="120"><img src="icons/n8n.svg" width="64" height="64"><br><sub>n8n</sub></td><td align="center" width="120"><img src="icons/githubcopilot.svg" width="64" height="64"><br><sub>GitHub Copilot</sub></td><td align="center" width="120"><img src="icons/cursor.svg" width="64" height="64"><br><sub>Cursor</sub></td><td align="center" width="120"><img src="icons/claudecode.svg" width="64" height="64"><br><sub>Claude Code</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/openai.svg" width="64" height="64"><br><sub>OpenAI</sub></td><td align="center" width="120"><img src="src/anthropic.svg" width="64" height="64"><br><sub>Anthropic</sub></td><td align="center" width="120"><img src="src/claude.svg" width="64" height="64"><br><sub>Claude</sub></td><td align="center" width="120"><img src="src/gemini.svg" width="64" height="64"><br><sub>Google Gemini</sub></td><td align="center" width="120"><img src="src/mistral.svg" width="64" height="64"><br><sub>Mistral AI</sub></td><td align="center" width="120"><img src="src/meta-llama.svg" width="64" height="64"><br><sub>Meta Llama</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/deepseek.svg" width="64" height="64"><br><sub>DeepSeek</sub></td><td align="center" width="120"><img src="src/qwen.svg" width="64" height="64"><br><sub>Qwen</sub></td><td align="center" width="120"><img src="src/xai.svg" width="64" height="64"><br><sub>xAI</sub></td><td align="center" width="120"><img src="src/huggingface.svg" width="64" height="64"><br><sub>Hugging Face</sub></td><td align="center" width="120"><img src="src/ollama.svg" width="64" height="64"><br><sub>Ollama</sub></td><td align="center" width="120"><img src="src/vllm.svg" width="64" height="64"><br><sub>vLLM</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/openrouter.svg" width="64" height="64"><br><sub>OpenRouter</sub></td><td align="center" width="120"><img src="src/groq.svg" width="64" height="64"><br><sub>Groq</sub></td><td align="center" width="120"><img src="src/vertexai.svg" width="64" height="64"><br><sub>Vertex AI</sub></td><td align="center" width="120"><img src="src/langchain.svg" width="64" height="64"><br><sub>LangChain</sub></td><td align="center" width="120"><img src="src/langgraph.svg" width="64" height="64"><br><sub>LangGraph</sub></td><td align="center" width="120"><img src="src/llamaindex.svg" width="64" height="64"><br><sub>LlamaIndex</sub></td></tr>
+<tr><td align="center" width="120"><img src="src/mcp.svg" width="64" height="64"><br><sub>Model Context Protocol</sub></td><td align="center" width="120"><img src="src/langfuse.svg" width="64" height="64"><br><sub>Langfuse</sub></td><td align="center" width="120"><img src="src/n8n.svg" width="64" height="64"><br><sub>n8n</sub></td><td align="center" width="120"><img src="src/githubcopilot.svg" width="64" height="64"><br><sub>GitHub Copilot</sub></td><td align="center" width="120"><img src="src/cursor.svg" width="64" height="64"><br><sub>Cursor</sub></td><td align="center" width="120"><img src="src/claudecode.svg" width="64" height="64"><br><sub>Claude Code</sub></td></tr>
 </table>
 
-24 of 41 shown. Every icon is in [`icons/`](icons/).
+24 of 41 shown. Every icon is in [`src/`](src/).
+
+## Sources
+
+Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by
+`uv run build.py --import ai`; the rest are kept by hand.
+
+| Files | Source | Notes |
+| ----- | ------ | ----- |
+| `*.svg` | https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/{src}.svg | MIT; the -color variant where one exists; 37 files |
+| `tensorflow.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
+| `pytorch.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
+| `numpy.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
+| `opencv.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
 
 ## Use
 
 Build with `uv run build.py` from the repo root, then in Excalidraw:
 
-1. Open `ai.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
-2. Import `ai.excalidrawlib` from the library panel.
+1. Open `runax-ai.excalidraw` (or paste icons from it into your drawing), so the images are loaded.
+2. Import `runax-ai.excalidrawlib` from the library panel.
 
 Excalidraw doesn't store images in library files, so library icons render only once the
 drawing contains them. See the [main README](../README.md).

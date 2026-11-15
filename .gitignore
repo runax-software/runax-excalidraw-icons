@@ -1,6 +1,6 @@
-# Raw packages: re-downloadable, and what's used is already in <pack>/icons/
+# techno's local svg.zip; what's used is already in techno/src/
 downloads/
-# Generated: rebuild with `python3 build_icon_libraries.py`
+# Generated: rebuild with `uv run build.py`
 *.excalidrawlib
 *.excalidraw
 

@@ -1,7 +1,63 @@
 title: AI
-source: "AI model, inference, framework and coding-tool logos, mostly from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT; URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "AI model, inference, framework and coding-tool logos, mostly from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons)"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://raw.githubusercontent.com/lobehub/lobe-icons/master/packages/static-svg/icons/{src}.svg
+    into: "{name}.svg"
+    note: "MIT; the -color variant where one exists"
+    names:
+      "anthropic": "anthropic"
+      "claude": "claude-color"
+      "claudecode": "claudecode-color"
+      "cline": "cline"
+      "codex": "codex-color"
+      "cohere": "cohere-color"
+      "crewai": "crewai-color"
+      "cursor": "cursor"
+      "deepseek": "deepseek-color"
+      "dify": "dify-color"
+      "gemini": "gemini-color"
+      "gemma": "gemma-color"
+      "githubcopilot": "githubcopilot"
+      "groq": "groq"
+      "huggingface": "huggingface-color"
+      "langchain": "langchain-color"
+      "langfuse": "langfuse-color"
+      "langgraph": "langgraph-color"
+      "llamaindex": "llamaindex-color"
+      "lmstudio": "lmstudio"
+      "mastra": "mastra"
+      "mcp": "mcp"
+      "meta-llama": "meta-color"
+      "mistral": "mistral-color"
+      "n8n": "n8n-color"
+      "ollama": "ollama"
+      "openai": "openai"
+      "openrouter": "openrouter-color"
+      "openwebui": "openwebui"
+      "perplexity": "perplexity-color"
+      "qwen": "qwen-color"
+      "replicate": "replicate"
+      "together": "together-color"
+      "vertexai": "vertexai-color"
+      "vllm": "vllm-color"
+      "windsurf": "windsurf"
+      "xai": "xai"
+
+# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
+sources:
+  - files: "tensorflow.svg"
+    note: "moved from the techno pack (originally from techno's svg.zip)"
+  - files: "pytorch.svg"
+    note: "moved from the techno pack (originally from techno's svg.zip)"
+  - files: "numpy.svg"
+    note: "moved from the techno pack (originally from techno's svg.zip)"
+  - files: "opencv.svg"
+    note: "moved from the techno pack (originally from techno's svg.zip)"
 
 # File name -> label.
 labels:

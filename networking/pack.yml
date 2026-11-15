@@ -1,7 +1,55 @@
 title: Networking
-source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF projects from [cncf/artwork](https://github.com/cncf/artwork) plus NGINX, Traefik, Kong, HAProxy, Caddy, Calico, Consul, Tailscale, WireGuard, NetBird, GraphQL, REST, OpenAPI, Swagger and Socket.IO (URLs in [`SOURCES.txt`](SOURCES.txt))"
-# Glob in downloads/; the newest match wins.
-download: sources
+source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF projects from [cncf/artwork](https://github.com/cncf/artwork) plus NGINX, Traefik, Kong, HAProxy, Caddy, Calico, Consul, Tailscale, WireGuard, NetBird, GraphQL, REST, OpenAPI, Swagger and Socket.IO"
+
+# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
+# of name -> src, filling {name} and {src} in `url` and `into`.
+downloaded: "2026-11-15"
+import:
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg
+    into: "cncf/{name}.svg"
+    names: ["antrea", "cert-manager", "cni", "contour", "coredns", "emissary-ingress", "envoy", "istio", "kgateway", "kube-ovn", "kuma", "linkerd", "metallb", "networkservicemesh", "spiffe", "spire", "submariner"]
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/cilium/icon/color/cilium_icon-color.svg
+    into: "cncf/cilium.svg"
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/kmesh/icon/color/KMESH-icon-color.svg
+    into: "cncf/kmesh.svg"
+  - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/grpc/pancake/color/grpc-pancake-color.svg
+    into: "cncf/grpc.svg"
+    note: "the gRPC mascot; its icon/ file is the wordmark"
+  - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
+    into: "other/{name}.svg"
+    note: "MIT"
+    names:
+      "nginx": "nginx"
+      "kong": "kong-icon"
+      "traefik": "traefik-proxy-icon"
+      "tailscale": "tailscale"
+      "consul": "consul"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/haproxy.svg
+    into: "other/haproxy.svg"
+    fill: "#169BD6"
+    note: "HAProxy brand color"
+  - url: https://caddyserver.com/resources/images/logo-light.svg
+    into: "other/caddy.svg"
+    viewBox: "-2 -2 152 151"
+    note: "mark only"
+  - url: https://www.tigera.io/app/uploads/2026/01/Calico-logo-2026-black-text.svg
+    into: "other/calico.svg"
+    viewBox: "0 0 105 118"
+    note: "mark only"
+  - url: https://www.wireguard.com/img/wireguard.svg
+    into: "other/wireguard.svg"
+    viewBox: "0 0 333.14 333.14"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/netbirdio/netbird/main/client/ui/frontend/src/assets/logos/netbird.svg
+    into: "other/netbird.svg"
+
+# Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
+sources:
+  - files: "other/rest.svg"
+    note: "drawn for this pack; REST has no logo"
+  - files: "other/*"
+    note: "moved from the techno pack (originally from techno's svg.zip) (GraphQL, OpenAPI, Swagger, Socket.IO)"
 
 # File name -> label.
 labels:

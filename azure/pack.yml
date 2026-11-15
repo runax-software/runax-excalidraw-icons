@@ -1,7 +1,9 @@
 title: Azure Architecture Icons
 source: "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)"
-# Glob in downloads/; the newest match wins.
-download: Azure_Public_Service_Icons_*.zip
+# `uv run build.py --import` downloads the zip and replaces src/ with the largest size of
+# each icon in it, skipping white-only ones.
+import:
+  - url: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip
 
 # Shown in README.md, in this order.
 samples:

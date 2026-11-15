@@ -22,47 +22,63 @@ build.py                        entry point: builds every pack
 builder/                        Pack, IconSource, Icon, ExcalidrawExporter, ReadmeRenderer
 pyproject.toml, uv.lock         dependencies (PyYAML), locked
 <pack>/
-  pack.yml                      title, source, download glob, label overrides, README samples
-  icons/                        SVGs used for the library (committed)
-  downloads/                    raw packages (git-ignored)
-  <pack>.excalidrawlib          generated library (git-ignored)
-  <pack>.excalidraw             generated scene with the images (git-ignored)
-  README.md                     generated preview of the pack
+  pack.yml                      title, imports, hand-made sources, label overrides, README samples
+  src/                          the SVGs the pack is built from (committed)
+  runax-<pack>.excalidrawlib    generated library (git-ignored)
+  runax-<pack>.excalidraw       generated scene with the images (git-ignored)
+  README.md                     generated preview and sources of the pack
 ```
 
 ## Build
 
 ```sh
-uv run build.py
+uv run build.py                 # build every pack from its src/ (no network)
+uv run build.py k8s data        # build only these packs
+uv run build.py --import        # first refresh src/ from each pack's `import:` urls
 ```
 
 Needs [uv](https://docs.astral.sh/uv/), which installs the locked dependencies into `.venv/`
-on first run. Every folder with a `pack.yml` is a pack. Each pack is built from its package in `<pack>/downloads/` if
-present (newest wins), otherwise from `<pack>/icons/`.
+on first run. Every folder with a `pack.yml` is a pack, built from every SVG in its `src/`.
 
-To update a pack, drop the new package into its `downloads/` folder and rerun:
+Files in `src/` are either imported or hand-made. Imports are listed in the pack's
+`pack.yml`; `--import` downloads them into a temporary folder and writes the results to
+`src/`, so nothing is cached in the repo:
 
-- `ai/downloads/sources/` (URLs in `ai/SOURCES.txt`)
-- `aws/downloads/Icon-package_*.zip`
-- `azure/downloads/Azure_Public_Service_Icons_*.zip`
-- `cloudflare/downloads/sources/` (URLs in `cloudflare/SOURCES.txt`)
-- `data/downloads/sources/` (one SVG per product; URLs in `data/SOURCES.txt`)
-- `k8s/downloads/sources/kubernetes-icons/` (the repo's `icons/` folder), plus `cncf/` and `other/` logos (URLs in `k8s/SOURCES.txt`)
-- `networking/downloads/sources/` (URLs in `networking/SOURCES.txt`)
-- `observability/downloads/sources/<vendor>/` (one SVG per product; URLs in `observability/SOURCES.txt`)
-- `supabase/downloads/sources/` (URLs in `supabase/SOURCES.txt`)
-- `techno/downloads/techno/` (flat folder of SVGs, picked from `svg.zip`)
+```yaml
+import:
+  # An archive (zip or tar) replaces the folder src/<into>/ (default: all of src/) with the
+  # largest size of each icon, skipping white-only ones (AWS `_Dark` variants).
+  - url: https://github.com/kubernetes/community/archive/<commit>.zip
+    path: "community-*/icons"          # optional: folder inside the archive
+    into: kubernetes
+  # A single SVG (or PNG, wrapped in an SVG) is written to src/<into> after optional edits.
+  - url: https://caddyserver.com/resources/images/logo-light.svg
+    into: other/caddy.svg
+    viewBox: "-2 -2 152 151"           # crop, e.g. to drop a wordmark
+  # `names` expands one entry per name, filling {name} (and {src}, for a map) in url and into.
+  - url: https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/icons/{name}.svg
+    into: "products/{name}.svg"
+    fill: "#F38020"                    # paint black / currentColor in this color
+    names: [workers, r2, d1]
+```
 
-The script keeps only the largest size of each icon, prefers unlabeled variants, and skips
-white-only icons (AWS `_Dark` variants), which are invisible on a white canvas.
+Other edits: `replace: [[old, new], ...]` for text. To move to a new release, change the url
+and run `uv run build.py --import <pack>`. `techno` has no imports: its logos were picked from
+a local `svg.zip` (kept in `techno/downloads/`, git-ignored).
+
+Hand-made files (drawn, cropped from a PNG, or with no known url) are listed under
+`sources:` instead, so every file in `src/` has a recorded origin.
+
+Both lists are shown in the pack's README. The build warns about files in `src/` that neither
+covers, `sources:` entries that match nothing, and imported files missing from `src/`.
 
 ## Using the libraries
 
 excalidraw.com doesn't store images in library files, so library icons show as empty boxes
 unless the drawing already contains them. For each pack:
 
-1. Open `<pack>/<pack>.excalidraw`, or paste icons from it into your drawing.
-2. Import `<pack>/<pack>.excalidrawlib` from the library panel.
+1. Open `<pack>/runax-<pack>.excalidraw`, or paste icons from it into your drawing.
+2. Import `<pack>/runax-<pack>.excalidrawlib` from the library panel.
 
 Library items use the same image IDs as the scene, so they render once the scene's images are loaded.
 
