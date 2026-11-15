@@ -61,13 +61,14 @@ runax_icons/                    the `runax-icons` package and command line
   packs/                        Pack, PackConfig (pack.yml), import entries, Importer,
                                 Validator, PackBuilder, ReadmeRenderer
   svg/                          SvgDocument, edits (Fill, ViewBox, Replace)
-  excalidraw/                   typed elements, Scene, Library, Diagram, geometry
+  excalidraw/                   typed elements, Scene, Library, Diagram, geometry, guidelines
   icon.py, sources.py           Icon (naming, fileId); folder, zip and tar readers
   download.py                   Downloader (temporary folder, parallel)
 tests/                          pytest suite
 pyproject.toml, uv.lock         package and dependencies, locked
 <pack>/
-  pack.yml                      title, license, imports, hand-made sources, labels, README samples
+  pack.yml                      title, license, imports, hand-made sources, labels, README samples,
+                                native_size (vendor's icon sizes), publish (for libraries.excalidraw.com)
   src/                          the SVGs the pack is built from (committed)
   CHANGELOG.md                  the pack's changes
   runax-<pack>.excalidrawlib    generated library (git-ignored)
@@ -82,6 +83,7 @@ uv run runax-icons build             # build every pack from its src/ (no networ
 uv run runax-icons build k8s data    # build only these packs
 uv run runax-icons import            # first refresh src/ from each pack's `import:` urls
 uv run runax-icons check             # report pack problems; exit 1 if there are any
+uv run runax-icons guidelines k8s    # check a built library against the libraries.excalidraw.com rules
 uv run pytest && uv run pyright      # tests and type checks
 ```
 
@@ -131,7 +133,8 @@ New icons and packs are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 The code (`runax_icons/`) is released under the [MIT License](LICENSE).
 
 The icons are **not** covered by that license. They belong to their owners and keep their own
-licenses and terms, listed in each pack's README:
+licenses and terms: [NOTICE.md](NOTICE.md) lists them with copyright notices and our changes,
+[LICENSES/](LICENSES/) holds the license texts, and each pack's README quotes its terms:
 
 - **AWS** and **Azure** icons are provided by Amazon and Microsoft for use in architecture
   diagrams and documentation, under [AWS's](https://aws.amazon.com/architecture/icons/) and

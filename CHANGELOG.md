@@ -22,7 +22,20 @@ All packs in the repository are released together.
     README samples) and exits 1 if there are any.
   - `search` finds icons across packs; `add` puts one into an `.excalidraw` diagram with its
     image embedded; `connect` draws an arrow between two icons by caption, bound to both.
+  - `guidelines` checks built libraries against the libraries.excalidraw.com submission
+    guidelines (trivial items, English only, items that stand alone, at least three items,
+    grouping, and images, which that site can't store); CI enforces it for `publish: true` packs.
 - `pack.yml` is validated on load: unknown keys and misplaced options are errors.
+- `native_size: true` draws a pack's icons at their designed size (AWS: 64px services, 48px
+  resources, 32px groups), as AWS's guidelines ask.
+- Captions follow vendor naming rules: at most two lines, never "AWS" or "Amazon" alone on a
+  line, and small words ("and", "for") lowercase.
+- Pack README previews keep each icon's proportions.
+- `NOTICE.md` and `LICENSES/`: copyright notices, license texts and our changes for every openly
+  licensed icon set, shipped with each release.
+- Imports recognize WebP as well as PNG, by content rather than file name, and reject downloads
+  that aren't images (an error page no longer lands in `src/`).
 - Non-square icons keep their aspect ratio, and SVGs without a size render at their real shape.
-- CI runs the tests, type checks, builds and checks every pack on each push and pull request,
-  and publishes the libraries to a GitHub Release for `v*` tags.
+- CI, each workflow running only when its files change: `ci` (tests and type checks)
+  for the package, `build` (build and check every pack, generated READMEs committed) for packs
+  and the build code. `build` also publishes the libraries to a GitHub Release for `v*` tags.
