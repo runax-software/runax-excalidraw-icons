@@ -1,6 +1,7 @@
 title: Azure Architecture Icons
 source: "[Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/)"
-# `uv run build.py --import` downloads the zip and replaces src/ with the largest size of
+license: "The icons are from Microsoft's [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/). Microsoft permits their use in architectural diagrams, training materials or documentation, and does not allow modifying them; see Microsoft's icon terms. Azure and the Azure product names are trademarks of Microsoft."
+# `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.
 import:
   - url: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip

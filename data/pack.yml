@@ -1,14 +1,15 @@
 title: Data
 source: "database, streaming and data-pipeline logos"
+license: "Logos come from the projects themselves, [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0) and [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 
-# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
 # entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
 # of name -> src, filling {name} and {src} in `url` and `into`.
 downloaded: "2026-11-15"
 import:
   - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
     into: "{name}.svg"
-    note: "MIT"
+    note: "CC0-1.0"
     names:
       "Airbyte": "airbyte-icon"
       "Apache-Flink": "apache-flink-icon"

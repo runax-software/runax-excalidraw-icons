@@ -1,7 +1,8 @@
 title: Observability
 source: "[grafana.com](https://grafana.com/oss/) product logos and signal icons, plus [OpenTelemetry](https://opentelemetry.io), [Prometheus](https://prometheus.io), [.NET Aspire](https://aspire.dev), [Seq](https://datalust.co/seq) and [PostHog](https://posthog.com)"
+license: "Logos come from grafana.com, the projects' own repositories and [cncf/artwork](https://github.com/cncf/artwork); the OpenTelemetry Collector icon is from [opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io) (CC-BY-4.0). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 
-# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
 # entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
 # of name -> src, filling {name} and {src} in `url` and `into`.
 downloaded: "2026-11-15"

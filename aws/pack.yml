@@ -1,6 +1,7 @@
 title: AWS Architecture Icons
 source: "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)"
-# `uv run build.py --import` downloads the zip and replaces src/ with the largest size of
+license: "The icons are from AWS's [Architecture Icons](https://aws.amazon.com/architecture/icons/). AWS lets customers and partners use them in architecture diagrams; check AWS's terms before using them for anything else. AWS and the AWS product names are trademarks of Amazon.com, Inc. or its affiliates."
+# `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.
 import:
   - url: https://d1.awsstatic.com/onedam/marketing-channels/website/public/shared/architecture-icon-release/Icon-package_07312026.5846e92413caa21490223536cc97f1269e44fa92.zip

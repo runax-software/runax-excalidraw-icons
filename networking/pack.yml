@@ -1,7 +1,8 @@
 title: Networking
 source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF projects from [cncf/artwork](https://github.com/cncf/artwork) plus NGINX, Traefik, Kong, HAProxy, Caddy, Calico, Consul, Tailscale, WireGuard, NetBird, GraphQL, REST, OpenAPI, Swagger and Socket.IO"
+license: "The CNCF project logos are from [cncf/artwork](https://github.com/cncf/artwork), used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage); other logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0), [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0) or the projects themselves. Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 
-# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
 # entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
 # of name -> src, filling {name} and {src} in `url` and `into`.
 downloaded: "2026-11-15"
@@ -18,7 +19,7 @@ import:
     note: "the gRPC mascot; its icon/ file is the wordmark"
   - url: https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg
     into: "other/{name}.svg"
-    note: "MIT"
+    note: "CC0-1.0"
     names:
       "nginx": "nginx"
       "kong": "kong-icon"

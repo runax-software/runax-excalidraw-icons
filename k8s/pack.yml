@@ -1,7 +1,8 @@
 title: Kubernetes Icons
 source: "[kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/main/icons/svg) plus the Kubernetes, Argo CD, Helm, K3s and K3OS logos"
+license: "The Kubernetes resource and component icons are from [kubernetes/community](https://github.com/kubernetes/community) (Apache-2.0). The Kubernetes, Helm, Argo, K3s and K3OS logos are trademarks of The Linux Foundation or their owners, used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 
-# `uv run build.py --import` downloads every url below and writes it to src/<into>, after the
+# `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the
 # entry's edits (fill, viewBox, replace). `names` expands one entry per name: a list, or a map
 # of name -> src, filling {name} and {src} in `url` and `into`.
 downloaded: "2026-11-15"
