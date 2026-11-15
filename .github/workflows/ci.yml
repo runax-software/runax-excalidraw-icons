@@ -1,0 +1,37 @@
+name: ci
+
+# Tests and type checks for the runax_icons package. Runs only when Python code, its
+# dependencies or this workflow change.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "runax_icons/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "runax_icons/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Test
+        run: uv run pytest
+
+      - name: Type-check
+        run: uv run pyright
