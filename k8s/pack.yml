@@ -12,12 +12,18 @@ import:
     into: kubernetes
   - url: https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg
     into: "cncf/{name}.svg"
+    forbid:
+      edit: "a CNCF/Linux Foundation logo: the trademark guidelines don't allow modifying it"
+      native: "a CNCF/Linux Foundation logo: the trademark guidelines don't allow modifying it"
     note: "argo is Argo CD"
     names: ["argo", "helm", "k3s", "kubernetes"]
 
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:
   - files: "other/k3os.svg"
+    forbid:
+      edit: "unknown license (from techno's svg.zip); a trademark"
+      native: "unknown license (from techno's svg.zip); a trademark"
     note: "moved from the techno pack (originally from techno's svg.zip); CNCF has no K3OS artwork"
 
 # File name (without size suffix) -> label. kubernetes/community names files by kubectl short name.

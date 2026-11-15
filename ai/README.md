@@ -16,6 +16,12 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 Most logos are from [lobehub/lobe-icons](https://github.com/lobehub/lobe-icons) (MIT). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied.
 
+This pack forbids, and the build refuses:
+
+- `edit`: the logos are their owners' trademarks, used as published
+- `native`: redrawing changes the logos' shape; the logos are their owners' trademarks
+- `publish`: the logos are their owners' trademarks; we don't republish them as a library of their own
+
 ## Sources
 
 Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by

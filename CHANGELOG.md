@@ -25,6 +25,12 @@ All packs in the repository are released together.
   - `guidelines` checks built libraries against the libraries.excalidraw.com submission
     guidelines (trivial items, English only, items that stand alone, at least three items,
     grouping, and images, which that site can't store); CI enforces it for `publish: true` packs.
+- `publish: true` packs also build `runax-<pack>-native.excalidrawlib`: icons converted into
+  native Excalidraw shapes (holes joined into their outlines, gradients as their average color),
+  which libraries.excalidraw.com can host; `guidelines` checks that library.
+- `forbid:` in `pack.yml`, on a pack or a single entry, rules out operations its icons' terms
+  don't allow (`edit`, `native`, `publish`), with the reason; the build refuses them, and every
+  pack declares its rules.
 - `pack.yml` is validated on load: unknown keys and misplaced options are errors.
 - `native_size: true` draws a pack's icons at their designed size (AWS: 64px services, 48px
   resources, 32px groups), as AWS's guidelines ask.

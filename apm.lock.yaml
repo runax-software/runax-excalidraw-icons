@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-11-15T17:01:15.510609+00:00'
+generated_at: '2026-11-15T17:59:27.645615+00:00'
 apm_version: 0.25.0
 dependencies:
 - repo_url: anthropics/claude-plugins-official
@@ -134,7 +134,7 @@ deployments:
   owners:
   - .
   active_owner: .
-  content_hash: sha256:fec7fdcaaf571c26c180bedc1baa507ea910b2b02ea4969fc70f5a25b176dcb8
+  content_hash: sha256:e748b4e240368bd783b701c1b56f599ae061379ebb4d9220f8988c2a58659bb1
 - kind: uri
   target: mcp
   value: excalidraw
@@ -173,4 +173,4 @@ local_deployed_files:
 - .claude/skills/icon-packs/SKILL.md
 local_deployed_file_hashes:
   .claude/skills/excalidraw-diagrams/SKILL.md: sha256:292edec7520f9671e9f1a200964797e9791a840e0c2fd67559e9b08deb8882d9
-  .claude/skills/icon-packs/SKILL.md: sha256:fec7fdcaaf571c26c180bedc1baa507ea910b2b02ea4969fc70f5a25b176dcb8
+  .claude/skills/icon-packs/SKILL.md: sha256:e748b4e240368bd783b701c1b56f599ae061379ebb4d9220f8988c2a58659bb1

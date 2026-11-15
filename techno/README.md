@@ -16,6 +16,12 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied.
 
+This pack forbids, and the build refuses:
+
+- `edit`: where these logos came from (techno/downloads/svg.zip) was never recorded, so their license is unknown
+- `native`: unknown license (see edit); the logos are their owners' trademarks
+- `publish`: unknown license (see edit)
+
 ## Sources
 
 Paths are relative to [`src/`](src/). Imported files are refreshed by

@@ -34,6 +34,12 @@ Microsoft's guidelines for using them:
 Running `runax-icons import azure` downloads the icons from Microsoft, which means agreeing to
 these terms. Azure and the Azure product names are trademarks of Microsoft.
 
+This pack forbids, and the build refuses:
+
+- `edit`: Microsoft's terms forbid cropping, recoloring or reshaping the icons
+- `native`: redrawing the icons as native shapes changes their shape, which Microsoft's terms forbid
+- `publish`: Microsoft permits the icons only in architectural diagrams, training materials or documentation
+
 ## Sources
 
 Paths are relative to [`src/`](src/). Imported files are refreshed by

@@ -17,6 +17,12 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 Logos come from grafana.com, the projects' own repositories and [cncf/artwork](https://github.com/cncf/artwork); the OpenTelemetry Collector icon is from [opentelemetry.io](https://github.com/open-telemetry/opentelemetry.io) (CC-BY-4.0). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied.
 
+This pack forbids, and the build refuses:
+
+- `edit`: the logos are their owners' trademarks (Grafana's among them), used as published
+- `native`: redrawing changes the logos' shape; the logos are their owners' trademarks
+- `publish`: the logos are their owners' trademarks; we don't republish them as a library of their own
+
 ## Sources
 
 Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by

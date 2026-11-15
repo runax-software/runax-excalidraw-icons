@@ -9,6 +9,9 @@ downloaded: "2026-11-15"
 import:
   - url: https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/supabase-logo-icon.svg
     into: "Supabase.svg"
+    forbid:
+      edit: "the Supabase logo is a trademark, used as published"
+      native: "the Supabase logo is a trademark: no redrawing"
 
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:

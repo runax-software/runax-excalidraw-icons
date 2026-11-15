@@ -1,6 +1,11 @@
 title: Technology Logos
 source: hand-picked technology logos
 license: "Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
+# Operations the icons' terms rule out; the build refuses them.
+forbid:
+  edit: where these logos came from (techno/downloads/svg.zip) was never recorded, so their license is unknown
+  native: unknown license (see edit); the logos are their owners' trademarks
+  publish: unknown license (see edit)
 
 # Where the files in src/ came from; `files` is a glob, the first match wins.
 sources:

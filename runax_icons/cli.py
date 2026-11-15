@@ -78,12 +78,14 @@ def guidelines(
 
     failed = False
     for pack in selected:
-        if not pack.library_path.exists():
+        # Publishable packs are submitted as their native-shape library.
+        library = pack.native_library_path if pack.config.publish else pack.library_path
+        if not library.exists():
             typer.echo(f"[{pack.name}] not built: run `runax-icons build {pack.name}`", err=True)
             failed = True
             continue
 
-        findings = Guidelines().check(LibraryFile(pack.library_path))
+        findings = Guidelines().check(LibraryFile(library))
         typer.echo(f"[{pack.name}] " + ("follows the guidelines" if not findings else f"{len(findings)} problems"))
         for finding in findings:
             typer.echo(f"  {finding}", err=True)
@@ -161,6 +163,8 @@ def _build(workspace: Workspace, names: list[str] | None) -> None:
     for pack in workspace.packs(names):
         result = PackBuilder(pack, factory).build()
         typer.echo(f"[{pack.name}] packaged {result.icons} icons -> {pack.library_path.name}")
+        if result.not_native:
+            typer.echo(f"[{pack.name}] left out of {pack.native_library_path.name} (forbid: native): {', '.join(result.not_native)}")
         for problem in result.problems:
             typer.echo(str(problem), err=True)
 

@@ -35,6 +35,12 @@ AWS's guidelines, from the PowerPoint toolkit on the same page:
 AWS and the AWS product names are trademarks of Amazon.com, Inc. or its affiliates. The AWS
 logo can't be used in some Regions (such as China): use the generic cloud group there.
 
+This pack forbids, and the build refuses:
+
+- `edit`: AWS's guidelines forbid cropping, recoloring or reshaping the icons
+- `native`: redrawing the icons as native shapes changes their shape, which AWS's guidelines forbid
+- `publish`: AWS allows the icons for creating architecture diagrams and similar materials, not for republishing
+
 ## Sources
 
 Paths are relative to [`src/`](src/). Imported files are refreshed by

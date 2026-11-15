@@ -9,14 +9,11 @@ import yaml
 
 from ..svg import Edit, Fill, Replace, ViewBox
 from .imports import ArchiveImport, FileImport, ImportEntry, NamesTemplate
+from .restrictions import ConfigError, Operation, Restrictions
 
-PACK_KEYS = {"title", "source", "license", "native_size", "publish", "import", "downloaded", "sources", "labels", "samples"}
-IMPORT_KEYS = {"url", "into", "path", "note", "names", "fill", "viewBox", "replace"}
-SOURCE_KEYS = {"files", "url", "note"}
-
-
-class ConfigError(Exception):
-    pass
+PACK_KEYS = {"title", "source", "license", "forbid", "native_size", "publish", "import", "downloaded", "sources", "labels", "samples"}
+IMPORT_KEYS = {"url", "into", "path", "note", "names", "fill", "viewBox", "replace", "forbid"}
+SOURCE_KEYS = {"files", "url", "note", "forbid"}
 
 
 @dataclass(frozen=True)
@@ -26,6 +23,7 @@ class SourceEntry:
     files: str  # glob relative to src/
     url: str = ""
     note: str = ""
+    forbid: Restrictions = Restrictions()  # on top of the pack's
 
     def covers(self, path: str) -> bool:
         return fnmatch(path, self.files)
@@ -36,6 +34,7 @@ class PackConfig:
     title: str
     source: str  # markdown, completes "N icons from ..." in the README
     license: str = ""  # markdown: the icons' license or terms
+    forbid: Restrictions = field(default_factory=Restrictions)  # operations the terms rule out
     native_size: bool = False  # show icons at their designed size (from the file name), not 64px
     publish: bool = False  # meant for libraries.excalidraw.com: CI enforces its guidelines
     imports: tuple[ImportEntry, ...] = ()
@@ -54,10 +53,11 @@ class PackConfig:
     @classmethod
     def parse(cls, data: dict[str, Any]) -> "PackConfig":
         _check_keys("pack.yml", data, PACK_KEYS, required={"title", "source"})
-        return cls(
+        config = cls(
             title=data["title"],
             source=data["source"],
             license=data.get("license", ""),
+            forbid=Restrictions.parse(data.get("forbid") or {}),
             native_size=bool(data.get("native_size", False)),
             publish=bool(data.get("publish", False)),
             imports=tuple(_parse_import(entry) for entry in data.get("import") or []),
@@ -66,18 +66,33 @@ class PackConfig:
             labels=dict(data.get("labels") or {}),
             samples=tuple(data.get("samples") or []),
         )
+        config.check_restrictions()
+        return config
+
+    def check_restrictions(self) -> None:
+        """Fail on anything the pack's `forbid:` rules out. Publishing builds a native library,
+        so it needs both `publish` and `native` allowed."""
+        if self.publish:
+            self.forbid.require(Operation.PUBLISH, "publish: true")
+            self.forbid.require(Operation.NATIVE, "publish: true")
+
+        for entry in self.imports:
+            if entry.edits:
+                self.forbid.require(Operation.EDIT, f"import {entry.url}")
+                entry.forbid.require(Operation.EDIT, f"import {entry.url}")
 
 
 def _parse_import(entry: dict[str, Any]) -> ImportEntry:
     _check_keys("import entry", entry, IMPORT_KEYS, required={"url"})
     into, note = entry.get("into", ""), entry.get("note", "")
+    forbid = Restrictions.parse(entry.get("forbid") or {})
 
     # An .svg target is one file; anything else is a folder an archive fills.
     if not into.endswith(".svg"):
         extra = {"names", "fill", "viewBox", "replace"} & entry.keys()
         if extra:
             raise ConfigError(f"{entry['url']}: {', '.join(sorted(extra))} only apply to .svg targets")
-        return ArchiveImport(url=entry["url"], into=into, path=entry.get("path"), note=note)
+        return ArchiveImport(url=entry["url"], into=into, path=entry.get("path"), note=note, forbid=forbid)
 
     if "path" in entry:
         raise ConfigError(f"{entry['url']}: `path` only applies to archives")
@@ -85,10 +100,10 @@ def _parse_import(entry: dict[str, Any]) -> ImportEntry:
     edits = _parse_edits(entry)
     names = entry.get("names")
     if names is None:
-        return FileImport(url=entry["url"], into=into, edits=edits, note=note)
+        return FileImport(url=entry["url"], into=into, edits=edits, note=note, forbid=forbid)
 
     pairs = dict(names) if isinstance(names, dict) else {name: name for name in names}
-    return NamesTemplate(url=entry["url"], into=into, names=pairs, edits=edits, note=note)
+    return NamesTemplate(url=entry["url"], into=into, names=pairs, edits=edits, note=note, forbid=forbid)
 
 
 def _parse_edits(entry: dict[str, Any]) -> tuple[Edit, ...]:
@@ -103,7 +118,12 @@ def _parse_edits(entry: dict[str, Any]) -> tuple[Edit, ...]:
 
 def _parse_source(entry: dict[str, Any]) -> SourceEntry:
     _check_keys("sources entry", entry, SOURCE_KEYS, required={"files"})
-    return SourceEntry(files=entry["files"], url=entry.get("url", ""), note=entry.get("note", ""))
+    return SourceEntry(
+        files=entry["files"],
+        url=entry.get("url", ""),
+        note=entry.get("note", ""),
+        forbid=Restrictions.parse(entry.get("forbid") or {}),
+    )
 
 
 def _check_keys(what: str, data: Any, allowed: set[str], required: set[str]) -> None:

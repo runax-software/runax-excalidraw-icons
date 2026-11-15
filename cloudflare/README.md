@@ -24,7 +24,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
 | `products/*.svg` | https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/icons/{name}.svg | labels from src/content/directory/<name>.yaml; docs-only icons and third-party logos left out; filled #F38020; 112 files |
-| `Cloudflare.svg` |  | moved from the techno pack (originally from techno's svg.zip) |
+| `Cloudflare.svg` |  | moved from the techno pack (originally from techno's svg.zip); forbids `edit`, `native` |
 
 ## Use
 

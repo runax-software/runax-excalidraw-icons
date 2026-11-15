@@ -34,6 +34,12 @@ unless the drawing already contains them. For each pack:
 Library items use the same image IDs as the scene, so they render once the scene's images are
 loaded.
 
+Packs marked `publish: true` also come as `runax-<pack>-native.excalidrawlib`: the icons drawn
+with Excalidraw's own shapes instead of images, so the library works on its own (and can be
+published on libraries.excalidraw.com). The shapes approximate the originals: curves become
+short straight segments and gradients a single color. Only packs whose icon terms allow that
+are published this way (not AWS or Azure).
+
 ## Diagrams from the command line
 
 `runax-icons` puts pack icons into `.excalidraw` files and connects them with arrows that stay
@@ -61,14 +67,16 @@ runax_icons/                    the `runax-icons` package and command line
   packs/                        Pack, PackConfig (pack.yml), import entries, Importer,
                                 Validator, PackBuilder, ReadmeRenderer
   svg/                          SvgDocument, edits (Fill, ViewBox, Replace)
-  excalidraw/                   typed elements, Scene, Library, Diagram, geometry, guidelines
+  excalidraw/                   typed elements, Scene, Library, Diagram, geometry, guidelines,
+                                NativeConverter (icons as native shapes)
   icon.py, sources.py           Icon (naming, fileId); folder, zip and tar readers
   download.py                   Downloader (temporary folder, parallel)
 tests/                          pytest suite
 pyproject.toml, uv.lock         package and dependencies, locked
 <pack>/
   pack.yml                      title, license, imports, hand-made sources, labels, README samples,
-                                native_size (vendor's icon sizes), publish (for libraries.excalidraw.com)
+                                native_size (vendor's icon sizes), publish (for libraries.excalidraw.com:
+                                also builds runax-<pack>-native.excalidrawlib)
   src/                          the SVGs the pack is built from (committed)
   CHANGELOG.md                  the pack's changes
   runax-<pack>.excalidrawlib    generated library (git-ignored)
@@ -119,6 +127,19 @@ a local `svg.zip` (kept in `techno/downloads/`, git-ignored).
 
 Hand-made files (drawn, cropped from a PNG, or with no known url) are listed under
 `sources:` instead, so every file in `src/` has a recorded origin.
+
+What a pack's icons may be put through is declared in `pack.yml` too, from their terms:
+
+```yaml
+forbid:                     # on the pack, or on a single import/sources entry
+  edit: Microsoft's terms forbid cropping, recoloring or reshaping the icons
+  native: redrawing the icons as native shapes changes their shape
+  publish: Microsoft permits the icons only in diagrams, training materials or documentation
+```
+
+`edit` covers `fill`, `viewBox` and `replace` on imports, `native` the native-shape library, and
+`publish` `publish: true`. The build refuses a forbidden edit or `publish: true` with the
+reason, and leaves icons whose entry forbids `native` out of the native library.
 
 Both lists are shown in the pack's README. `build` and `check` report files in `src/` that
 neither covers, `sources:` entries that match nothing, imported files missing from `src/` and

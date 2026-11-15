@@ -7,6 +7,7 @@ from ..icon import Icon
 from ..sources import FolderSource
 from .config import PackConfig, SourceEntry
 from .imports import ImportTarget
+from .restrictions import Restrictions
 
 OUTPUT_PREFIX = "runax-"  # published file names: runax-<pack>.excalidrawlib
 
@@ -33,6 +34,11 @@ class Pack:
     @property
     def library_path(self) -> Path:
         return self.dir / f"{OUTPUT_PREFIX}{self.name}.excalidrawlib"
+
+    @property
+    def native_library_path(self) -> Path:
+        """The library of native shapes built for `publish: true` packs."""
+        return self.dir / f"{OUTPUT_PREFIX}{self.name}-native.excalidrawlib"
 
     @property
     def scene_path(self) -> Path:
@@ -65,6 +71,11 @@ class Pack:
     @cached_property
     def import_targets(self) -> list[ImportTarget]:
         return [target for entry in self.config.imports for target in entry.targets()]
+
+    def restrictions(self, icon: Icon) -> Restrictions:
+        """What the icon may not be put through: the pack's `forbid:` and its entry's."""
+        entry = self.source_of(icon)
+        return self.config.forbid | (entry.forbid if entry else Restrictions())
 
     def source_of(self, icon: Icon) -> ImportTarget | SourceEntry | None:
         """The import or `sources` entry an icon came from. Imports come first; among

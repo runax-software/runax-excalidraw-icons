@@ -53,7 +53,9 @@ Files that can't be imported (drawn by hand, cut out of a raster image, no stabl
 - Keep icons as downloaded apart from declared edits: imports are reproduced byte for byte, and
   `.gitattributes` / `.editorconfig` deliberately leave SVG line endings alone.
 - Logos are trademarks: crop and color only, never redraw a product's logo. Record the license
-  or terms in the pack's `license:`.
+  or terms in the pack's `license:`, and the operations they rule out in `forbid:` (`edit`,
+  `native`, `publish`, each with the reason), on the pack or on the new entry. A `forbid:`
+  error means the change isn't allowed: don't remove the rule to get past it.
 - Labels use the product's own spelling and casing (`PostgreSQL`, `gRPC`, `NGINX`), and
   vendor-prefixed names where a bare name would be ambiguous across packs (`Cloudflare Workers`,
   `Supabase Database`).
@@ -62,5 +64,5 @@ Files that can't be imported (drawn by hand, cut out of a raster image, no stabl
 ## Adding a pack
 
 Create `<pack>/pack.yml` with `title`, `source` (markdown, completes "N icons from ..."),
-`license`, `import:` and/or `sources:`, `labels:` and `samples:`; add a `CHANGELOG.md`; run
+`license`, `forbid`, `import:` and/or `sources:`, `labels:` and `samples:`; add a `CHANGELOG.md`; run
 `uv run runax-icons import <pack>`; add the pack to the table in the root `README.md`.

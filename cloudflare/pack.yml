@@ -1,4 +1,5 @@
 title: Cloudflare
+publish: true  # also built as native shapes for libraries.excalidraw.com (the icons are CC BY 4.0)
 source: "the Cloudflare logo and product icons from [cloudflare/cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons)"
 license: "The product icons are from [cloudflare-docs](https://github.com/cloudflare/cloudflare-docs) (CC-BY-4.0, © Cloudflare, Inc.), recolored in Cloudflare orange. Cloudflare and its product names are trademarks of Cloudflare, Inc."
 
@@ -16,6 +17,9 @@ import:
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:
   - files: "Cloudflare.svg"
+    forbid:
+      edit: "the Cloudflare logo is a trademark, used as published"
+      native: "the Cloudflare logo is a trademark: no redrawing"
     note: "moved from the techno pack (originally from techno's svg.zip)"
 
 # File name -> label: product names from cloudflare-docs src/content/directory/*.yaml.

@@ -2,6 +2,7 @@ from urllib.parse import quote
 
 from ..icon import Icon
 from .pack import Pack
+from .restrictions import Restrictions
 
 README_COLUMNS = 6
 README_SAMPLES = 24
@@ -72,17 +73,25 @@ drawing contains them. See the [main README](../README.md).
     def _license(self) -> str:
         if not self.config.license:
             return ""
+
+        forbidden = "".join(
+            f"- `{operation}`: {reason}\n" for operation, reason in self.config.forbid.forbidden.items()
+        )
+        restrictions = f"\nThis pack forbids, and the build refuses:\n\n{forbidden}" if forbidden else ""
         return f"""
 ## License
 
 {self.config.license.strip()}
-"""
+{restrictions}"""
 
     def _sources(self) -> str:
         rows = [
             f"| `{entry.files}` | {entry.url} | {'; '.join(entry.notes())} |"
             for entry in self.config.imports
-        ] + [f"| `{s.files}` | {s.url} | {s.note} |" for s in self.config.sources]
+        ] + [
+            f"| `{s.files}` | {s.url} | {'; '.join(filter(None, [s.note, _forbids(s.forbid)]))} |"
+            for s in self.config.sources
+        ]
         if not rows:
             return ""
 
@@ -107,3 +116,7 @@ def _preview_size(icon: Icon) -> str:
     width = round(PREVIEW_SIZE * min(1, icon.aspect))
     height = round(PREVIEW_SIZE * min(1, 1 / icon.aspect))
     return f'width="{width}" height="{height}"'
+
+
+def _forbids(forbid: Restrictions) -> str:
+    return "forbids " + ", ".join(f"`{op}`" for op in forbid.forbidden) if forbid else ""

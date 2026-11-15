@@ -40,8 +40,9 @@ The package `runax_icons/` is object-oriented, one responsibility per class:
 - `svg/`: `SvgDocument` (immutable; root tag, size, aspect, white-only, PNG wrapping) and the
   `Edit`s `Fill`, `ViewBox`, `Replace`.
 - `excalidraw/`: typed elements built by `ElementFactory`, `Scene`, `Library`, `Diagram`
-  (add icons, connect them), `Box` / `Point` geometry, and `guidelines.py` (one `Rule` class per
-  libraries.excalidraw.com guideline).
+  (add icons, connect them), `Box` / `Point` geometry, `guidelines.py` (one `Rule` class per
+  libraries.excalidraw.com guideline) and `NativeConverter` (SVG to native line elements, holes
+  joined into their outline, for `publish: true` packs).
 - `icon.py` (`Icon`: naming from the path, fileId from the content), `sources.py` (folder,
   zip, tar readers), `download.py` (`Downloader`).
 - `<pack>/pack.yml`: `title`, `source`, `license`, `native_size`, `publish`, `import:` (downloaded files and archives),
@@ -64,10 +65,12 @@ Use the `icon-packs` skill (`.claude/skills/icon-packs/SKILL.md`, source in
   normalization in `.gitattributes` and `.editorconfig` on purpose.
 - Logos are trademarks: only crop or color them through declared edits, never redraw them, and
   never for vendors whose terms forbid it (Azure, AWS: no cropping, recoloring or reshaping).
-  Record each pack's terms in `license:`, quoting the vendor where it publishes terms.
+  Record each pack's terms in `license:`, quoting the vendor where it publishes terms, and turn
+  them into `forbid:` rules (`edit`, `native`, `publish`) on the pack or on single entries, with
+  the reason. Never remove a `forbid:` rule to make a change pass.
 - Python 3.11+: classes with one job each, type hints everywhere (`X | None`, never
   `Optional`), docstrings saying why, constants at module top. Dependencies: PyYAML, Typer,
-  brotli; keep it that way unless there's a strong reason.
+  brotli, svgelements; keep it that way unless there's a strong reason.
 - New behavior gets a test in `tests/`.
 - Release notes go in the pack's `CHANGELOG.md` (icons) or the root `CHANGELOG.md` (build and
   repository), under `## [Unreleased]`, in Keep a Changelog format.

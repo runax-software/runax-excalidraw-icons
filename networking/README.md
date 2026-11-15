@@ -17,6 +17,11 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 The CNCF project logos are from [cncf/artwork](https://github.com/cncf/artwork), used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage); other logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0), [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0) or the projects themselves. Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied. "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
 
+This pack forbids, and the build refuses:
+
+- `native`: redrawing changes the logos' shape; the logos are their owners' trademarks
+- `publish`: the logos are their owners' trademarks; we don't republish them as a library of their own
+
 ## Sources
 
 Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported files are refreshed by
@@ -32,7 +37,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | `other/haproxy.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/haproxy.svg | HAProxy brand color; filled #169BD6 |
 | `other/caddy.svg` | https://caddyserver.com/resources/images/favicon.png | Caddy's own symbol (its site icon) |
 | `other/calico.svg` | https://docs.tigera.io/img/calico-logo-2026-badge.png | Calico's badge, from its docs |
-| `other/wireguard.svg` | https://www.wireguard.com/img/wireguard.svg | official logo, unmodified: WireGuard's trademark policy forbids removing elements |
+| `other/wireguard.svg` | https://www.wireguard.com/img/wireguard.svg | official logo, unmodified: WireGuard's trademark policy forbids removing elements; forbids `edit` |
 | `other/netbird.svg` | https://raw.githubusercontent.com/netbirdio/netbird/main/client/ui/frontend/src/assets/logos/netbird.svg |  |
 | `other/rest.svg` |  | drawn for this pack; REST has no logo |
 | `other/*` |  | moved from the techno pack (originally from techno's svg.zip) (GraphQL, OpenAPI, Swagger, Socket.IO) |

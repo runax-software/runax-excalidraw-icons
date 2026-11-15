@@ -10,6 +10,7 @@ from pathlib import Path
 from ..icon import Icon
 from ..sources import IconSource
 from ..svg import Edit, EditError, SvgDocument, SvgError
+from .restrictions import Restrictions
 
 
 class UpstreamError(Exception):
@@ -21,6 +22,8 @@ class ImportEntry(ABC):
 
     url: str
     note: str
+    edits: tuple[Edit, ...] = ()  # declared edits; only single-file imports have any
+    forbid: Restrictions = Restrictions()  # on top of the pack's
 
     @abstractmethod
     def targets(self) -> list["ImportTarget"]:
@@ -33,7 +36,10 @@ class ImportEntry(ABC):
 
     def notes(self) -> list[str]:
         """What a reader of the README should know about it."""
-        return [self.note] if self.note else []
+        notes = [self.note] if self.note else []
+        if self.forbid:
+            notes.append("forbids " + ", ".join(f"`{op}`" for op in self.forbid.forbidden))
+        return notes
 
 
 class ImportTarget(ImportEntry):
@@ -60,6 +66,7 @@ class ArchiveImport(ImportTarget):
     into: str = ""
     path: str | None = None
     note: str = ""
+    forbid: Restrictions = Restrictions()
 
     @property
     def files(self) -> str:
@@ -112,6 +119,7 @@ class FileImport(ImportTarget):
     into: str
     edits: tuple[Edit, ...] = ()
     note: str = ""
+    forbid: Restrictions = Restrictions()
 
     @property
     def files(self) -> str:
@@ -148,6 +156,7 @@ class NamesTemplate(ImportEntry):
     names: dict[str, str]
     edits: tuple[Edit, ...] = ()
     note: str = ""
+    forbid: Restrictions = Restrictions()
 
     @property
     def files(self) -> str:
@@ -164,6 +173,7 @@ class NamesTemplate(ImportEntry):
                 into=self.into.format(name=name, src=src),
                 edits=self.edits,
                 note=self.note,
+                forbid=self.forbid,
             )
             for name, src in self.names.items()
         ]

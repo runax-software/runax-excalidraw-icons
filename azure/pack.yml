@@ -20,6 +20,11 @@ license: |
 
   Running `runax-icons import azure` downloads the icons from Microsoft, which means agreeing to
   these terms. Azure and the Azure product names are trademarks of Microsoft.
+# Operations the icons' terms rule out; the build refuses them.
+forbid:
+  edit: Microsoft's terms forbid cropping, recoloring or reshaping the icons
+  native: redrawing the icons as native shapes changes their shape, which Microsoft's terms forbid
+  publish: Microsoft permits the icons only in architectural diagrams, training materials or documentation
 # `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.
 import:
