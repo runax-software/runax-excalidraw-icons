@@ -67,16 +67,20 @@ class Library:
         self.files: dict[str, dict] = {}
 
     def add_icon(self, icon: Icon, label: str, box: int = ICON_SIZE) -> None:
+        """An image item; its SVG goes in `files` (see the class docstring)."""
+        self.add_item(label, self.factory.icon(icon, label, box=box))
+        self.files[icon.file_id] = self.factory.file(icon)
+
+    def add_item(self, name: str, elements: list[Element]) -> None:
         self.items.append(
             {
                 "id": self.factory.new_id(),
                 "status": "unpublished",
-                "elements": [e.to_dict() for e in self.factory.icon(icon, label, box=box)],
+                "elements": [e.to_dict() for e in elements],
                 "created": self.factory.now,
-                "name": label,
+                "name": name,
             }
         )
-        self.files[icon.file_id] = self.factory.file(icon)
 
     def save(self, path: Path) -> None:
         data = {

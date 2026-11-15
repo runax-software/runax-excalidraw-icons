@@ -33,7 +33,8 @@ class Element:
     updated: int
     group_ids: list[str] = field(default_factory=list)
     stroke_color: str = "transparent"
-    stroke_width: int = 1
+    background_color: str = "transparent"
+    stroke_width: float = 1
     stroke_style: str = "solid"
     roundness: dict | None = None
     bound_elements: list[dict] | None = None
@@ -48,7 +49,7 @@ class Element:
             "height": self.height,
             "angle": 0,
             "strokeColor": self.stroke_color,
-            "backgroundColor": "transparent",
+            "backgroundColor": self.background_color,
             "fillStyle": "solid",
             "strokeWidth": self.stroke_width,
             "strokeStyle": self.stroke_style,
@@ -115,6 +116,25 @@ class ArrowElement(Element):
             "startArrowhead": None,
             "endArrowhead": "arrow",
             "elbowed": False,
+        }
+
+
+@dataclass
+class LineElement(Element):
+    """A polyline; closed (`polygon`) it's a shape filled with its background color."""
+
+    points: list[list[float]] = field(default_factory=list)
+    polygon: bool = False
+
+    def _fields(self) -> dict[str, Any]:
+        return {
+            "points": self.points,
+            "lastCommittedPoint": None,
+            "startBinding": None,
+            "endBinding": None,
+            "startArrowhead": None,
+            "endArrowhead": None,
+            "polygon": self.polygon,
         }
 
 
@@ -196,6 +216,33 @@ class ElementFactory:
             roundness={"type": 2},
             **style,
             **self._base(start.x, start.y, abs(end.x - start.x), abs(end.y - start.y), None),
+        )
+
+    def line(
+        self,
+        points: list[Point],
+        group_id: str,
+        closed: bool,
+        fill: str | None,
+        stroke: str | None,
+        stroke_width: float,
+    ) -> LineElement:
+        """A shape traced through `points` (absolute): filled with `fill` when `closed`,
+        outlined with `stroke`."""
+        points = [Point(round(p.x, 2), round(p.y, 2)) for p in points]  # sub-pixel is noise
+        if closed and points[0] != points[-1]:
+            points = [*points, points[0]]
+
+        start = points[0]
+        xs, ys = [p.x for p in points], [p.y for p in points]
+        return LineElement(
+            type="line",
+            points=[[round(p.x - start.x, 2), round(p.y - start.y, 2)] for p in points],
+            polygon=closed,
+            stroke_color=stroke or "transparent",
+            background_color=fill if closed and fill else "transparent",
+            stroke_width=stroke_width,
+            **self._base(start.x, start.y, max(xs) - min(xs), max(ys) - min(ys), group_id),
         )
 
     def file(self, icon: Icon) -> dict[str, Any]:

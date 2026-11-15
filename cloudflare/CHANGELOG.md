@@ -10,4 +10,6 @@ All packs in the repository are released together.
 
 ### Added
 
+- `runax-cloudflare-native.excalidrawlib`: the icons as native Excalidraw shapes, a library that
+  works on its own and follows the libraries.excalidraw.com guidelines.
 - The Cloudflare logo and 112 product icons from the Cloudflare docs, in Cloudflare orange and named after Cloudflare's product list ("Cloudflare Workers", "Cloudflare R2", ...).
