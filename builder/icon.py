@@ -28,6 +28,9 @@ GROUP_FILL_RE = re.compile(
 SVG_TAG_RE = re.compile(r"<svg\b[^>]*>", re.IGNORECASE)
 VIEWBOX_RE = re.compile(r'\bviewBox\s*=\s*"([^"]+)"', re.IGNORECASE)
 DIMENSION_RE = r'\b{}\s*=\s*"\s*([\d.]+)(?:px)?\s*"'
+ABSOLUTE_SIZE_RE = r'\s{}\s*=\s*"\s*[\d.]+\s*(?:px|pt|mm|cm|in)?\s*"'
+SIZE_ATTR_RE = re.compile(r'\s(?:width|height)\s*=\s*"[^"]*"')
+RENDER_SIZE = 256  # longer side given to SVGs that only have a viewBox
 WHITE = {"#fff", "#ffffff", "white"}
 NO_PAINT = {"none", "transparent", "currentcolor", "inherit"}
 
@@ -95,8 +98,31 @@ class Icon:
         return 1
 
     @cached_property
+    def rendered_svg(self):
+        """The SVG with an absolute width and height on its root.
+
+        Browsers load an SVG without one (only a viewBox, or 1em / 100%) at a default
+        300x150, which Excalidraw then stretches to the element, distorting non-square icons.
+        """
+        text = self.svg.decode("utf-8", errors="ignore")
+        tag = SVG_TAG_RE.search(text)
+        if not tag or all(
+            re.search(ABSOLUTE_SIZE_RE.format(attr), tag.group())
+            for attr in ("width", "height")
+        ):
+            return self.svg
+
+        width = round(RENDER_SIZE * min(1, self.aspect), 2)
+        height = round(RENDER_SIZE * min(1, 1 / self.aspect), 2)
+        sized = SIZE_ATTR_RE.sub("", tag.group())
+        sized = re.sub(
+            r"<svg\b", f'<svg width="{width}" height="{height}"', sized, count=1
+        )
+        return text.replace(tag.group(), sized, 1).encode("utf-8")
+
+    @cached_property
     def base64(self):
-        return base64.b64encode(self.svg).decode("ascii")
+        return base64.b64encode(self.rendered_svg).decode("ascii")
 
     @property
     def file_id(self):

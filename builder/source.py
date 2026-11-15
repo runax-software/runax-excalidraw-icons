@@ -38,4 +38,5 @@ class ZipSource(IconSource):
                     or path.suffix.lower() != ".svg"
                 ):
                     continue
+
                 yield Icon(path, archive.read(info))
