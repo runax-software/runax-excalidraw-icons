@@ -22,9 +22,9 @@ jobs:
       python: ${{ steps.filter.outputs.python }}
       packs: ${{ steps.packs.outputs.packs }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-        with:
-          persist-credentials: false  # nothing here pushes with git
+      # Keeps the (read-only) token: on a push, paths-filter fetches the previous commit to compare
+      # against, which a private repository only allows authenticated. Nothing here pushes.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1  # zizmor: ignore[artipacked]
 
       - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d  # v4.0.3
         id: filter
