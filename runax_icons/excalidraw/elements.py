@@ -149,7 +149,7 @@ class ElementFactory:
         return uuid.uuid4().hex[:20]
 
     @staticmethod
-    def _seed() -> int:
+    def seed() -> int:
         return uuid.uuid4().int & 0x7FFFFFFF
 
     def _base(self, x: float, y: float, width: float, height: float, group_id: str | None) -> dict:
@@ -159,8 +159,8 @@ class ElementFactory:
             "y": y,
             "width": width,
             "height": height,
-            "seed": self._seed(),
-            "version_nonce": self._seed(),
+            "seed": self.seed(),
+            "version_nonce": self.seed(),
             "updated": self.now,
             "group_ids": [group_id] if group_id else [],
         }
@@ -205,14 +205,15 @@ class ElementFactory:
         )
 
     def arrow(
-        self, start: Point, end: Point, start_id: str, end_id: str, gap: float, **style: Any
+        self, start: Point, end: Point, start_id: str | None, end_id: str | None, gap: float, **style: Any
     ) -> ArrowElement:
-        """A straight arrow from `start` to `end`, bound to the elements at both ends."""
+        """A straight arrow from `start` to `end`, bound to the elements at both ends (an end
+        without an id stays free)."""
         return ArrowElement(
             type="arrow",
             points=[[0, 0], [end.x - start.x, end.y - start.y]],
-            start_binding={"elementId": start_id, "focus": 0, "gap": gap},
-            end_binding={"elementId": end_id, "focus": 0, "gap": gap},
+            start_binding={"elementId": start_id, "focus": 0, "gap": gap} if start_id else None,
+            end_binding={"elementId": end_id, "focus": 0, "gap": gap} if end_id else None,
             roundness={"type": 2},
             **style,
             **self._base(start.x, start.y, abs(end.x - start.x), abs(end.y - start.y), None),

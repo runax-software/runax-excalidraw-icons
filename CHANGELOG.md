@@ -31,6 +31,12 @@ All packs in the repository are released together.
 - `forbid:` in `pack.yml`, on a pack or a single entry, rules out operations its icons' terms
   don't allow (`edit`, `native`, `publish`), with the reason; the build refuses them, and every
   pack declares its rules.
+- `search` and `add` work from `.excalidrawlib` files too (`--library`, or `RUNAX_ICONS_LIBRARY`):
+  items are placed with fresh ids and their images, from ours or any other library, so diagrams
+  can be built from libraries that aren't published anywhere, by people or agents.
+- `export` writes a static site for agents: every library, `index.json` (packs, libraries, icon
+  names and terms) and `llms.txt`, which explains how to put icons into an `.excalidraw` file
+  with no tooling.
 - `pack.yml` is validated on load: unknown keys and misplaced options are errors.
 - `native_size: true` draws a pack's icons at their designed size (AWS: 64px services, 48px
   resources, 32px groups), as AWS's guidelines ask.

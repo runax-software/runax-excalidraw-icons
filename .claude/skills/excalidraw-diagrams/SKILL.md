@@ -1,54 +1,69 @@
 ---
 name: excalidraw-diagrams
-description: Draw architecture diagrams in Excalidraw with the runax icon packs (AWS, Azure, Kubernetes, Cloudflare, networking, data, observability, AI, Supabase, technology logos). Use when asked to draw, sketch or diagram a system, an architecture, a data flow or infrastructure as an .excalidraw file.
+description: Draw architecture diagrams as .excalidraw files using Excalidraw icon libraries (.excalidrawlib), such as the runax packs (AWS, Azure, Kubernetes, Cloudflare, networking, data, observability, AI, Supabase, technology logos). Use when asked to draw, sketch or diagram a system, an architecture, a data flow or infrastructure.
 ---
 
-# Excalidraw diagrams with the runax icon packs
+# Excalidraw diagrams from icon libraries
 
-`runax-icons` puts real product icons into `.excalidraw` files and connects them with arrows
-that stay attached when the diagram is edited. Run it from the repo root with `uv run`.
+`runax-icons` reads `.excalidrawlib` files, including the images that Excalidraw's own library
+panel can't keep, and places their items into `.excalidraw` files, connected by arrows that stay
+attached when the diagram is edited. The diagram embeds every image, so it opens anywhere.
+
+## Setup
+
+Which libraries to use comes from `RUNAX_ICONS_LIBRARY` (paths separated by `:`), or from
+`--library <file>` on each command. If neither is set, ask the user where their libraries are.
+
+Run the tool with `runax-icons` if it's installed, otherwise straight from GitHub:
+
+```sh
+uvx --from git+https://github.com/runax-software/runax-excalidraw-icons runax-icons --help
+```
+
+(Inside the runax-excalidraw-icons repository, `uv run runax-icons` also works without libraries:
+it reads the packs directly.)
 
 ## Steps
 
-1. **Plan the boxes and flows first**: list the components (one icon each) and the arrows
-   between them, with a short label per arrow ("HTTPS", "SQL", "events").
-2. **Find each icon's label**:
+1. **Plan first**: list the components (one icon each) and the arrows between them, each with a
+   short label ("HTTPS", "SQL", "events").
+2. **Find each icon's exact label**:
 
    ```sh
-   uv run runax-icons search postgres            # pack, label, file
-   uv run runax-icons search lambda --pack aws
+   runax-icons search postgres
+   runax-icons search lambda
    ```
 
-   Use the exact label from the output. Prefer the specific product (`Amazon RDS`) over a
-   generic one; for a concept with no product icon, use the closest signal icon
-   (`Logs`, `Metrics`, `Traces`, `Alerts`, `Dashboards` in observability) or `REST API`.
-3. **Place the icons on a grid**, left to right in the order data flows, about 200px apart
-   horizontally and 220px vertically (icons are 64px with a caption below):
+   Prefer the specific product (`Amazon RDS`) over a generic one. For a concept with no product
+   icon, use the closest one (a signal icon like `Logs` or `Metrics`, or `REST API`).
+3. **Place the icons on a grid**, left to right in the order data flows, about 220px apart
+   horizontally and 220px vertically:
 
    ```sh
-   uv run runax-icons add diagram.excalidraw "Cloudflare Workers" --at 0 0
-   uv run runax-icons add diagram.excalidraw "PostgreSQL" --at 220 0
-   uv run runax-icons add diagram.excalidraw "Redis" --at 220 220
-   uv run runax-icons add diagram.excalidraw "AWS Lambda" --at 0 0 --label "Order API"
+   runax-icons add docs/architecture.excalidraw "Cloudflare Workers" --at 0 0
+   runax-icons add docs/architecture.excalidraw "AWS Lambda" --at 220 0 --label "Order API"
+   runax-icons add docs/architecture.excalidraw "PostgreSQL" --at 440 0
    ```
 
-   `--label` renames the caption (the component's role) while keeping the product's icon.
-   Without `--at`, an icon goes right of everything already drawn.
+   `--label` renames the caption to the component's role while keeping the product's icon.
+   Without `--at`, an icon goes right of everything already drawn. The file is created if needed.
 4. **Connect them by caption**:
 
    ```sh
-   uv run runax-icons connect diagram.excalidraw "Cloudflare Workers" PostgreSQL --label SQL
-   uv run runax-icons connect diagram.excalidraw "Cloudflare Workers" Redis --label cache --dashed
+   runax-icons connect docs/architecture.excalidraw "Cloudflare Workers" "Order API" --label HTTPS
+   runax-icons connect docs/architecture.excalidraw "Order API" PostgreSQL --label SQL --dashed
    ```
 
-   Use `--dashed` for asynchronous or optional flows, `--color` to tell flows apart.
-5. **Check the result** before calling it done: open the file in Excalidraw, or render it, and
-   fix overlapping icons or arrows crossing captions by moving icons on the grid.
+   `--dashed` for asynchronous or optional flows, `--color` to tell flows apart.
+5. **Check the result** before calling it done: render or open the file and fix overlapping
+   icons or arrows crossing captions by moving icons on the grid.
 
 ## Notes
 
-- Captions are what `connect` matches (case-insensitive), so give every icon a unique caption.
-- The icons' images are embedded in the diagram, so it opens anywhere without the libraries.
+- `connect` matches captions (case-insensitive), so every icon needs a unique caption.
+- Arrows bind to an icon's image or main shape and follow it when moved; icons drawn only with
+  lines (native-shape libraries) get arrows that aren't bound.
+- Vendor terms travel with some icons (AWS, Azure: use as published, keep the service name as
+  the caption, don't resize out of proportion): use them for diagrams and documentation only.
 - For freeform sketches without product icons (boxes, flows, mind maps), the Excalidraw MCP
-  server (`excalidraw` in `.mcp.json`) draws directly; add product icons afterwards with
-  `runax-icons add`.
+  server draws directly; add product icons afterwards with `runax-icons add`.

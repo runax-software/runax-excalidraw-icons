@@ -1,6 +1,8 @@
 # Generated: rebuild with `uv run runax-icons build` (released from CI on `v*` tags)
 runax-*.excalidrawlib
 runax-*.excalidraw
+# Exported site: `uv run runax-icons export site/`
+site/
 
 __pycache__/
 .DS_Store

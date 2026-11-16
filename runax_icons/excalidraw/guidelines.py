@@ -4,12 +4,11 @@ https://github.com/excalidraw/excalidraw-libraries#guidelines. Rules that need j
 useful to others? is it copied from another library?) are listed, not checked.
 """
 
-import json
 import unicodedata
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Any
+
+from .library_file import LibraryFile
 
 BASIC_SHAPES = {"rectangle", "ellipse", "diamond", "arrow", "line"}
 MIN_ITEMS = 3
@@ -29,19 +28,6 @@ class Finding:
         return f"{self.rule}: {self.message}"
 
 
-class LibraryFile:
-    """An .excalidrawlib's items, read for checking."""
-
-    def __init__(self, path: Path):
-        self.path = path
-        data = json.loads(path.read_text(encoding="utf-8"))
-        self.items: list[dict[str, Any]] = data.get("libraryItems", [])
-
-    @staticmethod
-    def elements(item: dict[str, Any]) -> list[dict[str, Any]]:
-        return [e for e in item.get("elements", []) if not e.get("isDeleted")]
-
-
 class Rule(ABC):
     name: str
 
@@ -58,11 +44,11 @@ class NotTrivial(Rule):
 
     def check(self, library: LibraryFile) -> list[str]:
         return [
-            f"{item.get('name') or 'unnamed item'}: only a basic shape"
+            f"{item.name or 'unnamed item'}: only a basic shape"
             for item in library.items
-            if (elements := library.elements(item))
-            and len(elements) <= 2
-            and all(e["type"] in BASIC_SHAPES for e in elements)
+            if item.elements
+            and len(item.elements) <= 2
+            and all(e["type"] in BASIC_SHAPES for e in item.elements)
         ]
 
 
@@ -70,14 +56,14 @@ class EnglishOnly(Rule):
     name = "4. English only"
 
     def check(self, library: LibraryFile) -> list[str]:
-        texts = [(item.get("name", ""), item) for item in library.items] + [
+        texts = [(item.name, item) for item in library.items] + [
             (e.get("originalText", e.get("text", "")), item)
             for item in library.items
-            for e in library.elements(item)
+            for e in item.elements
             if e["type"] == "text"
         ]
         return [
-            f"{item.get('name') or 'unnamed item'}: non-Latin text {text!r}"
+            f"{item.name or 'unnamed item'}: non-Latin text {text!r}"
             for text, item in texts
             if not _latin(text)
         ]
@@ -89,10 +75,9 @@ class StandsAlone(Rule):
     def check(self, library: LibraryFile) -> list[str]:
         problems = []
         for item in library.items:
-            name = item.get("name") or "unnamed item"
-            if not library.elements(item):
-                problems.append(f"{name}: empty")
-            elif not item.get("name"):
+            if not item.elements:
+                problems.append(f"{item.name or 'unnamed item'}: empty")
+            elif not item.name:
                 problems.append("an item has no name")
         return problems
 
@@ -111,9 +96,9 @@ class Grouped(Rule):
     def check(self, library: LibraryFile) -> list[str]:
         problems = []
         for item in library.items:
-            elements = library.elements(item)
+            elements = item.elements
             if len(elements) > 1 and not set.intersection(*(set(e.get("groupIds", [])) for e in elements)):
-                problems.append(f"{item.get('name') or 'unnamed item'}: elements not grouped")
+                problems.append(f"{item.name or 'unnamed item'}: elements not grouped")
         return problems
 
 
@@ -125,9 +110,9 @@ class NoImages(Rule):
 
     def check(self, library: LibraryFile) -> list[str]:
         with_images = [
-            item.get("name") or "unnamed item"
+            item.name or "unnamed item"
             for item in library.items
-            if any(e["type"] == "image" for e in library.elements(item))
+            if any(e["type"] == "image" for e in item.elements)
         ]
         if not with_images:
             return []

@@ -40,21 +40,35 @@ published on libraries.excalidraw.com). The shapes approximate the originals: cu
 short straight segments and gradients a single color. Only packs whose icon terms allow that
 are published this way (not AWS or Azure).
 
-## Diagrams from the command line
+## For agents: the published site
 
-`runax-icons` puts pack icons into `.excalidraw` files and connects them with arrows that stay
-attached when you move things around in Excalidraw:
+`uv run runax-icons export site/` writes a static site of every library, an `index.json` of
+every pack, library and icon name, and an `llms.txt` explaining to an AI agent how to put
+icons into an `.excalidraw` file. Hosted (on GitHub Pages, say), an agent in any repository
+needs nothing else: point it at the site's `llms.txt`, for example in that repository's
+`AGENTS.md`, and it fetches the libraries it needs and writes the diagram itself.
+
+## Diagrams from your libraries
+
+Excalidraw's library panel can't keep images, but the `.excalidrawlib` files do: `runax-icons`
+reads them, images included, and places their items into `.excalidraw` files, connected by arrows
+that stay attached when you move things. Agents use it the same way (see the
+`excalidraw-diagrams` skill). Point it at your libraries, published or not, ours or any other:
 
 ```sh
-uv run runax-icons search postgres                                  # find an icon's label
-uv run runax-icons add diagram.excalidraw "Cloudflare Workers" --at 0 0
-uv run runax-icons add diagram.excalidraw "PostgreSQL" --at 220 0
-uv run runax-icons connect diagram.excalidraw "Cloudflare Workers" PostgreSQL --label SQL
+export RUNAX_ICONS_LIBRARY=~/libraries/runax-aws.excalidrawlib:~/libraries/runax-data.excalidrawlib
+alias runax-icons="uvx --from git+https://github.com/runax-software/runax-excalidraw-icons runax-icons"
+
+runax-icons search postgres                                         # find an icon's label
+runax-icons add docs/arch.excalidraw "AWS Lambda" --at 0 0 --label "Order API"
+runax-icons add docs/arch.excalidraw "PostgreSQL" --at 220 0
+runax-icons connect docs/arch.excalidraw "Order API" PostgreSQL --label SQL
 ```
 
-`add` creates the diagram if needed and embeds the icon's image, so the file opens anywhere
-without the libraries. `--label` renames the caption; `connect` matches icons by caption and
-takes `--dashed` and `--color`.
+`add` creates the diagram if needed and embeds each image, so the file opens anywhere.
+`--label` renames the caption; `connect` matches icons by caption and takes `--dashed` and
+`--color`. `--library <file>` picks libraries per command instead of the environment variable.
+Inside this repository, the commands also work without libraries, straight from the packs.
 
 ## Building
 
@@ -63,12 +77,13 @@ takes `--dashed` and `--color`.
 ```
 runax_icons/                    the `runax-icons` package and command line
   cli.py                        commands (Typer)
-  workspace.py                  Workspace (the packs in a folder), IconCatalog (search, resolve)
+  workspace.py                  Workspace (the packs in a folder), catalogs of pack icons and
+                                library items (search, resolve)
   packs/                        Pack, PackConfig (pack.yml), import entries, Importer,
                                 Validator, PackBuilder, ReadmeRenderer
   svg/                          SvgDocument, edits (Fill, ViewBox, Replace)
-  excalidraw/                   typed elements, Scene, Library, Diagram, geometry, guidelines,
-                                NativeConverter (icons as native shapes)
+  excalidraw/                   typed elements, Scene, Library, LibraryFile (reading libraries),
+                                Diagram, geometry, guidelines, NativeConverter (icons as native shapes)
   icon.py, sources.py           Icon (naming, fileId); folder, zip and tar readers
   download.py                   Downloader (temporary folder, parallel)
 tests/                          pytest suite
@@ -91,6 +106,7 @@ uv run runax-icons build             # build every pack from its src/ (no networ
 uv run runax-icons build k8s data    # build only these packs
 uv run runax-icons import            # first refresh src/ from each pack's `import:` urls
 uv run runax-icons check             # report pack problems; exit 1 if there are any
+uv run runax-icons export site/      # build, then write the site: libraries, index.json, llms.txt
 uv run runax-icons guidelines k8s    # check a built library against the libraries.excalidraw.com rules
 uv run pytest && uv run pyright      # tests and type checks
 ```

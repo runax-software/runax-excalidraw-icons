@@ -1,6 +1,7 @@
 """The `runax-icons` command line. Commands only parse arguments and print: the work is done
 by Workspace, Importer, PackBuilder, Validator, IconCatalog and Diagram."""
 
+import os
 import time
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -13,7 +14,8 @@ from .download import DownloadError
 from .excalidraw import Diagram, DiagramError, ElementFactory, Point
 from .excalidraw.guidelines import MANUAL_RULES, Guidelines, LibraryFile
 from .packs import ConfigError, Importer, PackBuilder, UpstreamError, Validator
-from .workspace import AmbiguousIcon, Workspace, WorkspaceError
+from .site import SiteExporter
+from .workspace import AmbiguousIcon, Catalog, IconMatch, LibraryCatalog, Workspace, WorkspaceError
 
 app = typer.Typer(
     help="Miro-style Excalidraw icon libraries: build packs and add their icons to diagrams.",
@@ -24,7 +26,20 @@ app = typer.Typer(
 PackNames = Annotated[
     list[str] | None, typer.Argument(help="Packs to use (default: all).", show_default=False)
 ]
+LIBRARY_ENV = "RUNAX_ICONS_LIBRARY"
+
 PackOption = Annotated[str | None, typer.Option("--pack", "-p", help="Only look in this pack.")]
+LibraryOption = Annotated[
+    list[Path] | None,
+    typer.Option(
+        "--library",
+        "-l",
+        help=f"Use these .excalidrawlib files instead of the packs (repeatable). Default: "
+        f"${LIBRARY_ENV}, paths separated by '{os.pathsep}' like PATH.",
+        exists=True,
+        dir_okay=False,
+    ),
+]
 
 
 @app.callback()
@@ -49,6 +64,20 @@ def import_(ctx: typer.Context, packs: PackNames = None) -> None:
         for pack in ctx.obj.packs(packs):
             Importer(pack, log=typer.echo).run()
         _build(ctx.obj, packs)
+
+
+@app.command()
+def export(
+    ctx: typer.Context,
+    out: Annotated[Path, typer.Argument(help="Folder to write the site to (replaced).")] = Path("site"),
+    base_url: Annotated[str, typer.Option(help="Absolute URL the site is served from, for llms.txt links.")] = "",
+) -> None:
+    """Build every pack, then write a static site for agents and people: the libraries,
+    index.json and llms.txt."""
+    with _errors():
+        _build(ctx.obj, None)
+        count = SiteExporter(ctx.obj.packs(), out, base_url).export()
+    typer.echo(f"exported {count} files to {out}")
 
 
 @app.command()
@@ -102,13 +131,15 @@ def search(
     ctx: typer.Context,
     text: Annotated[str, typer.Argument(help="Part of a label or file name; empty lists every icon.")] = "",
     pack: PackOption = None,
+    library: LibraryOption = None,
 ) -> None:
-    """Find icons by label or file name across packs."""
+    """Find icons by label or file name across packs, or across library files."""
     with _errors():
-        matches = ctx.obj.catalog(pack).search(text)
+        matches = _catalog(ctx.obj, pack, library).search(text)
 
     for m in matches:
-        typer.echo(f"{m.pack.name:<14} {m.label:<40} {m.pack.name}/src/{m.icon.path.as_posix()}")
+        where = f"{m.pack.name}/src/{m.icon.path.as_posix()}" if isinstance(m, IconMatch) else m.source
+        typer.echo(f"{m.source:<14} {m.label:<40} {where}")
     if not matches:
         typer.echo(f"no icons match {text!r}", err=True)
         raise typer.Exit(1)
@@ -125,17 +156,21 @@ def add(
     ] = None,
     label: Annotated[str | None, typer.Option(help="Caption (default: the icon's label).")] = None,
     pack: PackOption = None,
+    library: LibraryOption = None,
 ) -> None:
-    """Add an icon with its label to a diagram, embedding its image."""
+    """Add an icon with its label to a diagram, embedding its image: from the packs, or from
+    library files (any .excalidrawlib; ours carry their images)."""
     with _errors():
-        match = ctx.obj.catalog(pack).resolve(icon)
+        match = _catalog(ctx.obj, pack, library).resolve(icon)
         scene = Diagram(diagram, ElementFactory(_now()))
-        placed = scene.add_icon(
-            match.icon, label or match.label, Point(*at) if at else None, match.pack.box(match.icon)
-        )
+        at_point = Point(*at) if at else None
+        if isinstance(match, IconMatch):
+            placed = scene.add_icon(match.icon, label or match.label, at_point, match.pack.box(match.icon))
+        else:
+            placed = scene.add_library_item(match.item, at_point, label)
         scene.save()
 
-    typer.echo(f"added {label or match.label!r} from {match.pack.name} at {placed.x:g}, {placed.y:g}")
+    typer.echo(f"added {label or match.label!r} from {match.source} at {placed.x:g}, {placed.y:g}")
 
 
 @app.command()
@@ -177,11 +212,23 @@ def _errors() -> Iterator[None]:
     except AmbiguousIcon as error:
         typer.echo(str(error) + ":", err=True)
         for m in error.candidates[:20]:
-            typer.echo(f"  {m.pack.name:<14} {m.label}", err=True)
+            typer.echo(f"  {m.source:<14} {m.label}", err=True)
         raise typer.Exit(1) from error
     except (WorkspaceError, ConfigError, UpstreamError, DownloadError, DiagramError) as error:
         typer.echo(str(error), err=True)
         raise typer.Exit(1) from error
+
+
+def _catalog(workspace: Workspace, pack: str | None, libraries: list[Path] | None) -> Catalog:
+    """Library files when given (`--library`, else $RUNAX_ICONS_LIBRARY), else the packs."""
+    libraries = libraries or [Path(p) for p in os.environ.get(LIBRARY_ENV, "").split(os.pathsep) if p]
+    if not libraries:
+        return workspace.catalog(pack)
+
+    missing = [str(p) for p in libraries if not p.is_file()]
+    if missing:
+        raise WorkspaceError(f"library files not found: {', '.join(missing)}")
+    return LibraryCatalog(libraries)
 
 
 def _now() -> int:

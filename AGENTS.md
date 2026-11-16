@@ -31,18 +31,22 @@ looks right rendered.
 The package `runax_icons/` is object-oriented, one responsibility per class:
 
 - `cli.py`: Typer commands only (parse, call one object, print); domain errors become exit 1.
-- `workspace.py`: `Workspace` (the packs under a root), `IconCatalog` (search and resolve
-  icons across packs).
+- `workspace.py`: `Workspace` (the packs under a root), and `Catalog`s that search and
+  resolve pack icons (`IconCatalog`) or items of `.excalidrawlib` files (`LibraryCatalog`).
 - `packs/`: `Pack` (a folder: config, paths, icons), `PackConfig` (pack.yml, validated),
   `imports.py` (`ArchiveImport`, `FileImport`, `NamesTemplate`: each knows what it covers and
   how to write itself), `Importer`, `Validator` (`Problem`s), `PackBuilder`,
   `ReadmeRenderer` (named so GitHub doesn't show it as a readme).
 - `svg/`: `SvgDocument` (immutable; root tag, size, aspect, white-only, PNG wrapping) and the
   `Edit`s `Fill`, `ViewBox`, `Replace`.
-- `excalidraw/`: typed elements built by `ElementFactory`, `Scene`, `Library`, `Diagram`
-  (add icons, connect them), `Box` / `Point` geometry, `guidelines.py` (one `Rule` class per
+- `excalidraw/`: typed elements built by `ElementFactory`, `Scene`, `Library` (writing) and
+  `LibraryFile` (reading, images included), `Diagram` (add pack icons or library items, connect
+  them), `Box` / `Point` geometry, `guidelines.py` (one `Rule` class per
   libraries.excalidraw.com guideline) and `NativeConverter` (SVG to native line elements, holes
   joined into their outline, for `publish: true` packs).
+- `site.py`: `SiteExporter`, the static site (libraries, `index.json`, `llms.txt`) that lets
+  agents elsewhere use the icons with no tooling. Keep `llms.txt`'s instructions accurate: they
+  are the whole interface for those agents.
 - `icon.py` (`Icon`: naming from the path, fileId from the content), `sources.py` (folder,
   zip, tar readers), `download.py` (`Downloader`).
 - `<pack>/pack.yml`: `title`, `source`, `license`, `native_size`, `publish`, `import:` (downloaded files and archives),
