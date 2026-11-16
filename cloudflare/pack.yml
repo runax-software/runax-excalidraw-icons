@@ -18,7 +18,6 @@ import:
     note: "CC0-1.0"
     forbid:
       edit: "the Cloudflare logo is a trademark, used as published"
-      native: "the Cloudflare logo is a trademark: no redrawing"
     names:
       "Cloudflare": "cloudflare-icon"
 

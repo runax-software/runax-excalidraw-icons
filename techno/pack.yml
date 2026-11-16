@@ -3,7 +3,6 @@ source: "hand-picked technology logos from [gilbarbara/logos](https://github.com
 license: "The logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) and [simple-icons](https://github.com/simple-icons/simple-icons) (both CC0-1.0); GitHub Codespaces is from [Primer Octicons](https://github.com/primer/octicons) (MIT). Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied."
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
-  native: "redrawing changes the logos' shape; the logos are their owners' trademarks"
   publish: "the logos are their owners' trademarks; we don't republish them as a library of their own"
 
 

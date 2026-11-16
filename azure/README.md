@@ -16,6 +16,8 @@ each item is a 64px icon with an editable label below it, grouped together.
 
 The icons are Microsoft's [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/),
 unmodified (no cropping, recoloring or reshaping; only scaled to fit, keeping their proportions).
+The `-native` library redraws them with Excalidraw shapes, which approximate gradients with a
+single color.
 Microsoft's terms, as published with the icons:
 
 > Microsoft permits the use of these icons in architectural diagrams, training materials, or
@@ -37,7 +39,6 @@ these terms. Azure and the Azure product names are trademarks of Microsoft.
 This pack forbids, and the build refuses:
 
 - `edit`: Microsoft's terms forbid cropping, recoloring or reshaping the icons
-- `native`: redrawing the icons as native shapes changes their shape, which Microsoft's terms forbid
 - `publish`: Microsoft permits the icons only in architectural diagrams, training materials or documentation
 
 ## Sources

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 
 from ..excalidraw import ElementFactory, Library, NativeConverter, Scene
+from ..excalidraw.elements import LineElement
 from ..icon import Icon
 from .restrictions import Operation
 from .pack import Pack
@@ -16,7 +17,7 @@ SCENE_CELL_H = 150
 class BuildResult:
     icons: int
     problems: list[Problem]
-    not_native: list[str] = field(default_factory=list)  # labels left out of the native library
+    not_native: list[str] = field(default_factory=list)  # labels left out of the native library (forbidden, or raster)
 
 
 class PackBuilder:
@@ -34,7 +35,7 @@ class PackBuilder:
         self._library(icons).save(self.pack.library_path)
         self._scene(icons).save(self.pack.scene_path, indent=None)
         not_native: list[str] = []
-        if self.pack.config.publish:
+        if self.pack.config.forbid.allows(Operation.NATIVE):
             library, not_native = self._native_library(icons)
             library.save(self.pack.native_library_path)
         self.pack.readme_path.write_text(ReadmeRenderer(self.pack, icons).render(), encoding="utf-8")
@@ -48,8 +49,9 @@ class PackBuilder:
         return library
 
     def _native_library(self, icons: list[Icon]) -> tuple[Library, list[str]]:
-        """The icons as native shapes, for libraries.excalidraw.com (which can't store images),
-        and the labels of those whose `forbid:` rules out converting them."""
+        """The icons as native shapes, which work on their own in Excalidraw's library panel
+        (it drops a library's images), and the labels of those whose `forbid:` rules out
+        converting them."""
         self.pack.config.forbid.require(Operation.NATIVE, f"{self.pack.name} native library")
         library = Library(self.factory)
         converter = NativeConverter(self.factory)
@@ -59,7 +61,11 @@ class PackBuilder:
             if not self.pack.restrictions(icon).allows(Operation.NATIVE):
                 left_out.append(label)
                 continue
-            library.add_item(label, converter.icon(icon, label, box=self.pack.box(icon)))
+            elements = converter.icon(icon, label, box=self.pack.box(icon))
+            if not any(isinstance(e, LineElement) for e in elements):  # raster icons have no paths
+                left_out.append(label)
+                continue
+            library.add_item(label, elements)
         return library, left_out
 
     def _scene(self, icons: list[Icon]) -> Scene:

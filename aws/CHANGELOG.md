@@ -8,6 +8,10 @@ This pack is released on its own, tagged `aws/vX.Y.Z`.
 
 ## [Unreleased]
 
+### Added
+
+- `runax-aws-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
+
 ## [0.1.0] - 2026-11-16
 
 ### Added

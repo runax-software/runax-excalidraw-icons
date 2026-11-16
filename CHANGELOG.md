@@ -9,6 +9,10 @@ The command line is released with `vX.Y.Z` tags; each pack has its own (`aws/vX.
 
 ## [Unreleased]
 
+### Changed
+
+- Every pack gets a native-shape library (`runax-<pack>-native.excalidrawlib`), not only `publish: true` ones; icons without paths to trace (raster images) are left out of it.
+
 ## [0.1.0] - 2026-11-16
 
 ### Added

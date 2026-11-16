@@ -50,7 +50,7 @@ Semantic Versioning, per pack:
    |---|---|
    | `runax-<pack>.excalidrawlib` | the library |
    | `runax-<pack>.excalidraw` | a scene with every icon, images included |
-   | `runax-<pack>-native.excalidrawlib` | native-shape library (`publish: true` packs only) |
+   | `runax-<pack>-native.excalidrawlib` | native-shape library, for Excalidraw's library panel |
    | `runax-<pack>.json` | the pack's entry for `index.json` |
    | `NOTICE.md`, `LICENSE`, `LICENSES/*` | notices and license texts |
 

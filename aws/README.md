@@ -15,7 +15,8 @@ each item is a 64px icon with an editable label below it, grouped together.
 ## License
 
 The icons are AWS's [Architecture Icons](https://aws.amazon.com/architecture/icons/), unmodified
-(no cropping, recoloring or reshaping), shown at their predefined size. AWS's terms, from the
+(no cropping, recoloring or reshaping), shown at their predefined size. The `-native` library
+redraws them with Excalidraw shapes, keeping their shapes and colors. AWS's terms, from the
 icons page:
 
 > We allow customers and partners to use these toolkits and assets to create architecture
@@ -38,7 +39,6 @@ logo can't be used in some Regions (such as China): use the generic cloud group 
 This pack forbids, and the build refuses:
 
 - `edit`: AWS's guidelines forbid cropping, recoloring or reshaping the icons
-- `native`: redrawing the icons as native shapes changes their shape, which AWS's guidelines forbid
 - `publish`: AWS allows the icons for creating architecture diagrams and similar materials, not for republishing
 
 ## Sources

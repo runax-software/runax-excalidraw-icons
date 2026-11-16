@@ -10,7 +10,7 @@ every file came from, under Sources.
 | Icons | Copyright | License | Changes |
 | ----- | --------- | ------- | ------- |
 | `ai/`: lobe-icons logos | Copyright (c) 2023 LobeHub | MIT ([text](LICENSES/MIT-lobe-icons.txt)) | none |
-| `cloudflare/products/`: [Cloudflare docs icons](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons) | © Cloudflare, Inc. | CC BY 4.0 ([text](LICENSES/CC-BY-4.0.txt), [deed](https://creativecommons.org/licenses/by/4.0/)) | filled with Cloudflare orange #F38020 (the docs draw them in the text color); in `runax-cloudflare-native.excalidrawlib`, redrawn as Excalidraw shapes approximating the originals |
+| `cloudflare/products/`: [Cloudflare docs icons](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons) | © Cloudflare, Inc. | CC BY 4.0 ([text](LICENSES/CC-BY-4.0.txt), [deed](https://creativecommons.org/licenses/by/4.0/)) | filled with Cloudflare orange #F38020 (the docs draw them in the text color) |
 | `data/DuckDB.svg`: [DuckDB design manual icon](https://github.com/duckdb/duckdb-web/tree/main/images/designmanual) | Copyright 2018-2026 Stichting DuckDB Foundation | MIT ([text](LICENSES/MIT-duckdb.txt)) | none |
 | `data/Apache-Iceberg.svg`: [Apache Iceberg icon](https://github.com/apache/iceberg/tree/main/site/docs/assets/images) | Copyright 2017-2026 The Apache Software Foundation | Apache-2.0 ([text](LICENSES/Apache-2.0.txt)) | PNG wrapped in an SVG |
 | `data/ClickHouse.svg`: [ClickHouse logo](https://github.com/ClickHouse/ClickHouse/tree/master/docker/server/README.src) | © ClickHouse, Inc. | Apache-2.0 ([text](LICENSES/Apache-2.0.txt)) | none |
@@ -41,7 +41,10 @@ AWS and Azure icons are used under their vendors' terms for architecture diagram
 
 All product names, logos and brands are trademarks of their respective owners, used only to
 identify their products. Logos are used as published by their owners, unmodified apart from
-the changes listed above. CNCF project logos are used under the
+the changes listed above. Each pack's `runax-<pack>-native.excalidrawlib` redraws its icons with
+Excalidraw shapes approximating the originals (curves as short straight segments, gradients as
+a single color); the images in `runax-<pack>.excalidrawlib` and `runax-<pack>.excalidraw` are
+the published files. CNCF project logos are used under the
 [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage).
 "WireGuard" and the "WireGuard" logo are registered trademarks of Jason A. Donenfeld.
 

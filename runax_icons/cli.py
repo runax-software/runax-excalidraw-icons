@@ -219,7 +219,7 @@ def _build(workspace: Workspace, names: list[str] | None) -> None:
         result = PackBuilder(pack, factory).build()
         typer.echo(f"[{pack.name}] packaged {result.icons} icons -> {pack.library_path.name}")
         if result.not_native:
-            typer.echo(f"[{pack.name}] left out of {pack.native_library_path.name} (forbid: native): {', '.join(result.not_native)}")
+            typer.echo(f"[{pack.name}] left out of {pack.native_library_path.name} (raster or forbid: native): {', '.join(result.not_native)}")
         for problem in result.problems:
             typer.echo(str(problem), err=True)
 

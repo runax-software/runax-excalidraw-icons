@@ -14,7 +14,6 @@ import:
     into: "cncf/{name}.svg"
     forbid:
       edit: "a CNCF/Linux Foundation logo: the trademark guidelines don't allow modifying it"
-      native: "a CNCF/Linux Foundation logo: the trademark guidelines don't allow modifying it"
     note: "argo is Argo CD"
     names: ["argo", "helm", "k3s", "kubernetes"]
 

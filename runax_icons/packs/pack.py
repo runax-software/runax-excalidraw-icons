@@ -37,7 +37,7 @@ class Pack:
 
     @property
     def native_library_path(self) -> Path:
-        """The library of native shapes built for `publish: true` packs."""
+        """The library of native shapes, built unless the pack forbids `native`."""
         return self.dir / f"{OUTPUT_PREFIX}{self.name}-native.excalidrawlib"
 
     @property

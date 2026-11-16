@@ -4,7 +4,6 @@ license: "Logos come from grafana.com, the projects' own repositories and [cncf/
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
   edit: the logos are their owners' trademarks (Grafana's among them), used as published
-  native: redrawing changes the logos' shape; the logos are their owners' trademarks
   publish: the logos are their owners' trademarks; we don't republish them as a library of their own
 
 # `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the

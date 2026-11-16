@@ -64,3 +64,26 @@ def test_publishable_packs_get_a_native_library_that_follows_the_guidelines(tmp_
     library = json.loads(pack.native_library_path.read_text())
     assert not any(e["type"] == "image" for item in library["libraryItems"] for e in item["elements"])
     assert Guidelines().check(LibraryFile(pack.native_library_path)) == []
+
+
+RASTER = (
+    '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10">'
+    '<image width="10" height="10" xlink:href="data:image/png;base64,iVBORw0KGgo="/></svg>'
+)
+
+
+def test_every_pack_gets_a_native_library_without_its_raster_icons(tmp_path):
+    write_pack(tmp_path, "shapes", "title: S\nsource: s\nsources: [{files: '*.svg'}]\n", {"a.svg": SQUARE, "photo.svg": RASTER})
+    (pack,) = Workspace(tmp_path).packs()
+    result = PackBuilder(pack, ElementFactory(now=0)).build()
+
+    library = json.loads(pack.native_library_path.read_text())
+    assert [item["name"] for item in library["libraryItems"]] == ["A"]
+    assert result.not_native == ["Photo"]
+
+
+def test_packs_that_forbid_native_get_no_native_library(tmp_path):
+    write_pack(tmp_path, "logos", "title: L\nsource: s\nforbid: {native: terms}\nsources: [{files: '*.svg'}]\n", {"a.svg": SQUARE})
+    (pack,) = Workspace(tmp_path).packs()
+    PackBuilder(pack, ElementFactory(now=0)).build()
+    assert not pack.native_library_path.exists()

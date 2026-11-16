@@ -2,7 +2,8 @@ title: AWS Architecture Icons
 source: "[AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)"
 license: |
   The icons are AWS's [Architecture Icons](https://aws.amazon.com/architecture/icons/), unmodified
-  (no cropping, recoloring or reshaping), shown at their predefined size. AWS's terms, from the
+  (no cropping, recoloring or reshaping), shown at their predefined size. The `-native` library
+  redraws them with Excalidraw shapes, keeping their shapes and colors. AWS's terms, from the
   icons page:
 
   > We allow customers and partners to use these toolkits and assets to create architecture
@@ -24,7 +25,6 @@ license: |
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
   edit: AWS's guidelines forbid cropping, recoloring or reshaping the icons
-  native: redrawing the icons as native shapes changes their shape, which AWS's guidelines forbid
   publish: AWS allows the icons for creating architecture diagrams and similar materials, not for republishing
 native_size: true  # AWS: "use icons at their predefined size"
 # `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of

@@ -8,6 +8,10 @@ This pack is released on its own, tagged `cloudflare/vX.Y.Z`.
 
 ## [Unreleased]
 
+### Added
+
+- The Cloudflare logo is in the native-shape library too.
+
 ## [0.1.0] - 2026-11-16
 
 ### Added

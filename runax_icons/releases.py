@@ -69,7 +69,7 @@ images, so it opens anywhere.
 `index.json` lists `packs`, each with `name`, `title`, `release`, `version`, `license` (its
 terms), `forbid` (operations its terms rule out, with reasons), `library` and `scene` (file
 names), `icons` (a count) and `labels` (every icon's name, which is also its item's `name` in the
-library); a pack with a native-shape library has its file name in `native`. A `scene` is an
+library) and `native`, the file name of its native-shape library. A `scene` is an
 `.excalidraw` drawing of every icon in the library, for people to copy from.
 
 Libraries named `-native` draw their icons with Excalidraw shapes instead of images: their items
@@ -136,7 +136,7 @@ class PackRelease:
         """Copy the assets into `out`; return them, the entry last."""
         out.mkdir(parents=True, exist_ok=True)
         files = [self.pack.library_path, self.pack.scene_path]
-        if self.pack.config.publish and self.pack.native_library_path.exists():
+        if self.pack.native_library_path.exists():
             files.append(self.pack.native_library_path)
 
         assets = []
@@ -164,7 +164,7 @@ class PackRelease:
             "icons": len(labels),
             "labels": labels,
         }
-        if pack.config.publish and pack.native_library_path.exists():
+        if pack.native_library_path.exists():
             entry["native"] = pack.native_library_path.name
         return entry
 

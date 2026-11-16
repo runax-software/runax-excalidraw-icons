@@ -25,7 +25,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
 | `kubernetes/**` | https://github.com/kubernetes/community/archive/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a.zip | largest size of each icon, white-only ones skipped; from `community-*/icons` in the archive |
-| `cncf/*.svg` | https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg | argo is Argo CD; forbids `edit`, `native`; 4 files |
+| `cncf/*.svg` | https://raw.githubusercontent.com/cncf/artwork/main/projects/{name}/icon/color/{name}-icon-color.svg | argo is Argo CD; forbids `edit`; 4 files |
 
 ## Use
 

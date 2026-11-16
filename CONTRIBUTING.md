@@ -121,8 +121,9 @@ forbid:                     # on the pack, or on a single import/sources entry
 ```
 
 `edit` covers `fill`, `viewBox` and `replace` on imports, `native` the native-shape library, and
-`publish` `publish: true` (which also builds `runax-<pack>-native.excalidrawlib`, for
-libraries.excalidraw.com). The build refuses a forbidden edit or `publish: true` with the
+`publish` `publish: true` (for libraries.excalidraw.com). Every pack also gets
+`runax-<pack>-native.excalidrawlib`, unless it forbids `native`; icons with no paths to trace
+(raster images) are left out of it. The build refuses a forbidden edit or `publish: true` with the
 reason, and leaves icons whose entry forbids `native` out of the native library.
 `native_size: true` keeps the vendor's icon sizes (AWS: 64px services, 48px resources, 32px
 groups) instead of making every icon 64px.

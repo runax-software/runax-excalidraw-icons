@@ -24,7 +24,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
 | `products/*.svg` | https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/icons/{name}.svg | labels from src/content/directory/<name>.yaml; docs-only icons and third-party logos left out; filled #F38020; 112 files |
-| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; forbids `edit`, `native`; 1 files |
+| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; forbids `edit`; 1 files |
 
 ## Use
 

@@ -10,14 +10,16 @@ No need to clone anything. Pick how you want to draw:
 ### In Excalidraw, by hand
 
 1. Open the [releases](https://github.com/runax-software/runax-excalidraw-icons/releases), pick a
-   pack (say `aws/v0.1.0`) and download `runax-aws.excalidraw`.
-2. Open it in Excalidraw (*Open*, or drag the file in): it holds every icon of the pack.
-3. Copy the icons you need into your drawing. Double-click a caption to rename it.
+   pack (say `aws/v0.1.0`) and download `runax-aws-native.excalidrawlib`.
+2. In Excalidraw, open the library panel and import it (*⋯* → *Open*, or drag the file onto the
+   canvas).
+3. Drag icons from the panel into your drawing. Double-click a caption to rename it.
 
-Want them in the library panel too? Also import `runax-aws.excalidrawlib` there. Its icons
-show their images only in drawings that already contain them (step 2), because Excalidraw
-doesn't store images in libraries. Cloudflare also comes as
-`runax-cloudflare-native.excalidrawlib`, drawn with Excalidraw shapes, which works on its own.
+The `-native` libraries draw each icon with Excalidraw's own shapes, so they work anywhere.
+They approximate the originals: curves become short straight segments and gradients a single
+color. For the exact images, open `runax-aws.excalidraw` instead and copy icons from it.
+(`runax-aws.excalidrawlib` holds the images too, but Excalidraw drops a library's images on
+import, so on its own its icons show as empty boxes.)
 
 ### With an AI agent
 
@@ -76,8 +78,8 @@ released on its own (`aws/v0.1.0`, ...), with its changes in the pack's `CHANGEL
 | File                                | What it's for                                                     |
 | ----------------------------------- | ----------------------------------------------------------------- |
 | `runax-<pack>.excalidraw`           | a drawing with every icon: open it and copy from it               |
-| `runax-<pack>.excalidrawlib`        | the library: for the library panel, the command line and agents   |
-| `runax-<pack>-native.excalidrawlib` | Cloudflare only: icons drawn with shapes, works anywhere          |
+| `runax-<pack>.excalidrawlib`        | the exact images: for the command line and agents                 |
+| `runax-<pack>-native.excalidrawlib` | icons drawn with Excalidraw shapes: for the library panel         |
 | `runax-<pack>.json`                 | the pack's icon names and terms, merged into the `index` release  |
 
 The [`index`](https://github.com/runax-software/runax-excalidraw-icons/releases/tag/index)

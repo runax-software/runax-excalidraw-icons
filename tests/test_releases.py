@@ -59,7 +59,7 @@ def test_release_writes_libraries_scene_and_entry(tmp_path):
     pack = cloud_pack(tmp_path / "packs")
     assets = PackRelease(pack, Tag("cloud", "1.1.0")).write(tmp_path / "dist")
 
-    assert [a.name for a in assets] == ["runax-cloud.excalidrawlib", "runax-cloud.excalidraw", "runax-cloud.json"]
+    assert [a.name for a in assets] == ["runax-cloud.excalidrawlib", "runax-cloud.excalidraw", "runax-cloud-native.excalidrawlib", "runax-cloud.json"]
     entry = json.loads(assets[-1].read_text())
     assert entry["release"] == "cloud/v1.1.0" and entry["library"] == "runax-cloud.excalidrawlib"
     assert entry["labels"] == ["A", "B"] and entry["license"] == "diagrams only"
@@ -82,4 +82,4 @@ def test_index_merges_entries_and_explains_gh_downloads(tmp_path):
 
     llms = (tmp_path / "index" / "llms.txt").read_text()
     assert "gh release download index -R owner/icons -p index.json" in llms
-    assert "- Cloud (`cloud`), release `cloud/v1.1.0`: `runax-cloud.excalidrawlib`, 2 icons" in llms
+    assert "- Cloud (`cloud`), release `cloud/v1.1.0`: `runax-cloud.excalidrawlib`, native shapes `runax-cloud-native.excalidrawlib`, 2 icons" in llms

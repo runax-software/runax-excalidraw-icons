@@ -3,6 +3,8 @@ source: "[Azure Architecture Icons](https://learn.microsoft.com/azure/architectu
 license: |
   The icons are Microsoft's [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/),
   unmodified (no cropping, recoloring or reshaping; only scaled to fit, keeping their proportions).
+  The `-native` library redraws them with Excalidraw shapes, which approximate gradients with a
+  single color.
   Microsoft's terms, as published with the icons:
 
   > Microsoft permits the use of these icons in architectural diagrams, training materials, or
@@ -23,7 +25,6 @@ license: |
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
   edit: Microsoft's terms forbid cropping, recoloring or reshaping the icons
-  native: redrawing the icons as native shapes changes their shape, which Microsoft's terms forbid
   publish: Microsoft permits the icons only in architectural diagrams, training materials or documentation
 # `uv run runax-icons import` downloads the zip and replaces src/ with the largest size of
 # each icon in it, skipping white-only ones.

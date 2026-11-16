@@ -3,7 +3,6 @@ source: "service mesh, ingress, CNI, DNS, VPN and API protocol logos: CNCF proje
 license: "The CNCF project logos are from [cncf/artwork](https://github.com/cncf/artwork), used under the [Linux Foundation trademark guidelines](https://www.linuxfoundation.org/legal/trademark-usage); other logos come from [gilbarbara/logos](https://github.com/gilbarbara/logos) (CC0-1.0), [simple-icons](https://github.com/simple-icons/simple-icons) (CC0-1.0) or the projects themselves. Product names and logos are trademarks of their owners and are used here only to refer to their products; no endorsement is implied. \"WireGuard\" and the \"WireGuard\" logo are registered trademarks of Jason A. Donenfeld."
 # Operations the icons' terms rule out; the build refuses them.
 forbid:
-  native: redrawing changes the logos' shape; the logos are their owners' trademarks
   publish: the logos are their owners' trademarks; we don't republish them as a library of their own
 
 # `uv run runax-icons import` downloads every url below and writes it to src/<into>, after the

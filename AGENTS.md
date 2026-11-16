@@ -43,7 +43,7 @@ The package `runax_icons/` is object-oriented, one responsibility per class:
   `LibraryFile` (reading, images included), `Diagram` (add pack icons or library items, connect
   them), `Box` / `Point` geometry, `guidelines.py` (one `Rule` class per
   libraries.excalidraw.com guideline) and `NativeConverter` (SVG to native line elements, holes
-  joined into their outline, for `publish: true` packs).
+  joined into their outline, for each pack's `-native` library).
 - `releases.py`: `Tag` (`<pack>/vX.Y.Z`), `Changelog` (release notes), `PackRelease` (a pack's
   assets and index entry) and `ReleaseIndex` (`index.json` and `llms.txt` of the `index`
   release), which let agents elsewhere use the icons with `gh` alone. Keep `llms.txt`'s

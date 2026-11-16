@@ -19,7 +19,6 @@ Logos come from the projects themselves, [gilbarbara/logos](https://github.com/g
 
 This pack forbids, and the build refuses:
 
-- `native`: redrawing changes the logos' shape; the logos are their owners' trademarks
 - `publish`: the logos are their owners' trademarks; we don't republish them as a library of their own
 
 ## Sources

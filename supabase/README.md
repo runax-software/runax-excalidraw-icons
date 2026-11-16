@@ -21,7 +21,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
-| `Supabase.svg` | https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/supabase-logo-icon.svg | forbids `edit`, `native` |
+| `Supabase.svg` | https://raw.githubusercontent.com/supabase/supabase/master/apps/www/public/images/supabase-logo-icon.svg | forbids `edit` |
 | `Supabase-*.svg` | https://github.com/supabase/supabase/blob/master/packages/shared-data/products.ts | 24px product icon paths, drawn like ProductIcon.tsx's green variant: 1.5px round #D3F8E4 strokes on a rounded #3FCF8E tile |
 
 ## Use

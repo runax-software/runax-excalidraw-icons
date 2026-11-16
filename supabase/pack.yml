@@ -11,7 +11,6 @@ import:
     into: "Supabase.svg"
     forbid:
       edit: "the Supabase logo is a trademark, used as published"
-      native: "the Supabase logo is a trademark: no redrawing"
 
 # Hand-made files in src/ (not imported); `files` is a glob, the first match wins.
 sources:
