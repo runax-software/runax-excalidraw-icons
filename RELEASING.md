@@ -56,8 +56,10 @@ Semantic Versioning, per pack:
 
    and the `index` release's `index.json` and `llms.txt` list the new version.
 
-Several packs can be released at once (one tag each); index refreshes run one at a time and
-each includes every pack's latest release.
+Several packs can be released at once (one tag each, at most three per `git push`: GitHub
+starts no workflows for a push of more tags). Their index refreshes run side by side; each
+re-checks the releases after uploading and indexes again if one appeared meanwhile, so the last
+to finish lists them all.
 
 ## The index release
 

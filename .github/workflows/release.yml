@@ -53,37 +53,49 @@ jobs:
     needs: pack
     if: always() && (needs.pack.result == 'success' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
-    concurrency: index  # one refresh at a time when several packs are tagged together
+    # No `concurrency:` lock: GitHub cancels queued runs of a group, and a cancelled job marks the
+    # tagged commit failed. Refreshes run in parallel instead, and each checks after uploading
+    # that no release appeared meanwhile (else it may have overwritten a newer index), so the
+    # last one to finish lists every release.
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0  # every tag
 
       - uses: astral-sh/setup-uv@v7
 
-      - name: Download each pack's latest release entry
+      - name: Publish index.json and llms.txt
         run: |
-          mkdir entries
-          for config in */pack.yml; do
-            pack="${config%/pack.yml}"
-            tag=$(git tag --list "$pack/v*" | grep -E "^$pack/v[0-9]+\.[0-9]+\.[0-9]+$" | sort -V | tail -n 1 || true)
-            if [ -n "$tag" ]; then
-              gh release download "$tag" --pattern "runax-$pack.json" --dir entries \
-                || echo "::warning::$tag has no release entry yet"
-            fi
-          done
-
-      - name: Write index.json and llms.txt
-        run: uv run runax-icons index entries --repo "$GITHUB_REPOSITORY" --out index
-
-      - name: Publish the index release
-        run: |
+          # Plain X.Y.Z pack releases; pre-releases aren't indexed.
+          releases() {
+            gh release list --limit 1000 --json tagName --jq '.[].tagName' \
+              | grep -E '^[a-z0-9-]+/v[0-9]+\.[0-9]+\.[0-9]+$' | sort || true
+          }
           gh release view index > /dev/null 2>&1 \
             || gh release create index --title "Index" --latest=false \
                  --notes "index.json and llms.txt: the latest release of every pack, for agents."
-          gh release upload index index/* --clobber
+
+          for attempt in 1 2 3 4 5 6; do
+            seen=$(releases)
+            complete=true
+            rm -rf entries index && mkdir entries
+            for config in */pack.yml; do
+              pack="${config%/pack.yml}"
+              tag=$(grep "^$pack/v" <<< "$seen" | sort -V | tail -n 1 || true)
+              if [ -n "$tag" ] && ! gh release download "$tag" --pattern "runax-$pack.json" --dir entries; then
+                complete=false  # its assets are still uploading
+              fi
+            done
+            uv run runax-icons index entries --repo "$GITHUB_REPOSITORY" --out index
+            gh release upload index index/* --clobber
+
+            sleep 15  # let releases other runs are publishing show up
+            if $complete && [ "$(releases)" = "$seen" ]; then
+              exit 0
+            fi
+            echo "Releases changed while indexing; indexing again."
+          done
+          echo "::warning::A release has no runax-<pack>.json entry; the index leaves it out."
 
   tool:
     if: github.event_name == 'push' && !contains(github.ref_name, '/')
