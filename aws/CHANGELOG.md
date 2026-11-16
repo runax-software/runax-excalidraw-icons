@@ -8,10 +8,6 @@ This pack is released on its own, tagged `aws/vX.Y.Z`.
 
 ## [Unreleased]
 
-### Added
-
-- `runax-aws-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
-
 ## [0.1.0] - 2026-11-16
 
 ### Added
@@ -20,3 +16,4 @@ This pack is released on its own, tagged `aws/vX.Y.Z`.
 - Captions follow AWS's naming guidelines: at most two lines, "AWS" or "Amazon" never alone on a line, "and"/"for" lowercase. Resource icons named like their service icon are told apart ("Amazon EC2 Auto Scaling resource"), and AWS's file name typo "Aternate" reads "Alternate".
 - White-only `_Dark` variants are left out: they are invisible on a white canvas.
 - The README quotes AWS's terms and guidelines.
+- `runax-aws-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).

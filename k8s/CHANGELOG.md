@@ -8,13 +8,10 @@ This pack is released on its own, tagged `k8s/vX.Y.Z`.
 
 ## [Unreleased]
 
-### Added
-
-- `runax-k8s-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
-
 ## [0.1.0] - 2026-11-16
 
 ### Added
 
 - 39 resource and component icons from kubernetes/community, labeled with their full names (Deployment, not `deploy`).
 - The Kubernetes, Helm, Argo CD and K3s logos from the CNCF artwork.
+- `runax-k8s-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
