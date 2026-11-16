@@ -1,176 +1,100 @@
 # runax-excalidraw-icons
 
-Miro-style icon libraries for [Excalidraw](https://excalidraw.com): every item is a 64px icon
-with an editable label below it, grouped together, so architecture diagrams look consistent
-without hunting for logos.
+Icon libraries for [Excalidraw](https://excalidraw.com) architecture diagrams: AWS, Azure,
+Kubernetes, Cloudflare and 1,800+ more, each a 64px icon with an editable caption, Miro style.
 
-| Pack                              | Icons | Source                                                                                                                                                                                  |
-| --------------------------------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`ai`](ai/)                       | 41    | AI models, inference, frameworks and coding tools ([lobehub/lobe-icons](https://github.com/lobehub/lobe-icons))                                                                         |
-| [`aws`](aws/)                     | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                                                                                 |
-| [`azure`](azure/)                 | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                                                                                  |
-| [`cloudflare`](cloudflare/)       | 113   | Cloudflare logo and product icons ([cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons))                                                          |
-| [`data`](data/)                   | 32    | Databases, streaming and data-pipeline logos                                                                                                                                            |
-| [`k8s`](k8s/)                     | 43    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg), plus Kubernetes, Helm, Argo CD and K3s logos |
-| [`networking`](networking/)       | 35    | Service mesh, ingress, CNI, DNS, VPN and API protocols (CNCF artwork and others)                                                                                                        |
-| [`observability`](observability/) | 27    | Grafana products and signal icons, OpenTelemetry, Prometheus, .NET Aspire, Seq and PostHog                                                                                              |
-| [`supabase`](supabase/)           | 10    | Supabase logo and product icons                                                                                                                                                         |
-| [`techno`](techno/)               | 73    | Hand-picked technology logos ([gilbarbara/logos](https://github.com/gilbarbara/logos), [simple-icons](https://github.com/simple-icons/simple-icons))                                                                                                                                                            |
+## Quick start
 
-Click a pack to see a preview of its icons, where each one came from, and its license.
+No need to clone anything. Pick how you want to draw:
 
-## Using the libraries
+### In Excalidraw, by hand
 
-Each pack is released on its own, tagged `<pack>/vX.Y.Z`: download `runax-<pack>.excalidrawlib`
-and `runax-<pack>.excalidraw` from its
-[release](https://github.com/runax-software/runax-excalidraw-icons/releases), or
-[build them yourself](#building).
+1. Open the [releases](https://github.com/runax-software/runax-excalidraw-icons/releases), pick a
+   pack (say `aws/v0.1.0`) and download `runax-aws.excalidraw`.
+2. Open it in Excalidraw (*Open*, or drag the file in): it holds every icon of the pack.
+3. Copy the icons you need into your drawing. Double-click a caption to rename it.
 
-excalidraw.com doesn't store images in library files, so library icons show as empty boxes
-unless the drawing already contains them. For each pack:
+Want them in the library panel too? Also import `runax-aws.excalidrawlib` there. Its icons
+show their images only in drawings that already contain them (step 2), because Excalidraw
+doesn't store images in libraries. Cloudflare also comes as
+`runax-cloudflare-native.excalidrawlib`, drawn with Excalidraw shapes, which works on its own.
 
-1. Open `runax-<pack>.excalidraw`, or paste icons from it into your drawing, so the images are loaded.
-2. Import `runax-<pack>.excalidrawlib` from the library panel.
+### With an AI agent
 
-Library items use the same image IDs as the scene, so they render once the scene's images are
-loaded.
-
-Packs marked `publish: true` also come as `runax-<pack>-native.excalidrawlib`: the icons drawn
-with Excalidraw's own shapes instead of images, so the library works on its own (and can be
-published on libraries.excalidraw.com). The shapes approximate the originals: curves become
-short straight segments and gradients a single color. Only packs whose icon terms allow that
-are published this way (not AWS or Azure).
-
-## For agents: the index release
-
-The `index` release holds `index.json` (every pack's latest release, its terms and icon names)
-and `llms.txt`, which explains to an AI agent how to download libraries with `gh` and put their
-icons into an `.excalidraw` file. An agent in any repository needs nothing else, no clone and no
-tooling; add a line like this to that repository's `AGENTS.md`:
+Add this to the `AGENTS.md` (or `CLAUDE.md`) of the repository you want diagrams in:
 
 ```md
 Diagrams: Excalidraw icons are in the GitHub releases of runax-software/runax-excalidraw-icons;
 start with `gh release download index -R runax-software/runax-excalidraw-icons -p llms.txt -O -`.
 ```
 
-To release a pack, see [RELEASING.md](RELEASING.md).
+Then ask for a diagram ("draw our architecture in docs/architecture.excalidraw"). The agent
+reads [`llms.txt`](https://github.com/runax-software/runax-excalidraw-icons/releases/tag/index),
+finds icons by name, downloads only the packs it needs and writes the file. It needs the
+[GitHub CLI](https://cli.github.com) (`gh`), logged in.
 
-## Diagrams from your libraries
+### From the command line
 
-Excalidraw's library panel can't keep images, but the `.excalidrawlib` files do: `runax-icons`
-reads them, images included, and places their items into `.excalidraw` files, connected by arrows
-that stay attached when you move things. Agents use it the same way (see the
-`excalidraw-diagrams` skill). Point it at your libraries, published or not, ours or any other:
+`runax-icons` places icons and connects them with arrows that stay attached when you move
+things. It needs [uv](https://docs.astral.sh/uv/):
 
 ```sh
-export RUNAX_ICONS_LIBRARY=~/libraries/runax-aws.excalidrawlib:~/libraries/runax-data.excalidrawlib
 alias runax-icons="uvx --from git+https://github.com/runax-software/runax-excalidraw-icons runax-icons"
+gh release download aws/v0.1.0 -R runax-software/runax-excalidraw-icons -p runax-aws.excalidrawlib
+export RUNAX_ICONS_LIBRARY=$PWD/runax-aws.excalidrawlib    # several: separate with ':'
 
-runax-icons search postgres                                         # find an icon's label
-runax-icons add docs/arch.excalidraw "AWS Lambda" --at 0 0 --label "Order API"
-runax-icons add docs/arch.excalidraw "PostgreSQL" --at 220 0
-runax-icons connect docs/arch.excalidraw "Order API" PostgreSQL --label SQL
+runax-icons search lambda                                   # find an icon's exact name
+runax-icons add arch.excalidraw "AWS Lambda" --at 0 0 --label "Order API"
+runax-icons add arch.excalidraw "Amazon DynamoDB" --at 220 0
+runax-icons connect arch.excalidraw "Order API" "Amazon DynamoDB" --label writes
 ```
 
-`add` creates the diagram if needed and embeds each image, so the file opens anywhere.
-`--label` renames the caption; `connect` matches icons by caption and takes `--dashed` and
-`--color`. `--library <file>` picks libraries per command instead of the environment variable.
-Inside this repository, the commands also work without libraries, straight from the packs.
+`add` creates the file if needed and embeds the images, so it opens anywhere. `--label` renames
+the caption; `connect` takes `--dashed` and `--color`. Any `.excalidrawlib` works, not just
+these.
 
-## Building
+## Packs
 
-### Layout
+| Pack                              | Icons | What's in it                                                                                                                                                                         |
+| --------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`ai`](ai/)                       | 41    | AI models, inference, frameworks and coding tools ([lobehub/lobe-icons](https://github.com/lobehub/lobe-icons))                                                                      |
+| [`aws`](aws/)                     | 810   | [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/), July 2026 release                                                                                              |
+| [`azure`](azure/)                 | 645   | [Azure Architecture Icons](https://learn.microsoft.com/azure/architecture/icons/), V25                                                                                               |
+| [`cloudflare`](cloudflare/)       | 113   | Cloudflare logo and product icons ([cloudflare-docs](https://github.com/cloudflare/cloudflare-docs/tree/production/src/icons))                                                       |
+| [`data`](data/)                   | 32    | Databases, streaming and data-pipeline logos                                                                                                                                         |
+| [`k8s`](k8s/)                     | 43    | [kubernetes/community `icons/svg`](https://github.com/kubernetes/community/tree/c8b1af836bc44adbafe45653ceb1a4a54ab14d9a/icons/svg), plus Kubernetes, Helm, Argo CD and K3s logos |
+| [`networking`](networking/)       | 35    | Service mesh, ingress, CNI, DNS, VPN and API protocols (CNCF artwork and others)                                                                                                     |
+| [`observability`](observability/) | 27    | Grafana products and signal icons, OpenTelemetry, Prometheus, .NET Aspire, Seq and PostHog                                                                                           |
+| [`supabase`](supabase/)           | 10    | Supabase logo and product icons                                                                                                                                                      |
+| [`techno`](techno/)               | 73    | Hand-picked technology logos ([gilbarbara/logos](https://github.com/gilbarbara/logos), [simple-icons](https://github.com/simple-icons/simple-icons))                                  |
 
-```
-runax_icons/                    the `runax-icons` package and command line
-  cli.py                        commands (Typer)
-  workspace.py                  Workspace (the packs in a folder), catalogs of pack icons and
-                                library items (search, resolve)
-  packs/                        Pack, PackConfig (pack.yml), import entries, Importer,
-                                Validator, PackBuilder, ReadmeRenderer
-  svg/                          SvgDocument, edits (Fill, ViewBox, Replace)
-  excalidraw/                   typed elements, Scene, Library, LibraryFile (reading libraries),
-                                Diagram, geometry, guidelines, NativeConverter (icons as native shapes)
-  releases.py                   pack releases (tags, notes, assets) and the index release
-  icon.py, sources.py           Icon (naming, fileId); folder, zip and tar readers
-  download.py                   Downloader (temporary folder, parallel)
-tests/                          pytest suite
-pyproject.toml, uv.lock         package and dependencies, locked
-<pack>/
-  pack.yml                      title, license, imports, hand-made sources, labels, README samples,
-                                native_size (vendor's icon sizes), publish (for libraries.excalidraw.com:
-                                also builds runax-<pack>-native.excalidrawlib)
-  src/                          the SVGs the pack is built from (committed)
-  CHANGELOG.md                  the pack's changes
-  runax-<pack>.excalidrawlib    generated library (git-ignored)
-  runax-<pack>.excalidraw       generated scene with the images (git-ignored)
-  README.md                     generated preview, license and sources of the pack
-```
+Click a pack for a preview of its icons, where each one came from, and its terms. Each pack is
+released on its own (`aws/v0.1.0`, ...), with its changes in the pack's `CHANGELOG.md`.
 
-### Build
+## What's in a release
 
-```sh
-uv run runax-icons build             # build every pack from its src/ (no network)
-uv run runax-icons build k8s data    # build only these packs
-uv run runax-icons import            # first refresh src/ from each pack's `import:` urls
-uv run runax-icons check             # report pack problems; exit 1 if there are any
-uv run runax-icons release aws/v1.0.0  # build one pack's release assets into dist/
-uv run runax-icons guidelines k8s    # check a built library against the libraries.excalidraw.com rules
-uv run pytest && uv run pyright      # tests and type checks
-```
+| File                                | What it's for                                                     |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| `runax-<pack>.excalidraw`           | a drawing with every icon: open it and copy from it               |
+| `runax-<pack>.excalidrawlib`        | the library: for the library panel, the command line and agents   |
+| `runax-<pack>-native.excalidrawlib` | Cloudflare only: icons drawn with shapes, works anywhere          |
+| `runax-<pack>.json`                 | the pack's icon names and terms, merged into the `index` release  |
 
-Needs [uv](https://docs.astral.sh/uv/), which installs the package and its locked dependencies
-into `.venv/` on first run. Every folder with a `pack.yml` is a pack, built from every SVG in
-its `src/`.
+The [`index`](https://github.com/runax-software/runax-excalidraw-icons/releases/tag/index)
+release lists every pack's latest release in `index.json`, and explains to agents how to use
+them in `llms.txt`.
 
-Files in `src/` are either imported or hand-made. Imports are listed in the pack's
-`pack.yml`; `runax-icons import` downloads them into a temporary folder and writes the results to
-`src/`, so nothing is cached in the repo:
+## Using the icons
 
-```yaml
-import:
-  # An archive (zip or tar) replaces the folder src/<into>/ (default: all of src/) with the
-  # largest size of each icon, skipping white-only ones (AWS `_Dark` variants).
-  - url: https://github.com/kubernetes/community/archive/<commit>.zip
-    path: "community-*/icons"          # optional: folder inside the archive
-    into: kubernetes
-  # A single SVG (or PNG, wrapped in an SVG) is written to src/<into> after optional edits.
-  - url: https://caddyserver.com/resources/images/logo-light.svg
-    into: other/caddy.svg
-    viewBox: "-2 -2 152 151"           # crop, e.g. to drop a wordmark
-  # `names` expands one entry per name, filling {name} (and {src}, for a map) in url and into.
-  - url: https://raw.githubusercontent.com/cloudflare/cloudflare-docs/production/src/icons/{name}.svg
-    into: "products/{name}.svg"
-    fill: "#F38020"                    # paint black / currentColor in this color
-    names: [workers, r2, d1]
-```
-
-Other edits: `replace: [[old, new], ...]` for text. To move to a new release, change the url
-and run `uv run runax-icons import <pack>`.
-
-Hand-made files (drawn, cropped from a PNG, or with no known url) are listed under
-`sources:` instead, so every file in `src/` has a recorded origin.
-
-What a pack's icons may be put through is declared in `pack.yml` too, from their terms:
-
-```yaml
-forbid:                     # on the pack, or on a single import/sources entry
-  edit: Microsoft's terms forbid cropping, recoloring or reshaping the icons
-  native: redrawing the icons as native shapes changes their shape
-  publish: Microsoft permits the icons only in diagrams, training materials or documentation
-```
-
-`edit` covers `fill`, `viewBox` and `replace` on imports, `native` the native-shape library, and
-`publish` `publish: true`. The build refuses a forbidden edit or `publish: true` with the
-reason, and leaves icons whose entry forbids `native` out of the native library.
-
-Both lists are shown in the pack's README. `build` and `check` report files in `src/` that
-neither covers, `sources:` entries that match nothing, imported files missing from `src/` and
-README samples that aren't labels. `pack.yml` is validated: unknown keys are errors.
+The icons belong to their owners and keep their terms. In short: use them in diagrams,
+documentation and training material, unmodified, with the product name as the caption. AWS and
+Azure icons may not be resized out of proportion, recolored or cropped. Each pack's README
+quotes its terms.
 
 ## Contributing
 
-New icons and packs are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+New icons and packs are welcome: [CONTRIBUTING.md](CONTRIBUTING.md) explains how to build, add
+icons and work on the code, and [RELEASING.md](RELEASING.md) how packs are released.
 
 ## License
 
