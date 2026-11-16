@@ -18,10 +18,12 @@ import:
       "Airbyte": "airbyte-icon"
       "Apache-Flink": "apache-flink-icon"
       "dbt": "dbt-icon"
+      "MariaDB": "mariadb-icon"
       "NATS": "nats-icon"
       "OpenSearch": "opensearch-icon"
       "Qdrant": "qdrant-icon"
       "Snowflake": "snowflake-icon"
+      "Temporal": "temporal-icon"
       "Valkey": "valkey-icon"
   - url: https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/docker/server/README.src/logo.svg
     into: "ClickHouse.svg"
@@ -44,6 +46,35 @@ import:
   - url: https://raw.githubusercontent.com/apache/nifi-site/main/themes/nifi/static/images/apache-nifi-drop-logo.svg
     into: "Apache-NiFi.svg"
     note: "the drop mark from the NiFi website"
+  - url: https://raw.githubusercontent.com/apache/pulsar-site/main/static/img/logo.svg
+    into: "Apache-Pulsar.svg"
+    viewBox: "0 0 61 43.08"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/apache/datafusion/main/docs/logos/primary_mark/original.svg
+    into: "Apache-DataFusion.svg"
+    viewBox: "0 0 153 168"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/apache/arrow-site/main/img/arrow-logo_chevrons_black-txt_transparent-bg.svg
+    into: "Apache-Arrow.svg"
+    viewBox: "168.75 168.75 1012.5 843.75"
+    note: "the chevrons from Arrow's visual identity"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/apacheparquet.svg
+    into: "Apache-Parquet.svg"
+    fill: "#50ABF1"
+    note: "CC0-1.0; Parquet brand color (the parquet-site logo is an embedded raster)"
+  - url: https://raw.githubusercontent.com/apache/polaris/main/site/static/favicons/favicon.svg
+    into: "Apache-Polaris.svg"
+    note: "the mark from the Polaris website"
+  - url: https://raw.githubusercontent.com/delta-io/delta/master/docs/src/assets/delta-lake-logo-light.svg
+    into: "Delta-Lake.svg"
+    viewBox: "0 0 35 35"
+    note: "mark only"
+  - url: https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/trino.svg
+    into: "Trino.svg"
+    fill: "#DD00A1"
+    note: "CC0-1.0; Trino brand color"
+  - url: https://raw.githubusercontent.com/pola-rs/polars-static/master/logos/polars_logo_blue.svg
+    into: "Polars.svg"
   - url: https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg
     into: "MQTT.svg"
     note: "official logo, unmodified (mqtt.org has no symbol-only version)"
