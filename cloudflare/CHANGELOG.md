@@ -13,4 +13,4 @@ This pack is released on its own, tagged `cloudflare/vX.Y.Z`.
 ### Added
 
 - The Cloudflare logo and 112 product icons from the Cloudflare docs, in Cloudflare orange and named after Cloudflare's product list ("Cloudflare Workers", "Cloudflare R2", ...).
-- `runax-cloudflare-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
+- `runax-cloudflare-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import) and take arrows like any shape.

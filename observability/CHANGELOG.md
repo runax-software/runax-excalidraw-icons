@@ -14,4 +14,4 @@ This pack is released on its own, tagged `observability/vX.Y.Z`.
 
 - 27 icons: Grafana and its products (Loki, Tempo, Mimir, Pyroscope, Alloy, Beyla, Faro, k6, OnCall, Incident, SLO, Tanka, Graphite), the signal icons Logs, Metrics, Traces, Profiles, Alerts and Dashboards in Grafana's style, Prometheus, Alertmanager, OpenTelemetry and its Collector, .NET Aspire, Seq and PostHog.
 - Logos as their owners publish them: grafana.com's product logos, Grafana's IRM icon for Alerts, and Seq's own symbol.
-- `runax-observability-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import); Seq is an image, so it's left out.
+- `runax-observability-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import) and take arrows like any shape; Seq is an image, so it's left out.

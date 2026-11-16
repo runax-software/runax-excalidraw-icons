@@ -29,9 +29,9 @@ The command line is released with `vX.Y.Z` tags; each pack has its own (`aws/vX.
     grouping, and images, which that site can't store); CI enforces it for `publish: true` packs.
 - Every pack also builds `runax-<pack>-native.excalidrawlib`: icons converted into native
   Excalidraw shapes (holes joined into their outlines, gradients as their average color and
-  opacity, text as text, shapes clipped to the viewBox), which work in Excalidraw's library
-  panel on their own, as Excalidraw drops a library's images on import; raster icons are left
-  out. `guidelines` checks it for `publish: true` packs.
+  opacity, text as text, shapes clipped to the viewBox, and an invisible rectangle around each
+  icon that arrows bind to), which work in Excalidraw's library panel on their own, as
+  Excalidraw drops a library's images on import; raster icons are left out. `guidelines` checks it for `publish: true` packs.
 - `forbid:` in `pack.yml`, on a pack or a single entry, rules out operations its icons' terms
   don't allow (`edit`, `native`, `publish`), with the reason; the build refuses them, and every
   pack declares its rules.

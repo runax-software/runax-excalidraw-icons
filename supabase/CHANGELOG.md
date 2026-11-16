@@ -13,4 +13,4 @@ This pack is released on its own, tagged `supabase/vX.Y.Z`.
 ### Added
 
 - The Supabase logo and its product icons (Database, Authentication, Storage, Edge Functions, Realtime, Compute, Cron, Queues, Vector), drawn the way supabase.com draws them.
-- `runax-supabase-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
+- `runax-supabase-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import) and take arrows like any shape.

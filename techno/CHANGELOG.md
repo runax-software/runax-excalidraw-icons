@@ -14,4 +14,4 @@ This pack is released on its own, tagged `techno/vX.Y.Z`.
 
 - 73 hand-picked technology logos: languages, frameworks, developer tools and platforms, from gilbarbara/logos and simple-icons (CC0) and, for GitHub Codespaces, Primer Octicons (MIT).
 - Database, Kubernetes, networking, observability, Cloudflare and machine-learning logos are in their own packs.
-- `runax-techno-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
+- `runax-techno-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import) and take arrows like any shape.

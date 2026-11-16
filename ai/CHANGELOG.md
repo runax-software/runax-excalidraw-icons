@@ -13,4 +13,4 @@ This pack is released on its own, tagged `ai/vX.Y.Z`.
 ### Added
 
 - 41 icons: model providers (OpenAI, Anthropic, Claude, Google Gemini and Gemma, Mistral AI, Meta Llama, DeepSeek, Qwen, xAI, Cohere, Perplexity), inference and hosting (Hugging Face, Ollama, vLLM, OpenRouter, Groq, Together AI, Replicate, LM Studio, Vertex AI, Open WebUI), frameworks (LangChain, LangGraph, LlamaIndex, CrewAI, Mastra, Model Context Protocol, Langfuse, n8n, Dify), coding tools (GitHub Copilot, Cursor, Claude Code, OpenAI Codex, Windsurf, Cline) and the machine-learning libraries TensorFlow, PyTorch, NumPy and OpenCV.
-- `runax-ai-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import).
+- `runax-ai-native.excalidrawlib`: the icons drawn with Excalidraw shapes, which work in Excalidraw's library panel on their own (it drops a library's images on import) and take arrows like any shape.
