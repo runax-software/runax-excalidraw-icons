@@ -59,7 +59,8 @@ entries, then run `uv run runax-icons import <pack>`. Every folder with a `pack.
 
 `.github/workflows/ci.yml` runs only what a pull request affects: tests and type checks when
 Python code changes, and a build, `check` and guidelines check for each changed pack. The single
-`ci` check is green when everything that ran passed. `release.yml` publishes tagged releases.
+`ci` check is green when everything that ran passed. `release.yml` publishes a pack's release for each `<pack>/vX.Y.Z` tag, then refreshes the
+`index` release that agents read: see [RELEASING.md](RELEASING.md).
 
 ## Licensing
 

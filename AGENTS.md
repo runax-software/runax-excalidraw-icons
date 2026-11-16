@@ -44,8 +44,10 @@ The package `runax_icons/` is object-oriented, one responsibility per class:
   them), `Box` / `Point` geometry, `guidelines.py` (one `Rule` class per
   libraries.excalidraw.com guideline) and `NativeConverter` (SVG to native line elements, holes
   joined into their outline, for `publish: true` packs).
-- `site.py`: `SiteExporter`, the static site (libraries, `index.json`, `llms.txt`) that lets
-  agents elsewhere use the icons with no tooling. Keep `llms.txt`'s instructions accurate: they
+- `releases.py`: `Tag` (`<pack>/vX.Y.Z`), `Changelog` (release notes), `PackRelease` (a pack's
+  assets and index entry) and `ReleaseIndex` (`index.json` and `llms.txt` of the `index`
+  release), which let agents elsewhere use the icons with `gh` alone. Keep `llms.txt`'s
+  instructions accurate: they
   are the whole interface for those agents.
 - `icon.py` (`Icon`: naming from the path, fileId from the content), `sources.py` (folder,
   zip, tar readers), `download.py` (`Downloader`).

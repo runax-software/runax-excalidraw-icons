@@ -5,7 +5,7 @@ this file. Each pack has its own `CHANGELOG.md` for its icons.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-All packs in the repository are released together.
+The command line is released with `vX.Y.Z` tags; each pack has its own (`aws/vX.Y.Z`).
 
 ## [Unreleased]
 
@@ -34,8 +34,11 @@ All packs in the repository are released together.
 - `search` and `add` work from `.excalidrawlib` files too (`--library`, or `RUNAX_ICONS_LIBRARY`):
   items are placed with fresh ids and their images, from ours or any other library, so diagrams
   can be built from libraries that aren't published anywhere, by people or agents.
-- `export` writes a static site for agents: every library, `index.json` (packs, libraries, icon
-  names and terms) and `llms.txt`, which explains how to put icons into an `.excalidraw` file
+- Each pack is released on its own with a `<pack>/vX.Y.Z` tag: `release` builds its libraries,
+  scene and a `runax-<pack>.json` entry, with notes from the pack's changelog. The `index`
+  release then holds `index.json` (every pack's latest release, icon names and terms) and
+  `llms.txt`, which explains to agents how to download them with `gh` and put icons into an
+  `.excalidraw` file
   with no tooling.
 - `pack.yml` is validated on load: unknown keys and misplaced options are errors.
 - `native_size: true` draws a pack's icons at their designed size (AWS: 64px services, 48px
@@ -51,4 +54,4 @@ All packs in the repository are released together.
 - CI runs only what a change affects: a paths-filter job finds changed Python code and changed
   packs, then tests and type-checks the package and builds, checks and guideline-checks each
   changed pack in parallel (every pack when the build code changed); one `ci` job sums it up for
-  branch protection. Tags `v*` publish a GitHub Release with the libraries, notices and licenses.
+  branch protection. Tags publish GitHub Releases (see above).

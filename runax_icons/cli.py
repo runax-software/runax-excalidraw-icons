@@ -1,5 +1,5 @@
 """The `runax-icons` command line. Commands only parse arguments and print: the work is done
-by Workspace, Importer, PackBuilder, Validator, IconCatalog and Diagram."""
+by Workspace, Importer, PackBuilder, Validator, IconCatalog, Diagram and the releases."""
 
 import os
 import time
@@ -14,7 +14,7 @@ from .download import DownloadError
 from .excalidraw import Diagram, DiagramError, ElementFactory, Point
 from .excalidraw.guidelines import MANUAL_RULES, Guidelines, LibraryFile
 from .packs import ConfigError, Importer, PackBuilder, UpstreamError, Validator
-from .site import SiteExporter
+from .releases import PackRelease, ReleaseError, ReleaseIndex, Tag
 from .workspace import AmbiguousIcon, Catalog, IconMatch, LibraryCatalog, Workspace, WorkspaceError
 
 app = typer.Typer(
@@ -67,17 +67,37 @@ def import_(ctx: typer.Context, packs: PackNames = None) -> None:
 
 
 @app.command()
-def export(
+def release(
     ctx: typer.Context,
-    out: Annotated[Path, typer.Argument(help="Folder to write the site to (replaced).")] = Path("site"),
-    base_url: Annotated[str, typer.Option(help="Absolute URL the site is served from, for llms.txt links.")] = "",
+    tag: Annotated[str, typer.Argument(help="The pack's release tag, like aws/v1.0.0.")],
+    out: Annotated[Path, typer.Option(help="Folder to write the assets to.")] = Path("dist"),
+    notes: Annotated[Path | None, typer.Option(help="Also write the release notes, from the pack's CHANGELOG.md, here.")] = None,
 ) -> None:
-    """Build every pack, then write a static site for agents and people: the libraries,
-    index.json and llms.txt."""
+    """Build one pack and write its release assets: libraries, scene and index entry."""
     with _errors():
-        _build(ctx.obj, None)
-        count = SiteExporter(ctx.obj.packs(), out, base_url).export()
-    typer.echo(f"exported {count} files to {out}")
+        parsed = Tag.parse(tag)
+        (pack,) = ctx.obj.packs([parsed.pack])
+        pack_release = PackRelease(pack, parsed)
+        release_notes = pack_release.notes()
+        _build(ctx.obj, [pack.name])
+        assets = pack_release.write(out)
+    if notes:
+        notes.write_text(release_notes, encoding="utf-8")
+    for asset in assets:
+        typer.echo(asset)
+
+
+@app.command()
+def index(
+    entries: Annotated[Path, typer.Argument(help="Folder holding the runax-<pack>.json entry of each pack's latest release.")],
+    repo: Annotated[str, typer.Option(help="The GitHub repository the releases are in, owner/name.")],
+    out: Annotated[Path, typer.Option(help="Folder to write index.json and llms.txt to.")] = Path("dist"),
+) -> None:
+    """Write index.json and llms.txt, for agents, from the packs' release entries."""
+    with _errors():
+        files = ReleaseIndex.load(entries, repo).write(out)
+    for file in files:
+        typer.echo(file)
 
 
 @app.command()
@@ -214,7 +234,7 @@ def _errors() -> Iterator[None]:
         for m in error.candidates[:20]:
             typer.echo(f"  {m.source:<14} {m.label}", err=True)
         raise typer.Exit(1) from error
-    except (WorkspaceError, ConfigError, UpstreamError, DownloadError, DiagramError) as error:
+    except (WorkspaceError, ConfigError, UpstreamError, DownloadError, DiagramError, ReleaseError) as error:
         typer.echo(str(error), err=True)
         raise typer.Exit(1) from error
 

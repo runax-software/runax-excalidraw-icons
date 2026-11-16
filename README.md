@@ -21,8 +21,9 @@ Click a pack to see a preview of its icons, where each one came from, and its li
 
 ## Using the libraries
 
-Download `runax-<pack>.excalidrawlib` and `runax-<pack>.excalidraw` from the
-[latest release](https://github.com/runax-software/runax-excalidraw-icons/releases/latest), or
+Each pack is released on its own, tagged `<pack>/vX.Y.Z`: download `runax-<pack>.excalidrawlib`
+and `runax-<pack>.excalidraw` from its
+[release](https://github.com/runax-software/runax-excalidraw-icons/releases), or
 [build them yourself](#building).
 
 excalidraw.com doesn't store images in library files, so library icons show as empty boxes
@@ -40,13 +41,19 @@ published on libraries.excalidraw.com). The shapes approximate the originals: cu
 short straight segments and gradients a single color. Only packs whose icon terms allow that
 are published this way (not AWS or Azure).
 
-## For agents: the published site
+## For agents: the index release
 
-`uv run runax-icons export site/` writes a static site of every library, an `index.json` of
-every pack, library and icon name, and an `llms.txt` explaining to an AI agent how to put
-icons into an `.excalidraw` file. Hosted (on GitHub Pages, say), an agent in any repository
-needs nothing else: point it at the site's `llms.txt`, for example in that repository's
-`AGENTS.md`, and it fetches the libraries it needs and writes the diagram itself.
+The `index` release holds `index.json` (every pack's latest release, its terms and icon names)
+and `llms.txt`, which explains to an AI agent how to download libraries with `gh` and put their
+icons into an `.excalidraw` file. An agent in any repository needs nothing else, no clone and no
+tooling; add a line like this to that repository's `AGENTS.md`:
+
+```md
+Diagrams: Excalidraw icons are in the GitHub releases of runax-software/runax-excalidraw-icons;
+start with `gh release download index -R runax-software/runax-excalidraw-icons -p llms.txt -O -`.
+```
+
+To release a pack, see [RELEASING.md](RELEASING.md).
 
 ## Diagrams from your libraries
 
@@ -84,6 +91,7 @@ runax_icons/                    the `runax-icons` package and command line
   svg/                          SvgDocument, edits (Fill, ViewBox, Replace)
   excalidraw/                   typed elements, Scene, Library, LibraryFile (reading libraries),
                                 Diagram, geometry, guidelines, NativeConverter (icons as native shapes)
+  releases.py                   pack releases (tags, notes, assets) and the index release
   icon.py, sources.py           Icon (naming, fileId); folder, zip and tar readers
   download.py                   Downloader (temporary folder, parallel)
 tests/                          pytest suite
@@ -106,7 +114,7 @@ uv run runax-icons build             # build every pack from its src/ (no networ
 uv run runax-icons build k8s data    # build only these packs
 uv run runax-icons import            # first refresh src/ from each pack's `import:` urls
 uv run runax-icons check             # report pack problems; exit 1 if there are any
-uv run runax-icons export site/      # build, then write the site: libraries, index.json, llms.txt
+uv run runax-icons release aws/v1.0.0  # build one pack's release assets into dist/
 uv run runax-icons guidelines k8s    # check a built library against the libraries.excalidraw.com rules
 uv run pytest && uv run pyright      # tests and type checks
 ```

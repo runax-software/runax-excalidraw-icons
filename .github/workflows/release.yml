@@ -1,33 +1,96 @@
 name: release
 
-# Publishes a GitHub Release for each `v*` tag: every pack's libraries and scenes (with the native
-# libraries of publish packs), the notices and the license texts.
+# Pack releases: a `<pack>/vX.Y.Z` tag publishes that pack's libraries, scene and index entry,
+# with the notes of its CHANGELOG.md section `## [X.Y.Z]`. Then the `index` release is refreshed
+# with index.json and llms.txt for the latest release of every pack: what agents download.
+# A `vX.Y.Z` tag releases the runax-icons command line (no assets). Running the workflow by hand
+# only refreshes the index.
 on:
   push:
-    tags: ["v*"]
+    tags: ["v*", "*/v*"]
+  workflow_dispatch:
 
 permissions:
-  contents: write  # create the release
+  contents: write  # create releases and upload their assets
 
 jobs:
-  release:
+  pack:
+    if: github.event_name == 'push' && contains(github.ref_name, '/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
       - uses: astral-sh/setup-uv@v7
 
-      - name: Build every pack
-        run: uv run runax-icons build
+      - name: Check the pack
+        env:
+          TAG: ${{ github.ref_name }}
+        run: uv run runax-icons check "${TAG%%/*}"
 
-      - name: Check every pack
-        run: uv run runax-icons check
+      - name: Build the release assets
+        env:
+          TAG: ${{ github.ref_name }}
+        run: uv run runax-icons release "$TAG" --out dist --notes notes.md
 
-      - name: Check publish packs against the libraries.excalidraw.com guidelines
-        run: uv run runax-icons guidelines --publishable
-
+      # A release made in the GitHub UI (which creates the tag) already exists: attach the assets
+      # to it, keeping its notes unless it has none.
       - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
-        run: gh release create "$TAG" --generate-notes */runax-*.excalidrawlib */runax-*.excalidraw NOTICE.md LICENSE LICENSES/*
+        run: |
+          assets=(dist/* NOTICE.md LICENSE LICENSES/*)
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" "${assets[@]}" --clobber
+            if [ -z "$(gh release view "$TAG" --json body --jq .body)" ]; then
+              gh release edit "$TAG" --notes-file notes.md
+            fi
+          else
+            gh release create "$TAG" --title "$TAG" --notes-file notes.md --latest=false "${assets[@]}"
+          fi
+
+  index:
+    needs: pack
+    if: always() && (needs.pack.result == 'success' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    concurrency: index  # one refresh at a time when several packs are tagged together
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # every tag
+
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Download each pack's latest release entry
+        run: |
+          mkdir entries
+          for config in */pack.yml; do
+            pack="${config%/pack.yml}"
+            tag=$(git tag --list "$pack/v*" | grep -E "^$pack/v[0-9]+\.[0-9]+\.[0-9]+$" | sort -V | tail -n 1 || true)
+            if [ -n "$tag" ]; then
+              gh release download "$tag" --pattern "runax-$pack.json" --dir entries \
+                || echo "::warning::$tag has no release entry yet"
+            fi
+          done
+
+      - name: Write index.json and llms.txt
+        run: uv run runax-icons index entries --repo "$GITHUB_REPOSITORY" --out index
+
+      - name: Publish the index release
+        run: |
+          gh release view index > /dev/null 2>&1 \
+            || gh release create index --title "Index" --latest=false \
+                 --notes "index.json and llms.txt: the latest release of every pack, for agents."
+          gh release upload index index/* --clobber
+
+  tool:
+    if: github.event_name == 'push' && !contains(github.ref_name, '/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --generate-notes
