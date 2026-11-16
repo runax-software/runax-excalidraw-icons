@@ -61,8 +61,9 @@ it reads the packs directly.)
 ## Notes
 
 - `connect` matches captions (case-insensitive), so every icon needs a unique caption.
-- Arrows bind to an icon's image or main shape and follow it when moved; icons drawn only with
-  lines (native-shape libraries) get arrows that aren't bound.
+- Arrows bind to an icon's image or main shape and follow it when moved. The runax `-native`
+  libraries have an invisible rectangle around each icon for this; other libraries' icons drawn
+  only with lines get arrows that aren't bound.
 - Vendor terms travel with some icons (AWS, Azure: use as published, keep the service name as
   the caption, don't resize out of proportion): use them for diagrams and documentation only.
 - For freeform sketches without product icons (boxes, flows, mind maps), the Excalidraw MCP
