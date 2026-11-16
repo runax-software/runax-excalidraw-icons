@@ -1,6 +1,6 @@
 # Data
 
-32 icons from database, streaming and data-pipeline logos, packaged as a Miro-style Excalidraw library:
+33 icons from database, streaming and data-pipeline logos, packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
@@ -11,7 +11,7 @@ each item is a 64px icon with an editable label below it, grouped together.
 <tr><td align="center" width="120"><img src="src/Qdrant.svg" width="55" height="64"><br><sub>Qdrant</sub></td><td align="center" width="120"><img src="src/OpenSearch.svg" width="64" height="64"><br><sub>OpenSearch</sub></td></tr>
 </table>
 
-26 of 32 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
+26 of 33 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## License
 
@@ -36,6 +36,7 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 | `Apache-Iceberg.svg` | https://raw.githubusercontent.com/apache/iceberg/main/site/docs/assets/images/iceberg-logo-icon.png | PNG wrapped in SVG |
 | `Apache-SeaTunnel.svg` | https://seatunnel.apache.org/image/logo.png | PNG wrapped in SVG |
 | `Apache-ActiveMQ.svg` | https://raw.githubusercontent.com/apache/activemq-website/main/src/assets/img/activemq_logo_icon.svg | viewBox cropped |
+| `Apache-NiFi.svg` | https://raw.githubusercontent.com/apache/nifi-site/main/themes/nifi/static/images/apache-nifi-drop-logo.svg | the drop mark from the NiFi website |
 | `MQTT.svg` | https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg | official logo, unmodified (mqtt.org has no symbol-only version) |
 | `BullMQ.svg` | https://user-images.githubusercontent.com/95200/143832033-32e868df-f3b0-4251-97fb-c64809a43d36.png | the taskforcesh/bullmq README banner, unmodified (BullMQ has no other logo file) |
 | `CockroachDB.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cockroachlabs.svg | Cockroach Labs brand color; filled #6933FF |

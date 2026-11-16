@@ -41,6 +41,9 @@ import:
   - url: https://raw.githubusercontent.com/apache/activemq-website/main/src/assets/img/activemq_logo_icon.svg
     into: "Apache-ActiveMQ.svg"
     viewBox: "10.8 10.4 30 44"
+  - url: https://raw.githubusercontent.com/apache/nifi-site/main/themes/nifi/static/images/apache-nifi-drop-logo.svg
+    into: "Apache-NiFi.svg"
+    note: "the drop mark from the NiFi website"
   - url: https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg
     into: "MQTT.svg"
     note: "official logo, unmodified (mqtt.org has no symbol-only version)"
