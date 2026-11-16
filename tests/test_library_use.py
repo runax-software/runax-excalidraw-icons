@@ -62,9 +62,30 @@ def test_added_items_get_fresh_ids_their_files_and_a_new_caption(tmp_path):
     assert set(diagram.scene.files) == set(item.files)
 
 
-def test_arrows_to_line_drawn_icons_stay_unbound(tmp_path):
+def test_arrows_bind_to_native_icons_through_their_anchor(tmp_path):
     diagram = Diagram(tmp_path / "d.excalidraw", ElementFactory(now=1))
     (queue,) = LibraryFile(native_library(tmp_path)).items
+    diagram.add_library_item(queue, Point(0, 0))
+    diagram.add_library_item(queue, Point(300, 0), label="Retries")
+    diagram.connect("Queue", "Retries")
+
+    arrow = next(e for e in diagram.scene.elements if e["type"] == "arrow")
+    ends = [e for e in diagram.scene.elements if e["id"] in (arrow["startBinding"]["elementId"], arrow["endBinding"]["elementId"])]
+    assert len(ends) == 2
+    assert all(e["type"] == "rectangle" and e["strokeColor"] == e["backgroundColor"] == "transparent" for e in ends)
+    assert all(e["boundElements"] == [{"id": arrow["id"], "type": "arrow"}] for e in ends)
+
+
+def test_arrows_to_line_only_icons_stay_unbound(tmp_path):
+    # Other libraries' line-drawn items have nothing Excalidraw binds arrows to.
+    path = native_library(tmp_path)
+    data = json.loads(path.read_text())
+    for item in data["libraryItems"]:
+        item["elements"] = [e for e in item["elements"] if e["type"] != "rectangle"]
+    path.write_text(json.dumps(data))
+
+    diagram = Diagram(tmp_path / "d.excalidraw", ElementFactory(now=1))
+    (queue,) = LibraryFile(path).items
     (database,) = LibraryFile(image_library(tmp_path, ["Database"])).items
     diagram.add_library_item(queue, Point(0, 0))
     diagram.add_library_item(database, Point(300, 0))

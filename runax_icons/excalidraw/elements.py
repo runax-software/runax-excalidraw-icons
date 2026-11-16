@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from ..icon import Icon
-from .geometry import Point
+from .geometry import Box, Point
 
 ICON_SIZE = 64
 LABEL_GAP = 8  # between an icon and its caption
@@ -228,6 +228,12 @@ class ElementFactory:
             **style,
             **self._base(start.x, start.y, abs(end.x - start.x), abs(end.y - start.y), None),
         )
+
+    def anchor(self, box: Box, group_id: str) -> Element:
+        """An invisible rectangle over `box`: something arrows can bind to, which a native
+        icon's lines aren't (Excalidraw binds arrows to rectangles, images, text and the like)."""
+        width, height = box.right - box.left, box.bottom - box.top
+        return Element(type="rectangle", **self._base(box.left, box.top, width, height, group_id))
 
     def line(
         self,

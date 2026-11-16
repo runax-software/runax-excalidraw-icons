@@ -20,9 +20,19 @@ RING_OVER_BLUE = (
 )
 
 
-def convert(svg: str, box: int = ICON_SIZE) -> list[dict]:
+def convert(svg: str, box: int = ICON_SIZE, anchor: bool = False) -> list[dict]:
+    """The icon's elements: its shapes and caption, after its anchor when `anchor`."""
     converter = NativeConverter(ElementFactory(now=0))
-    return [e.to_dict() for e in converter.icon(Icon(PurePosixPath("i.svg"), svg.encode()), "Icon", box=box)]
+    elements = [e.to_dict() for e in converter.icon(Icon(PurePosixPath("i.svg"), svg.encode()), "Icon", box=box)]
+    return elements if anchor else elements[1:]
+
+
+def test_an_invisible_rectangle_around_the_shapes_takes_arrows():
+    # Excalidraw binds arrows to rectangles, not to lines; it's first so it paints under them.
+    anchor, shape, caption = convert(svg('<rect x="0" y="2.5" width="10" height="5" fill="#000"/>'), anchor=True)
+    assert anchor["type"] == "rectangle" and anchor["backgroundColor"] == anchor["strokeColor"] == "transparent"
+    assert (anchor["x"], anchor["y"], anchor["width"], anchor["height"]) == (0, 16, 64, 32)
+    assert anchor["groupIds"] == shape["groupIds"] == caption["groupIds"]
 
 
 def test_icon_becomes_grouped_lines_with_a_caption():

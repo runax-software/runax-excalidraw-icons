@@ -21,8 +21,8 @@ from dataclasses import dataclass
 from svgelements import SVG, Close, Color, Line, Matrix, Move, Path as SvgPath, Shape, Text
 
 from ..icon import Icon
-from .elements import ICON_SIZE, LABEL_GAP, Element, ElementFactory, wrap_label
-from .geometry import Point
+from .elements import ICON_SIZE, LABEL_GAP, Element, ElementFactory, LineElement, wrap_label
+from .geometry import Box, Point
 
 CURVE_SAMPLES = 8  # points per curved segment
 MIN_STROKE = 0.5  # Excalidraw's thinnest visible line
@@ -85,7 +85,9 @@ class NativeConverter:
         group_id = self.factory.new_id()
         shapes = self.shapes(icon, Point(x, y), box, group_id)
         caption = self.factory.text(wrap_label(label), x + box / 2, y + box + LABEL_GAP, group_id=group_id)
-        return [*shapes, caption]
+        # Under the shapes, around what they draw: arrows bind to it and stop at the icon's edge.
+        anchor = self.factory.anchor(_bounds(shapes) or Box(x, y, x + box, y + box), group_id)
+        return [anchor, *shapes, caption]
 
     def shapes(self, icon: Icon, at: Point, box: int, group_id: str) -> list[Element]:
         # Parse the rendered document: it has an absolute size (a `1em` or unitless SVG would
@@ -163,6 +165,22 @@ class NativeConverter:
             else:
                 parts += [Part(points, closed, None, stroke_color, stroke_width, alpha) for points, closed in subpaths]
         return parts
+
+
+def _bounds(elements: list[Element]) -> Box | None:
+    """The box around elements' drawn points (a line's x, y is its first point, not its corner)."""
+    xs: list[float] = []
+    ys: list[float] = []
+    for element in elements:
+        if isinstance(element, LineElement):
+            xs += [element.x + px for px, _ in element.points]
+            ys += [element.y + py for _, py in element.points]
+        else:
+            xs += [element.x, element.x + element.width]
+            ys += [element.y, element.y + element.height]
+    if not xs:
+        return None
+    return Box(round(min(xs), 2), round(min(ys), 2), round(max(xs), 2), round(max(ys), 2))
 
 
 def _glyphs(element: Text, gradients: dict[str, Paint]) -> Glyphs | None:
