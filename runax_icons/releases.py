@@ -73,7 +73,8 @@ library) and `native`, the file name of its native-shape library. A `scene` is a
 `.excalidraw` drawing of every icon in the library, for people to copy from.
 
 Libraries named `-native` draw their icons with Excalidraw shapes instead of images: their items
-need no `files`, and they also work in Excalidraw's library panel.
+need no `files`, and they also work in Excalidraw's library panel. Bind arrows to a native item's
+`rectangle` element (invisible, around the icon) as to an image.
 """
 TERMS = """## Terms
 

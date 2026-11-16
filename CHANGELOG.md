@@ -5,7 +5,8 @@ this file. Each pack has its own `CHANGELOG.md` for its icons.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-The command line is released with `vX.Y.Z` tags; each pack has its own (`aws/vX.Y.Z`).
+The command line isn't released (it's for working on this repository); each pack is, tagged
+`<pack>/vX.Y.Z`.
 
 ## [Unreleased]
 

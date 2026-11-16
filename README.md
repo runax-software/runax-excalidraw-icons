@@ -35,26 +35,6 @@ reads [`llms.txt`](https://github.com/runax-software/runax-excalidraw-icons/rele
 finds icons by name, downloads only the packs it needs and writes the file. It needs the
 [GitHub CLI](https://cli.github.com) (`gh`), logged in.
 
-### From the command line
-
-`runax-icons` places icons and connects them with arrows that stay attached when you move
-things. It needs [uv](https://docs.astral.sh/uv/):
-
-```sh
-alias runax-icons="uvx --from git+https://github.com/runax-software/runax-excalidraw-icons runax-icons"
-gh release download aws/v0.1.0 -R runax-software/runax-excalidraw-icons -p runax-aws.excalidrawlib
-export RUNAX_ICONS_LIBRARY=$PWD/runax-aws.excalidrawlib    # several: separate with ':'
-
-runax-icons search lambda                                   # find an icon's exact name
-runax-icons add arch.excalidraw "AWS Lambda" --at 0 0 --label "Order API"
-runax-icons add arch.excalidraw "Amazon DynamoDB" --at 220 0
-runax-icons connect arch.excalidraw "Order API" "Amazon DynamoDB" --label writes
-```
-
-`add` creates the file if needed and embeds the images, so it opens anywhere. `--label` renames
-the caption; `connect` takes `--dashed` and `--color`. Any `.excalidrawlib` works, not just
-these.
-
 ## Packs
 
 | Pack                              | Icons | What's in it                                                                                                                                                                         |
@@ -78,7 +58,7 @@ released on its own (`aws/v0.1.0`, ...), with its changes in the pack's `CHANGEL
 | File                                | What it's for                                                     |
 | ----------------------------------- | ----------------------------------------------------------------- |
 | `runax-<pack>.excalidraw`           | a drawing with every icon: open it and copy from it               |
-| `runax-<pack>.excalidrawlib`        | the exact images: for the command line and agents                 |
+| `runax-<pack>.excalidrawlib`        | the exact images, for AI agents                                   |
 | `runax-<pack>-native.excalidrawlib` | icons drawn with Excalidraw shapes: for the library panel         |
 | `runax-<pack>.json`                 | the pack's icon names and terms, merged into the `index` release  |
 

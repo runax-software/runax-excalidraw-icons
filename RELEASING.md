@@ -73,8 +73,8 @@ To rebuild it without releasing a pack (after deleting a release, say): Actions 
 
 ## The command line
 
-A plain `vX.Y.Z` tag releases the `runax-icons` command line, with notes generated from the
-merged pull requests and no icon files. Its changes are in the root `CHANGELOG.md`.
+The `runax-icons` command line isn't released: it builds and checks the packs, and draws
+diagrams, from within this repository. Its changes are in the root `CHANGELOG.md`.
 
 ## Trying a release locally
 
