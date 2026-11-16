@@ -4,10 +4,11 @@ import struct
 from functools import cached_property
 
 ROOT_TAG_RE = re.compile(r"<svg\b[^>]*>", re.IGNORECASE)
-VIEWBOX_RE = re.compile(r'\bviewBox\s*=\s*"([^"]+)"', re.IGNORECASE)
-DIMENSION_RE = r'\b{}\s*=\s*"\s*([\d.]+)(?:px)?\s*"'
-ABSOLUTE_SIZE_RE = r'\s{}\s*=\s*"\s*[\d.]+\s*(?:px|pt|mm|cm|in)?\s*"'
-SIZE_ATTR_RE = re.compile(r'\s(?:width|height)\s*=\s*"[^"]*"')
+# Attribute values may be single- or double-quoted (svglite writes single quotes).
+VIEWBOX_RE = re.compile(r'\bviewBox\s*=\s*["\']([^"\']+)["\']', re.IGNORECASE)
+DIMENSION_RE = r'\b{}\s*=\s*["\']\s*([\d.]+)(?:px)?\s*["\']'
+ABSOLUTE_SIZE_RE = r'\s{}\s*=\s*["\']\s*[\d.]+\s*(?:px|pt|mm|cm|in)?\s*["\']'
+SIZE_ATTR_RE = re.compile(r'\s(?:width|height)\s*=\s*(?:"[^"]*"|\'[^\']*\')')
 COLOR_RE = re.compile(
     r'(?:fill|stroke|stop-color)\s*[=:]\s*"?\s*(#[0-9a-f]{3,8}|[a-z]+)', re.IGNORECASE
 )

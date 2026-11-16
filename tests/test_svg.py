@@ -61,6 +61,22 @@ def test_viewbox_crops_and_drops_the_size():
     assert "width=" not in cropped.root_tag
 
 
+SINGLE_QUOTED = "<svg xmlns='http://www.w3.org/2000/svg' width='200pt' height='100pt' viewBox='0 0 200 100'><path d='M0 0' fill='black'/></svg>"
+
+
+def test_single_quoted_attributes_are_read_and_edited():
+    document = SvgDocument.from_text(SINGLE_QUOTED)
+    assert document.aspect == 2 and document.has_absolute_size
+
+    cropped = ViewBox("0 0 50 50").apply(document)
+    assert 'viewBox="0 0 50 50"' in cropped.root_tag and "0 0 200 100" not in cropped.root_tag
+    assert "width=" not in cropped.root_tag
+    assert cropped.rendered().root_tag.count("width=") == 1  # one width, or parsers reject it
+
+    filled = Fill("#F38020").apply(document)
+    assert 'fill="#F38020"' in filled.text and "'black'" not in filled.text
+
+
 def test_replace_fails_when_upstream_changed():
     with pytest.raises(EditError):
         Replace("opacity=0.2", "opacity=0.15").apply(SvgDocument.from_text(SQUARE))

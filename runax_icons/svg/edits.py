@@ -6,7 +6,10 @@ from dataclasses import dataclass
 
 from .document import SvgDocument
 
-BLACK_RE = re.compile(r'\b(fill|stroke)="(?:#000|#000000|black|currentColor)"', re.IGNORECASE)
+# Attribute values may be single- or double-quoted.
+BLACK_RE = re.compile(r'\b(fill|stroke)=(["\'])(?:#000|#000000|black|currentColor)\2', re.IGNORECASE)
+VIEWBOX_ATTR_RE = re.compile(r'\sviewBox=(?:"[^"]*"|\'[^\']*\')')
+COLOR_ATTR_RE = re.compile(r'\scolor=(?:"[^"]*"|\'[^\']*\')')
 
 
 class EditError(Exception):
@@ -48,7 +51,7 @@ class Fill(Edit):
     def apply(self, document: SvgDocument) -> SvgDocument:
         document = document.with_text(BLACK_RE.sub(rf'\1="{self.color}"', document.text))
         tag = document.root_tag
-        root = re.sub(r"\scolor=\"[^\"]*\"", "", tag)[:-1] + f' color="{self.color}"'
+        root = COLOR_ATTR_RE.sub("", tag)[:-1] + f' color="{self.color}"'
         if not re.search(r"\sfill=", tag):
             root += f' fill="{self.color}"'
 
@@ -67,8 +70,8 @@ class ViewBox(Edit):
 
     def apply(self, document: SvgDocument) -> SvgDocument:
         root = document.without_size().root_tag
-        if re.search(r"\sviewBox=", root):
-            root = re.sub(r'\sviewBox="[^"]*"', f' viewBox="{self.box}"', root)
+        if VIEWBOX_ATTR_RE.search(root):
+            root = VIEWBOX_ATTR_RE.sub(f' viewBox="{self.box}"', root)
         else:
             root = root[:-1] + f' viewBox="{self.box}">'
 
