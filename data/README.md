@@ -1,6 +1,6 @@
 # Data
 
-32 icons from database, streaming and data-pipeline logos, packaged as a Miro-style Excalidraw library:
+43 icons from database, streaming and data-pipeline logos, packaged as a Miro-style Excalidraw library:
 each item is a 64px icon with an editable label below it, grouped together.
 
 <table>
@@ -11,7 +11,7 @@ each item is a 64px icon with an editable label below it, grouped together.
 <tr><td align="center" width="120"><img src="src/Qdrant.svg" width="55" height="64"><br><sub>Qdrant</sub></td><td align="center" width="120"><img src="src/OpenSearch.svg" width="64" height="64"><br><sub>OpenSearch</sub></td></tr>
 </table>
 
-26 of 32 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
+26 of 43 shown. Every icon is in [`src/`](src/). Changes are in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## License
 
@@ -29,13 +29,22 @@ Imports last fetched 2026-11-15. Paths are relative to [`src/`](src/). Imported 
 
 | Files | Source | Notes |
 | ----- | ------ | ----- |
-| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; 8 files |
+| `*.svg` | https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{src}.svg | CC0-1.0; 10 files |
 | `ClickHouse.svg` | https://raw.githubusercontent.com/ClickHouse/ClickHouse/master/docker/server/README.src/logo.svg |  |
 | `DuckDB.svg` | https://raw.githubusercontent.com/duckdb/duckdb-web/main/images/designmanual/DuckDB_icon-lightmode.svg | the icon from DuckDB's design manual |
 | `Neo4j.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/neo4j.svg | CC0-1.0; Neo4j brand color (the neo4j-browser icon is GPL-3.0); filled #4581C3 |
 | `Apache-Iceberg.svg` | https://raw.githubusercontent.com/apache/iceberg/main/site/docs/assets/images/iceberg-logo-icon.png | PNG wrapped in SVG |
 | `Apache-SeaTunnel.svg` | https://seatunnel.apache.org/image/logo.png | PNG wrapped in SVG |
 | `Apache-ActiveMQ.svg` | https://raw.githubusercontent.com/apache/activemq-website/main/src/assets/img/activemq_logo_icon.svg | viewBox cropped |
+| `Apache-NiFi.svg` | https://raw.githubusercontent.com/apache/nifi-site/main/themes/nifi/static/images/apache-nifi-drop-logo.svg | the drop mark from the NiFi website |
+| `Apache-Pulsar.svg` | https://raw.githubusercontent.com/apache/pulsar-site/main/static/img/logo.svg | mark only; viewBox cropped |
+| `Apache-DataFusion.svg` | https://raw.githubusercontent.com/apache/datafusion/main/docs/logos/primary_mark/original.svg | mark only; viewBox cropped |
+| `Apache-Arrow.svg` | https://raw.githubusercontent.com/apache/arrow-site/main/img/arrow-logo_chevrons_black-txt_transparent-bg.svg | the chevrons from Arrow's visual identity; viewBox cropped |
+| `Apache-Parquet.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/apacheparquet.svg | CC0-1.0; Parquet brand color (the parquet-site logo is an embedded raster); filled #50ABF1 |
+| `Apache-Polaris.svg` | https://raw.githubusercontent.com/apache/polaris/main/site/static/favicons/favicon.svg | the mark from the Polaris website |
+| `Delta-Lake.svg` | https://raw.githubusercontent.com/delta-io/delta/master/docs/src/assets/delta-lake-logo-light.svg | mark only; viewBox cropped |
+| `Trino.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/trino.svg | CC0-1.0; Trino brand color; filled #DD00A1 |
+| `Polars.svg` | https://raw.githubusercontent.com/pola-rs/polars-static/master/logos/polars_logo_blue.svg |  |
 | `MQTT.svg` | https://raw.githubusercontent.com/mqtt/mqtt.org/master/assets/img/mqtt-ver.svg | official logo, unmodified (mqtt.org has no symbol-only version) |
 | `BullMQ.svg` | https://user-images.githubusercontent.com/95200/143832033-32e868df-f3b0-4251-97fb-c64809a43d36.png | the taskforcesh/bullmq README banner, unmodified (BullMQ has no other logo file) |
 | `CockroachDB.svg` | https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/cockroachlabs.svg | Cockroach Labs brand color; filled #6933FF |

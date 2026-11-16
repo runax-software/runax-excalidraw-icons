@@ -8,6 +8,13 @@ This pack is released on its own, tagged `data/vX.Y.Z`.
 
 ## [Unreleased]
 
+### Added
+
+- Apache NiFi: the drop mark from the NiFi website.
+- Query engines and formats: Apache DataFusion, Apache Arrow, Apache Parquet, Trino and Polars.
+- Lakehouse: Delta Lake and Apache Polaris.
+- Apache Pulsar, MariaDB and Temporal.
+
 ## [0.1.0] - 2026-11-16
 
 ### Added
