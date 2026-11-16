@@ -38,6 +38,7 @@ class Element:
     stroke_style: str = "solid"
     roundness: dict | None = None
     bound_elements: list[dict] | None = None
+    opacity: int = 100  # percent
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -54,7 +55,7 @@ class Element:
             "strokeWidth": self.stroke_width,
             "strokeStyle": self.stroke_style,
             "roughness": 0,
-            "opacity": 100,
+            "opacity": self.opacity,
             "groupIds": self.group_ids,
             "frameId": None,
             "roundness": self.roundness,
@@ -85,19 +86,21 @@ class ImageElement(Element):
 class TextElement(Element):
     text: str = ""
     container_id: str | None = None
+    font_size: float = FONT_SIZE
+    text_align: str = "center"
 
     def _fields(self) -> dict[str, Any]:
         return {
             "text": self.text,
             "originalText": self.text,
-            "fontSize": FONT_SIZE,
+            "fontSize": self.font_size,
             "fontFamily": FONT_FAMILY,
-            "textAlign": "center",
+            "textAlign": self.text_align,
             "verticalAlign": "middle" if self.container_id else "top",
             "containerId": self.container_id,
             "autoResize": True,
             "lineHeight": LINE_HEIGHT,
-            "baseline": round(FONT_SIZE * 0.88),
+            "baseline": round(self.font_size * 0.88),
         }
 
 
@@ -186,22 +189,29 @@ class ElementFactory:
     def text(
         self,
         text: str,
-        center_x: float,
+        x: float,
         top: float,
         group_id: str | None = None,
         container_id: str | None = None,
+        font_size: float = FONT_SIZE,
+        color: str = TEXT_COLOR,
+        align: str = "center",
     ) -> TextElement:
-        """A centered text element; `center_x` is its horizontal middle."""
+        """A text element; `x` is its horizontal middle, or its left or right edge for
+        `align` left or right."""
         lines = text.split("\n")
-        width = round(max(len(line) for line in lines) * CHAR_WIDTH, 2)
-        height = round(len(lines) * FONT_SIZE * LINE_HEIGHT, 2)
+        width = round(max(len(line) for line in lines) * font_size * CHAR_WIDTH / FONT_SIZE, 2)
+        height = round(len(lines) * font_size * LINE_HEIGHT, 2)
+        left = x - width * {"left": 0, "center": 0.5, "right": 1}[align]
 
         return TextElement(
             type="text",
             text=text,
             container_id=container_id,
-            stroke_color=TEXT_COLOR,
-            **self._base(center_x - width / 2, top, width, height, group_id),
+            font_size=font_size,
+            text_align=align,
+            stroke_color=color,
+            **self._base(left, top, width, height, group_id),
         )
 
     def arrow(
@@ -227,6 +237,7 @@ class ElementFactory:
         fill: str | None,
         stroke: str | None,
         stroke_width: float,
+        opacity: int = 100,
     ) -> LineElement:
         """A shape traced through `points` (absolute): filled with `fill` when `closed`,
         outlined with `stroke`."""
@@ -243,6 +254,7 @@ class ElementFactory:
             stroke_color=stroke or "transparent",
             background_color=fill if closed and fill else "transparent",
             stroke_width=stroke_width,
+            opacity=opacity,
             **self._base(start.x, start.y, max(xs) - min(xs), max(ys) - min(ys), group_id),
         )
 
