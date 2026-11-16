@@ -8,6 +8,8 @@ This pack is released on its own, tagged `data/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 32 icons: databases (PostgreSQL, MySQL, Oracle, SQLite, MongoDB, Redis, Valkey, Cassandra, CouchDB, ClickHouse, DuckDB, CockroachDB, Snowflake, Neo4j), messaging and streaming (Kafka, RabbitMQ, NATS, MQTT, ActiveMQ, BullMQ, Flink, Spark), search (Elasticsearch, OpenSearch, Kibana, Qdrant), lakehouse and pipelines (Iceberg, Airbyte, SeaTunnel, dbt, Airflow) and Firebase.

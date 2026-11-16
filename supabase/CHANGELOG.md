@@ -8,6 +8,8 @@ This pack is released on its own, tagged `supabase/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - The Supabase logo and its product icons (Database, Authentication, Storage, Edge Functions, Realtime, Compute, Cron, Queues, Vector), drawn the way supabase.com draws them.

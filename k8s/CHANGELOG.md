@@ -8,6 +8,8 @@ This pack is released on its own, tagged `k8s/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 39 resource and component icons from kubernetes/community, labeled with their full names (Deployment, not `deploy`).

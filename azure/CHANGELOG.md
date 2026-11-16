@@ -8,6 +8,8 @@ This pack is released on its own, tagged `azure/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 645 icons from the Azure Architecture Icons V25, captioned with their full service names ("Windows Admin Center"); icons Microsoft names alike carry its icon number ("Workspaces (00330)").

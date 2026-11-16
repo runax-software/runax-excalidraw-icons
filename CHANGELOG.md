@@ -9,6 +9,8 @@ The command line is released with `vX.Y.Z` tags; each pack has its own (`aws/vX.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - `runax-icons`, a command line (Typer) for the packs and for diagrams:

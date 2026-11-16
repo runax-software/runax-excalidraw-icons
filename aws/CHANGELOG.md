@@ -8,6 +8,8 @@ This pack is released on its own, tagged `aws/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 810 icons from the AWS Architecture Icons release of 2026-07-31: the largest size of each service, resource and category icon (unlabeled variants preferred), drawn at AWS's predefined sizes: 64px services, 48px resources, 32px groups.

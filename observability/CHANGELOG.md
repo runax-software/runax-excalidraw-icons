@@ -8,6 +8,8 @@ This pack is released on its own, tagged `observability/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 27 icons: Grafana and its products (Loki, Tempo, Mimir, Pyroscope, Alloy, Beyla, Faro, k6, OnCall, Incident, SLO, Tanka, Graphite), the signal icons Logs, Metrics, Traces, Profiles, Alerts and Dashboards in Grafana's style, Prometheus, Alertmanager, OpenTelemetry and its Collector, .NET Aspire, Seq and PostHog.

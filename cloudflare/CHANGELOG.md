@@ -8,6 +8,8 @@ This pack is released on its own, tagged `cloudflare/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - The Cloudflare logo and 112 product icons from the Cloudflare docs, in Cloudflare orange and named after Cloudflare's product list ("Cloudflare Workers", "Cloudflare R2", ...).

@@ -8,6 +8,8 @@ This pack is released on its own, tagged `networking/vX.Y.Z`.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 35 icons: service meshes and proxies (Istio, Linkerd, Cilium, Envoy, Kuma, Consul, NGINX, Traefik, Kong, HAProxy, Caddy), ingress and gateways (Contour, Emissary-ingress, kgateway), CNI and cluster networking (CNI, Calico, Antrea, Kube-OVN, MetalLB, Kmesh, Submariner, Network Service Mesh, CoreDNS), identity (cert-manager, SPIFFE, SPIRE), VPNs (Tailscale, WireGuard, NetBird) and API protocols (gRPC, GraphQL, REST, OpenAPI, Swagger, Socket.IO).
